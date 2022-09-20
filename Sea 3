@@ -2801,7 +2801,7 @@ end
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = PUK
                         elseif v.Name == Ms then
                         game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,-20,0)
                     end
                 end
     
