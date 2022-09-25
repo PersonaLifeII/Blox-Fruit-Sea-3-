@@ -3406,19 +3406,19 @@ end)
 
 
 local S3_2 = page3:NewSecction("Esp")
-S3_2:addToggle("ESP Player",false,function(Value)
+S3_2:Toggle("ESP Player",false,function(Value)
     PLYESP = Value
     Findply(PLYESP)
  end)
- S3_2:addToggle("ESP Chest",false,function(Value)
+ S3_2:Toggle("ESP Chest",false,function(Value)
     ChestESP = Value
     FindChest(ChestESP)
  end)
- S3_2:addToggle("ESP Devil Fruit",false,function(Value)
+ S3_2:Toggle("ESP Devil Fruit",false,function(Value)
     DevilFruitESP = Value
     FindDevilFruit(DevilFruitESP)
  end)
- S3_2:addToggle("ESP Flower",false,function(Value)
+ S3_2:Toggle("ESP Flower",false,function(Value)
     FlowerESP = Value
     FindFlower(FlowerESP)
  end)
@@ -4390,7 +4390,15 @@ S5_6:Button("Fire Punch [ Left Hand ]", function(Yahoo)
     Fire.Heat = 5
     Fire.Size = 3
 end)
-
+S5_6:Button("Fire Head", function(Yahoo)
+    local Fire = Instance.new("Fire")
+    Fire.Parent = game.Players.LocalPlayer.Character.Head
+    Fire.Heat = 5
+    Fire.Size = 3
+end)
+S5_6:Button("Invisble Head", function(Yahoo)
+    game.Players.LocalPlayer.Character.Head.Transparency = 1
+end)
 local SetPage = win:NewPage("Setting")
 local SettingSection = SetPage:NewSecction("Setting")
 
