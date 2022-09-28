@@ -5,5 +5,5 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Blox-Fru
 elseif PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/King%20Legacy%20Sea%202")()
 else
-https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/Work%20In%20All%20Game%20%7C%20Kill%20Player
+loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/Work%20In%20All%20Game%20%7C%20Kill%20Player")()
 end
