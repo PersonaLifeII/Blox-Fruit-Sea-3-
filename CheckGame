@@ -7,3 +7,4 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Blox-Fru
 else
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/Work%20In%20All%20Game%20%7C%20Kill%20Player")()
 end
+end
