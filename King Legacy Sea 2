@@ -19,7 +19,7 @@ function click()
    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 end
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/UI%20Venyx"))()
-local UI  = Venyx.new("Impact Hub | Saturday At 7 October | King Legacy", 5013109572)
+local UI  = Venyx.new("Impact Hub | Saturday At 8 October | King Legacy", 5013109572)
 
 local page1 = UI:addPage("Main Tab")
 local FARM = page1:addSection("")
@@ -495,22 +495,22 @@ end)
 local TeleportL = page3:addSection("Legacy Island")
 
 TeleportL:addButton("Legacy Island 1", function()
-	TP(CFrame.new(-8168.458984375, 24.21000289917, -10551.879882812))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8168.458984375, 24.21000289917, -10551.879882812)
 end)
 TeleportL:addButton("Legacy Island 2", function()
-	TP(CFrame.new(10054.767578125, 21.233226776123, -11169.692382812))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(10054.767578125, 21.233226776123, -11169.692382812)
 end)
 TeleportL:addButton("Legacy Island 3", function()
-	TP(CFrame.new(-15415.356445312, 22.917552947998, -1117.6180419922))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-15415.356445312, 22.917552947998, -1117.6180419922)
 end)
 TeleportL:addButton("Legacy Island 4", function()
-	TP(CFrame.new(13691.034179688, 21.36120223999, 16766.748046875))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13691.034179688, 21.36120223999, 16766.748046875)
 end)
 TeleportL:addButton("Legacy Island 5", function()
-	TP(CFrame.new(-10446.91796875, 21.233226776123047, 17660.865234375))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10446.91796875, 21.233226776123047, 17660.865234375)
 end)
 TeleportL:addButton("Legacy Island 6", function()
-	TP(CFrame.new(-1069.1862792969, 21.36120223999, -12518.303710938))
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1069.1862792969, 21.36120223999, -12518.303710938)
 end)
 local Teleport2 = page3:addSection("Sea")
 Teleport2:addButton("First Sea", function()
@@ -576,7 +576,7 @@ PLYS:addToggle("Spectate Player", nil, function(State)
             _G.SafeModeOn = a
             end)
          PLYS:addButton("Teleport Player", function(Value)
-    TP(game.Players[Select].Character.HumanoidRootPart.CFrame)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
          end)
 
 local PLYS2 = PLY:addSection("")
@@ -717,6 +717,7 @@ spawn(function()
                 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                     if string.find(v.Name, "Fruit") then
                         if v:IsA("Tool") then
+                            v.Handle.CanCollide = false
                             v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 							wait(.2)
             				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Handle,0)
@@ -1177,7 +1178,7 @@ spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
          if _G.KillPl then
-            TP(game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,6))
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,6)
 click()
         end
  end)
@@ -1281,7 +1282,7 @@ function TP(P1)
     elseif Distance < 1000 then
         Speed = 800
     elseif Distance >= 1000 then
-        Speed = 10000
+        Speed = 15000
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
