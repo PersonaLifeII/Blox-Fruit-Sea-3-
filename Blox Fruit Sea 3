@@ -1,4 +1,4 @@
-wait(0)
+-- Blox Fruit Sea 3
 game.StarterGui:SetCore("SendNotification", {
     Title = "Impact Hub"; 
     Text = "Thank For Using..."; 
@@ -14,7 +14,7 @@ game.StarterGui:SetCore("SendNotification", {
 })
 wait(1)
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
-local painx = library.new("Impact Hub | Blox Fruit", 5013109572)
+local painx = library.new("Impact Hub | Blox Fruit [SEA 3]", 5013109572)
 
 
 local mainpage = painx:addPage("Main Page", 7040391851)
@@ -36,7 +36,7 @@ end)
 statssection:addToggle("Blox Fruit", nil, function(esea)
     _G.StatsUp_BloxFruit = esea
 end)
-statssection:addSlider("Point Up", _G.PointUp, 3, 2099, function(esea)
+statssection:addSlider("Point Up", _G.PointUp, 3, 100, function(esea)
     _G.PointUp = esea
 end)
 
@@ -86,12 +86,23 @@ spawn(function()
 end)
 local tppage = painx:addPage("Teleport", 7044233235)
 local worldsection = tppage:addSection("Teleport Sea")
-worldsection:addButton("Teleport To First Sea", function()
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
+worldsection:addButton("Teleport To Sea 1",function()
+    local args = {
+        [1] = "TravelMain"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
-
-worldsection:addButton("Teleport To Third Sea", function()
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+worldsection:addButton("Teleport To Sea 2",function()
+    local args = {
+        [1] = "TravelDressrosa"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+worldsection:addButton("Teleport To Sea 3",function()
+local args = {
+        [1] = "TravelZou"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 local Tp = tppage:addSection("Tween Island")
 
@@ -128,64 +139,64 @@ local Tp = tppage:addSection("Tween Island")
 	Tp:addButton("Raid Lab", function()
 		TP2(CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469))
 	end)
-
-	Tp:addButton("Mini Sky", function()
-		TP2(CFrame.new(-263.66668701172, 49325.49609375, -35260))
-	end)
 	Tp:addButton("Stop Tween", function()
 		Clip = false
 		TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 	end)
-local plypage = painx:addPage("Players", 7252023075)
-local plysection = plypage:addSection("Players")
-local playerlist = {}
-
-for i,v in pairs(game.Players:GetPlayers())do
-   if v ~= game.Players.LocalPlayer then
-       table.insert(playerlist,v.Name)
-   end
-end
-
-local playerdrop = plysection:addDropdown("Select Players", playerlist, function(abc)
- Player = abc
-end)
-
-game.Players.PlayerAdded:Connect(function(player)
-   local name = player.Name
-   table.insert(playerlist,name)
-   playerdrop:Refresh(playerlist)
-end)
-
-game.Players.PlayerRemoving:Connect(function(player)
-   local name = player.Name
-   for i,v in pairs(playerlist)do
-       if v == name then  
-           table.remove(playerlist,i)
+    local plypage = painx:addPage("Players", 7252023075)
+    local plysection = plypage:addSection("Players")
+    local playerlist = {}
+    
+    for i,v in pairs(game.Players:GetPlayers())do
+       if v ~= game.Players.LocalPlayer then
+           table.insert(playerlist,v.Name)
        end
-   end
-   playerdrop:Refresh(playerlist)
-end)
-plysection:addToggle("Kill Player", nil, function(a)
-_G.KillPlayer = a
-end)
-plysection:addToggle("Fast Attack", nil,function(a)
-    _G.FastAttack = a
-end)
-plysection:addToggle("Spectate Player", nil,function(Spectate)
-    Sp = Spectate
-    local plr1 = game.Players.LocalPlayer.Character.Humanoid
-    local plr2 = game.Players:FindFirstChild(Player)
-    repeat wait(.1)
-        game.Workspace.Camera.CameraSubject = plr2.Character.Humanoid
-    until Sp == false 
-    game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
-end)
-plysection:addToggle("Aimbot ",nil,function(AAA)
-	Aimbot = AAA
-end)
-plysection:addButton("Tween To Player", function()
-TP(game.Players[Player].Character.HumanoidRootPart.CFrame)
-end)
+    end
+    
+    local playerdrop = plysection:addDropdown("Select Players", playerlist, function(abc)
+     Player = abc
+    end)
+    
+    game.Players.PlayerAdded:Connect(function(player)
+       local name = player.Name
+       table.insert(playerlist,name)
+       playerdrop:Refresh(playerlist)
+    end)
+    
+    game.Players.PlayerRemoving:Connect(function(player)
+       local name = player.Name
+       for i,v in pairs(playerlist)do
+           if v == name then  
+               table.remove(playerlist,i)
+           end
+       end
+       playerdrop:Refresh(playerlist)
+    end)
+    plysection:addToggle("Kill Player", nil, function(a)
+    _G.KillPlayer = a
+    end)
+    plysection:addToggle("Fast Attack", nil,function(a)
+        _G.FastAttack = a
+    end)
+    plysection:addToggle("Spectate Player", nil,function(Spectate)
+        Sp = Spectate
+        local plr1 = game.Players.LocalPlayer.Character.Humanoid
+        local plr2 = game.Players:FindFirstChild(Player)
+        repeat wait(.1)
+            game.Workspace.Camera.CameraSubject = plr2.Character.Humanoid
+        until Sp == false 
+        game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+    end)
+    plysection:addToggle("Aimbot [ In Develop ]",nil,function(AAA)
+        Aimbot = AAA
+    end)
+    plysection:addButton("Tween To Player", function()
+    TP(game.Players[Player].Character.HumanoidRootPart.CFrame)
+    end)
+    plysection:addButton("Stop Tween", function()
+        Clip = false
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end)
 farmsection:addToggle("Auto Farm Level", false, function(a)
     AutoEquiped = a
     _G.AutoFarmLv = a
@@ -741,6 +752,10 @@ end
 	farmsection:addToggle("Auto SetSpawn", _G.SetSpawn, true, function(value)
 	_G.SetSpawn = value
 	end)
+    farmsection:addButton("Stop Tween", function()
+        Clip = false
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end)
     farmsection:addButton("Check Elite Progress", function()
     game.StarterGui:SetCore("SendNotification", {
     Title = "Impact Hub";
@@ -753,62 +768,54 @@ end
     wait(2)
     game:Shutdown()
     end)
-    farmsection:addToggle("Auto Yama", nil, function(ag)
+    farmsection:addToggle("Auto Farm Sea Beasts", nil, function(a)
+        AutoEquiped = a
+         _G.SeaBeasts = a
+     
+         task.spawn(function()
+             while task.wait() do
+                 if not _G.SeaBeasts then break end
+                 pcall(function()
+                     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                     for i, v in pairs(game.Workspace.SeaBeasts:GetChildren()) do
+                         if string.find(v.Name, "SeaBeast") and v:FindFirstChild("Humanoid") then
+                               TP(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+                             click()
+                             Haki()
+                         end
+                     end
+                 end)
+             end
+         end)
+     end)
+    farmsection:addToggle("Auto Yama [ In Develop ]", nil, function(ag)
         AutoEquiped = aq
     _G.AutoYama = ag
     end)
-    farmsection:addToggle("Auto Rainbow Haki", nil, function(ar)
+    farmsection:addToggle("Auto Rainbow Haki [ In Develop ]", nil, function(ar)
         AutoEquiped = aq
     _G.AutoRGBHaki = ar
     end)
-    farmsection:addToggle("Auto Superhuman", nil, function(aq)
+    farmsection:addToggle("Auto Superhuman [ In Develop ]", nil, function(aq)
     AutoEquiped = aq
     _G.AutoSuper = aq
     end)
-    farmsection:addToggle("Auto Death Step", nil, function(at)
+    farmsection:addToggle("Auto Death Step [ In Develop ]", nil, function(at)
     AutoEquiped = at
     _G.AutoDeathStep = at
     end)
-    farmsection:addToggle("Auto Sharkman Karate", nil, function(af)
+    farmsection:addToggle("Auto Sharkman Karate [ In Develop ]", nil, function(af)
         AutoEquiped = af
     _G.AutoSharkmankarate = af
     end)
-    farmsection:addToggle("Auto Electric Claw", nil, function(av)
+    farmsection:addToggle("Auto Electric Claw [ In Develop ]", nil, function(av)
         AutoEquiped = av
     _G.AutoElectricClaw = av
     end)
-    farmsection:addToggle("Auto Dragon Talon", nil, function(ac)
+    farmsection:addToggle("Auto Dragon Talon [ In Develop ]", nil, function(ac)
         AutoEquiped = ac
     _G.AutoDragonTalon = ac
     end)
-    farmsection:addToggle("Auto Farm Factory", nil, function(vu)
-        AutoEquiped = vu
-        Factory = vu
-                    while Factory do wait()
-                        if game.Workspace.Enemies:FindFirstChild("Core") then
-                            Core = true
-                            AFM = false
-                            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                if Core and v.Name == "Core" and v.Humanoid.Health > 0 then
-                                    repeat wait(.1)
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(448.46756, 199.356781, -441.389252)
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    until not Core or v.Humanoid.Health <= 0  or Factory == false
-                                end
-                            end
-                        elseif game.ReplicatedStorage:FindFirstChild("Core") then
-                            Core = true
-                            AFM = false
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(448.46756, 199.356781, -441.389252)
-                        elseif AFMMain then
-                            Core = false
-                            AFM = true
-                        end
-                    end
-                end)
-        farmsection:addToggle("Auto Rengoku", nil, function(value)
-        end)
     farmsection:addToggle("Auto Buy Colors Haki",nil,function(C)
         _G.ColorsHaki = C
         while _G.ColorsHaki do
@@ -900,9 +907,9 @@ end
 end)
     
     local massection = mainpage:addSection("Auto Farm Mastery")
-    massection:addToggle("Auto Farm Mastery Devil Fruit", nil, function()
+    massection:addToggle("Auto Farm Mastery Devil Fruit [ In Develop ]", nil, function()
     end)
-    massection:addToggle("Auto Farm Mastery Gun", nil, function()
+    massection:addToggle("Auto Farm Mastery Gun [ In Develop ]", nil, function()
     end)
     local Weaponlist = {}
     local Weapon = nil
@@ -920,64 +927,182 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) 
    table.insert(Weaponlist,v.Name)
 end
 end)
-    local AutoFarm = mainpage:addSection("Auto Farm Boss")
-    AutoFarm:addToggle("Auto Farm Boss", false, function(vu)
-        AutoFarmBoss = vu
-        if vu == false then
-            wait(1)
-            TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-        end
-    end)
-    
-    AutoFarm:addToggle("Auto Farm Boss Quest", true, function(vu)
-        BossQuest = vu
-    end)
-    
-    local BossName = AutoFarm:addDropdown("Select Boss", Boss, function(Value)
-        SelectBoss = Value
-    end)
-    
-    local Weaponlist = {}
-    local Weapon = nil
-    
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-        table.insert(Weaponlist,v.Name)
-    end
-    
-    AutoFarm:addDropdown("Select Weapon", Weaponlist, function(a)
-        Weapon = a
-    end)
-    
-    AutoFarm:addButton("Refresh Boss", function()
-        BossName:Clear()
-        for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
-            if string.find(v.Name, "Boss") then
-                if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
-                elseif v.Name == "rip_indra [Lv. 1500] [Boss]" then
-                else
-                    BossName:Add(v.Name)
-                end
-            end
-        end
-        for i,v in pairs(game.workspace.Enemies:GetChildren()) do
-            if string.find(v.Name, "Boss") then
-                if v.Name ~= "Ice Admiral [Lv. 700] [Boss]" or v.Name ~= "rip_indra [Lv. 1500] [Boss]" then
-                    BossName:Add(v.Name)
-                end
-            end
-        end
-    end)
-    AutoFarm:addButton("Refresh Weapon", function(a)
-        table.clear(Weaponlist)
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-       table.insert(Weaponlist,v.Name)
-    end
-    end)
-    local hakisection = mainpage:addSection("Haki")
-    hakisection:addToggle("Auto Buso Haki", true, function(State)
-        BusoHaki()
-    end)
 
+local AutoFarm = mainpage:addSection("Auto Farm Boss")
+
+AutoFarm:addToggle("Auto Farm Boss Quest", nil, function(vu)
+    BossQuest = vu
+end)
+
+local Boss = {}
+for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+    if string.find(v.Name, "Boss") then
+        if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
+        else
+            table.insert(Boss, v.Name)
+        end
+    end
+end
+for i, v in pairs(game.workspace.Enemies:GetChildren()) do
+    if string.find(v.Name, "Boss") then
+        if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
+        else
+            table.insert(Boss, v.Name)
+        end
+    end
+end
+
+local BossName = AutoFarm:addDropdown("Select Boss",Boss,function(Value)
+    SelectBoss = Value
+end)
+
+AutoFarm:addToggle("Auto Farm Boss", nil, function(a)   
+AutoEquiped = a
+_G.FarmBoss = a
+
+task.spawn(function()
+    while task.wait() do
+        if not _G.FarmBoss then break end
+        pcall(function()
+            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+               if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
+                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+                    click()
+                    BusoHaki()
+                end
+            end
+        end)
+    end
+end)
+end)
+local Weaponlist = {}
+local Weapon = nil
+
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+table.insert(Weaponlist,v.Name)
+end
+AutoFarm:addDropdown("Select Weapon", Weaponlist, function(a)
+Weapon = a
+end)
+AutoFarm:addButton("Refresh Weapon", function(a)
+table.clear(Weaponlist)
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+table.insert(Weaponlist,v.Name)
+end
+end)
+AutoFarm:addButton("Refresh Boss", function(a)
+table.clear(Boss)
+for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+table.insert(Boss,v.Name)
+end
+end)
+AutoFarm:addButton("If Auto Farm Boss Is Not Working. Click This", function(a)   
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Impact Hub"; 
+    Text = "You Must Be Near Boss"; 
+    Icon = ""; 
+    Duration = 5;
+})
+end)
+
+    local monsection = mainpage:addSection("Auto Farm Monster")
+
+    local mobs = {} 
+getgenv().mob = nil 
+
+for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    insert = true 
+    for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+    if insert then table.insert(mobs, v.Name) end 
+end
+
+local mobdropdown = monsection:addDropdown("Select Mon", mobs, function(v)
+    getgenv().mob = v
+end)
+
+monsection:addToggle("Auto Farm Monster", nil, function(v)
+    getgenv().autofarmmobs = v
+    while wait() do
+        if getgenv().autofarmmobs == false then return end 
+        if getgenv().mob == nil then 
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Impact Hub", 
+                Text = "Please Select Your Monster",
+                Icon = "",
+                Duration = 3
+            })
+            getgenv().autofarmmobs = false
+            return
+        end
+        local mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+        if mob == nil then
+            game.StarterGui:SetCore("SendNotification", { 
+                Title = "Impact Hub",
+                Text = "There Is Currently No Spawned Monster Of This Type", 
+                Icon = "", 
+                Duration = 3
+            })
+            while wait() do 
+                wait() 
+                if getgenv().autofarmmobs == false then return end 
+                if game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob) ~= nil then break; end
+            end 
+        else
+            local mob2 = mob
+            while wait() do
+                mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+                if mob ~= mob2 then break; end
+                if getgenv().autofarmmobs == false then return end
+                if mob ~= nil then
+                    if mob:FindFirstChild("Humanoid") then
+                        if mob.Humanoid.Health == 0 then wait(0.1) mob:Destroy() break; end 
+                    end
+                    if mob:FindFirstChild("HumanoidRootPart") then
+                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                        TP(mob.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+                        Haki()
+                        click()
+                    end
+                end
+                wait() 
+            end
+        end
+    end
+end)
+
+game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end
+    
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+
+game:GetService("Workspace").Enemies.ChildRemoved:Connect(function() 
+    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    
+    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+        insert = true 
+        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+        if insert then table.insert(mobs, v.Name) end 
+    end
+    mobdropdown:Refresh(mobs)
+end)
+    local hakisection = mainpage:addSection("Haki")
+    hakisection:addToggle("Auto Buso Haki", nil, function(State)
+        AutoBHaki = State
+    end)
+    spawn(function()
+        while wait(.1) do
+            if AutoBHaki then
+                BusoHaki()
+            end
+        end
+    end)
     hakisection:addToggle("Auto Farm Ken Haki [ In Develop ]", nil, function()
     end)
     hakisection:addButton("Observation Haki Level :", function()
@@ -1128,7 +1253,7 @@ end)
             game:GetService'VirtualUser':Button1Up(Vector2.new(0.9,0.9))
         end
     end)
-        missection:addToggle("Fly [ X ]",nil,function(State)
+        missection:addToggle("Fly [ G ]",nil,function(State)
         FL = State
         local Max = 0
         local Players = game.Players
@@ -1136,7 +1261,7 @@ end)
         local Mouse = LP:GetMouse()
         Mouse.KeyDown:connect(
             function(k)
-                if k:lower() == "x" then
+                if k:lower() == "g" then
                     Max = Max + 1
                     getgenv().Fly = false
                     if FL then
@@ -1267,8 +1392,6 @@ local args = {
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
     local scrsection = mainpage:addSection("Screen")
-    scrsection:addButton("FPS Unlock", function()
-    end)
     scrsection:addButton("FPS Boost", function()
     local decalsyeeted = true
     local g = game
@@ -1367,12 +1490,6 @@ end)
     end)
     guisection:addButton("Open Devil Fruit Shop", function()
     game.Players.LocalPlayer.PlayerGui.Main.FruitShop.Visible = true
-    end)
-    guisection:addButton("Open Tresure Inventory", function()
-    game.Players.LocalPlayer.PlayerGui.Main.FruitInventory.Visible = true
-    end)
-    guisection:addButton("Open Inventory", function()
-    game.Players.LocalPlayer.PlayerGui.Main.Inventory.Visible = true
     end)
     guisection:addButton("Open Devil Fruit Shop", function()
     game.Players.LocalPlayer.PlayerGui.Main.FruitShop.Visible = true
@@ -2109,26 +2226,6 @@ local args = {
 }
  
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-end)
-
-local Haki1 = itpage:addSection("Haki")
-
-Haki1:addToggle("Auto Buy Color Buso Haki", function(vu)
-	_G.Setting_table.Buso_Haki = vu
-	Buso_Haki_Buy = vu
-	Update_Setting(getgenv()['MyName'])
-end)
-
-spawn(function()
-	while wait(.5) do
-		pcall(function()
-			if Buso_Haki_Buy then
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ColorsDealer", "2")
-			else
-				wait(3)
-			end
-		end)
-	end
 end)
 
 
