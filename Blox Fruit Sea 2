@@ -999,22 +999,18 @@ end)
     AutoEquiped = a
     _G.FarmBoss = a
 
-    task.spawn(function()
-        while task.wait() do
-            if not _G.FarmBoss then break end
-            pcall(function()
-                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-                   if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
-                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
-                        click()
-                        BusoHaki()
+    while _G.FarmBoss do wait()
+        pcall(function()
+            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+             if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
+                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+                click()
+            BusoHaki()
                     end
                 end
             end)
-        end
-    end)
-end)
+            end
+        end)
 local Weaponlist = {}
 local Weapon = nil
 
@@ -1060,55 +1056,21 @@ local mobdropdown = monsection:addDropdown("Select Mon", mobs, function(v)
     getgenv().mob = v
 end)
 
-monsection:addToggle("Auto Farm Monster", nil, function(v)
-    getgenv().autofarmmobs = v
-    while wait() do
-        if getgenv().autofarmmobs == false then return end 
-        if getgenv().mob == nil then 
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Impact Hub", 
-                Text = "Please Select Your Monster",
-                Icon = "",
-                Duration = 3
-            })
-            getgenv().autofarmmobs = false
-            return
-        end
-        local mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
-        if mob == nil then
-            game.StarterGui:SetCore("SendNotification", { 
-                Title = "Impact Hub",
-                Text = "There Is Currently No Spawned Monster Of This Type", 
-                Icon = "", 
-                Duration = 3
-            })
-            while wait() do 
-                wait() 
-                if getgenv().autofarmmobs == false then return end 
-                if game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob) ~= nil then break; end
-            end 
-        else
-            local mob2 = mob
-            while wait() do
-                mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
-                if mob ~= mob2 then break; end
-                if getgenv().autofarmmobs == false then return end
-                if mob ~= nil then
-                    if mob:FindFirstChild("Humanoid") then
-                        if mob.Humanoid.Health == 0 then wait(0.1) mob:Destroy() break; end 
-                    end
-                    if mob:FindFirstChild("HumanoidRootPart") then
-                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                        TP(mob.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
-                        Haki()
-                        click()
+monsection:addToggle("Auto Farm Monster", nil, function(a)
+    _G.FarmMonster = a
+
+    while _G.FarmMonster do wait()
+        pcall(function()
+            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+             if v.Name == getgenv().mob and v:FindFirstChild("Humanoid") then
+                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+                click()
+            BusoHaki()
                     end
                 end
-                wait() 
+            end)
             end
-        end
-    end
-end)
+        end)
 
 game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
     for _,v2 in pairs(mobs) do table.remove(mobs, _) end
@@ -1170,6 +1132,81 @@ end)
             Duration = 5; 
             })
             end)
+
+    local chestsection = mainpage:addSection("Chest Farm")
+    chestsection:addToggle("Auto Farm Wood Chest",nil,function(a)
+        _G.FarmChest1 = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest1 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest1" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm Gold Chest",nil,function(a)
+        _G.FarmChest2 = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest2 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest2" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm Diamond Chest",nil,function(a)
+        _G.FarmChest3= a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest3 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest3" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm All Chest",nil,function(a)
+        _G.FarmAllChest = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmAllChest then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                        if string.find(v.Name, "Chest") and v:FindFirstChild("Mesh") then
+                            CHESTTP(v.CFrame)
+                            BusoHaki()                     
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+
     local missection = mainpage:addSection("Character")
     missection:addToggle("Anti AFK",nil,function(a)
         local aa = game:GetService("VirtualUser")
@@ -1438,6 +1475,18 @@ end)
             end
         )
         
+        end)
+        missection:addToggle("Noclip",nil,function(a)
+          _G.Noclip = a
+        end)
+        spawn(function()
+            pcall(function()
+                while game:GetService("RunService").Heartbeat:wait() do
+                    if _G.Noclip then
+                        NoWall()
+                    end
+                end
+            end)
         end)
     local Team = mainpage:addSection("Set Team")
     Team:addDropdown("Select Team", {"Pirates", "Marines"}, function(text)
@@ -2314,6 +2363,23 @@ painx:SelectPage(painx.pages[1], true)
     end
 end
 
+function CHESTTP(P1)
+    Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 250 then
+        Speed = 500
+    elseif Distance < 500 then
+        Speed = 400
+    elseif Distance < 1000 then
+        Speed = 350
+    elseif Distance >= 1000 then
+        Speed = 300
+    end
+    game:GetService("TweenService"):Create(
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = P1}
+    ):Play()
+end
     function TP(P1)
         Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 250 then
@@ -2383,3 +2449,13 @@ end
                     )
                 end)(false, -1, false, -1, false, 60, pcall, type)
                 end)
+
+
+ function NoWall()
+    local character = game.Players.LocalPlayer.Character
+    for _, v in pairs(character:GetChildren()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+        end
+    end
+end     
