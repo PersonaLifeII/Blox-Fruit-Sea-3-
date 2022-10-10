@@ -197,7 +197,7 @@ local Tp = tppage:addSection("Tween Island")
         Clip = false
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end)
-farmsection:addToggle("Auto Farm Level", false, function(a)
+farmsection:addToggle("Auto Farm Level", nil, function(a)
     AutoEquiped = a
     _G.AutoFarmLv = a
     OldWorld = false
@@ -595,7 +595,7 @@ farmsection:addToggle("Auto Farm Level", false, function(a)
             NQ = "HauntedQuest1"
             QN = 1
             QP = CFrame.new(-9481.0439453125, 142.13061523438, 5564.1069335938)
-            PUK = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875) -9481.0439453125, 142.13061523438, 5564.1069335938
+            PUK = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875)
     elseif Level == 2000 or Level <= 2024 then -- Living Zombie
         Ms = "Living Zombie [Lv. 2000]"
             NQ = "HauntedQuest1"
@@ -680,7 +680,7 @@ farmsection:addToggle("Auto Farm Level", false, function(a)
         QN = 1	 
         QP = CFrame.new(147.37564086914062, 24.7938289642334, -12779.0478515625)
         PUK = CFrame.new(-22.53498649597168, 64.85152435302734, -12684.798828125)
-    elseif Level == 2350 or Level <= 2374 then -- Posessed Mummy
+    elseif Level == 2375 or Level <= 9999 then -- Posessed Mummy
         Ms = "Candy Rebel [Lv. 2375]"
             NQ = "ChocQuest2"
         QN = 2	 
@@ -960,22 +960,18 @@ AutoFarm:addToggle("Auto Farm Boss", nil, function(a)
 AutoEquiped = a
 _G.FarmBoss = a
 
-task.spawn(function()
-    while task.wait() do
-        if not _G.FarmBoss then break end
-        pcall(function()
-            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-               if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
-                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
-                    click()
-                    BusoHaki()
+while _G.FarmBoss do wait()
+    pcall(function()
+        for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+         if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
+            TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+            click()
+        BusoHaki()
                 end
             end
         end)
-    end
-end)
-end)
+        end
+    end)
 local Weaponlist = {}
 local Weapon = nil
 
@@ -1119,6 +1115,80 @@ end)
             aa:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
         end)
     end)
+    local chestsection = mainpage:addSection("Chest Farm")
+    chestsection:addToggle("Auto Farm Wood Chest",nil,function(a)
+        _G.FarmChest1 = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest1 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest1" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm Gold Chest",nil,function(a)
+        _G.FarmChest2 = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest2 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest2" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm Diamond Chest",nil,function(a)
+        _G.FarmChest3= a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmChest3 then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                       if v.Name == "Chest3" and v:FindFirstChild("Mesh") then
+                        CHESTTP(v.CFrame)
+                            BusoHaki()
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+    chestsection:addToggle("Auto Farm All Chest",nil,function(a)
+        _G.FarmAllChest = a
+
+        task.spawn(function()
+            while task.wait() do
+                if not _G.FarmAllChest then break end
+                pcall(function()
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i, v in pairs(game.Workspace:GetChildren()) do
+                        if string.find(v.Name, "Chest") and v:FindFirstChild("Mesh") then
+                            CHESTTP(v.CFrame)
+                            BusoHaki()                     
+                        end
+                    end
+                end)
+            end
+        end)
+    end)
+
     missection:addToggle("Infinite Agility", nil, function(vu)
         InfAbility = vu
     end)
@@ -2351,3 +2421,22 @@ end
                     )
                 end)(false, -1, false, -1, false, 60, pcall, type)
                 end)
+
+
+                function CHESTTP(P1)
+                    Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if Distance < 250 then
+                        Speed = 500
+                    elseif Distance < 500 then
+                        Speed = 400
+                    elseif Distance < 1000 then
+                        Speed = 350
+                    elseif Distance >= 1000 then
+                        Speed = 300
+                    end
+                    game:GetService("TweenService"):Create(
+                        game.Players.LocalPlayer.Character.HumanoidRootPart,
+                        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+                        {CFrame = P1}
+                    ):Play()
+                end
