@@ -719,7 +719,7 @@ end
     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Ms then
     v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-    v.HumanoidRootPart.Transparency = 0.9
+    v.HumanoidRootPart.Transparency = 1
         end
     end
     
@@ -768,6 +768,20 @@ end
     wait(2)
     game:Shutdown()
     end)
+    farmsection:addButton("Check Time You Have Join", function(value)
+        local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+        local Hour = math.floor(GameTime/(60^2))%24
+        local Minute = math.floor(GameTime/(60^1))%60
+        local Second = math.floor(GameTime/(60^0))%60
+        local CoreGui = game:GetService("StarterGui")
+    
+    CoreGui:SetCore("SendNotification", {
+        Title = "Impact Hub";
+        Text = "Hour : "..Hour.." Minute : "..Minute.." Second : "..Second;
+        Duration = 5;
+        Button1 = "Okay";
+    })
+    end)
     farmsection:addToggle("Auto Farm Sea Beasts", nil, function(a)
         AutoEquiped = a
          _G.SeaBeasts = a
@@ -779,7 +793,7 @@ end
                      local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                      for i, v in pairs(game.Workspace.SeaBeasts:GetChildren()) do
                          if string.find(v.Name, "SeaBeast") and v:FindFirstChild("Humanoid") then
-                               TP(v.HumanoidRootPart.CFrame * CFrame.new(0,50,0))
+                               TP(v.HumanoidRootPart.CFrame * CFrame.new(0,100,0))
                              click()
                              Haki()
                          end
@@ -963,8 +977,8 @@ _G.FarmBoss = a
 while _G.FarmBoss do wait()
     pcall(function()
         for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-         if v.Name == SelectBoss and v:FindFirstChild("Humanoid") then
-            TP(v.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+         if v.Name == SelectBoss then
+            TP(v.HumanoidRootPart.CFrame * CFrame.new(0,10,10))
             click()
         BusoHaki()
                 end
@@ -988,10 +1002,22 @@ table.insert(Weaponlist,v.Name)
 end
 end)
 AutoFarm:addButton("Refresh Boss", function(a)
-table.clear(Boss)
-for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-table.insert(Boss,v.Name)
-end
+    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+        if string.find(v.Name, "Boss") then
+            if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
+            else
+                table.insert(Boss, v.Name)
+            end
+        end
+    end
+    for i, v in pairs(game.workspace.Enemies:GetChildren()) do
+        if string.find(v.Name, "Boss") then
+            if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
+            else
+                table.insert(Boss, v.Name)
+            end
+        end
+    end
 end)
 AutoFarm:addButton("If Auto Farm Boss Is Not Working. Click This", function(a)   
 game.StarterGui:SetCore("SendNotification", {
@@ -1018,76 +1044,76 @@ local mobdropdown = monsection:addDropdown("Select Mon", mobs, function(v)
 end)
 
 monsection:addToggle("Auto Farm Monster", nil, function(v)
-    getgenv().autofarmmobs = v
-    while wait() do
-        if getgenv().autofarmmobs == false then return end 
-        if getgenv().mob == nil then 
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Impact Hub", 
-                Text = "Please Select Your Monster",
-                Icon = "",
-                Duration = 3
-            })
-            getgenv().autofarmmobs = false
-            return
-        end
-        local mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
-        if mob == nil then
-            game.StarterGui:SetCore("SendNotification", { 
-                Title = "Impact Hub",
-                Text = "There Is Currently No Spawned Monster Of This Type", 
-                Icon = "", 
-                Duration = 3
-            })
-            while wait() do 
-                wait() 
-                if getgenv().autofarmmobs == false then return end 
-                if game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob) ~= nil then break; end
-            end 
-        else
-            local mob2 = mob
-            while wait() do
-                mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
-                if mob ~= mob2 then break; end
-                if getgenv().autofarmmobs == false then return end
-                if mob ~= nil then
-                    if mob:FindFirstChild("Humanoid") then
-                        if mob.Humanoid.Health == 0 then wait(0.1) mob:Destroy() break; end 
+        getgenv().autofarmmobs = v
+        while wait() do
+            if getgenv().autofarmmobs == false then return end 
+            if getgenv().mob == nil then 
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Impact Hub", 
+                    Text = "Please Select Your Monster",
+                    Icon = "",
+                    Duration = 3
+                })
+                getgenv().autofarmmobs = false
+                return
+            end
+            local mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+            if mob == nil then
+                game.StarterGui:SetCore("SendNotification", { 
+                    Title = "Impact Hub",
+                    Text = "There Is Currently No Spawned Monster Of This Type", 
+                    Icon = "", 
+                    Duration = 3
+                })
+                while wait() do 
+                    wait() 
+                    if getgenv().autofarmmobs == false then return end 
+                    if game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob) ~= nil then break; end
+                end 
+            else
+                local mob2 = mob
+                while wait() do
+                    mob = game:GetService("Workspace").Enemies:FindFirstChild(getgenv().mob)
+                    if mob ~= mob2 then break; end
+                    if getgenv().autofarmmobs == false then return end
+                    if mob ~= nil then
+                        if mob:FindFirstChild("Humanoid") then
+                            if mob.Humanoid.Health == 0 then wait(0.1) mob:Destroy() break; end 
+                        end
+                        if mob:FindFirstChild("HumanoidRootPart") then
+                            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                            TP(mob.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
+                            Haki()
+                            click()
+                        end
                     end
-                    if mob:FindFirstChild("HumanoidRootPart") then
-                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                        TP(mob.HumanoidRootPart.CFrame * CFrame.new(0,15,10))
-                        Haki()
-                        click()
-                    end
+                    wait() 
                 end
-                wait() 
             end
         end
-    end
-end)
-
-game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
-    for _,v2 in pairs(mobs) do table.remove(mobs, _) end
+    end)
     
-    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-        insert = true 
-        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
-        if insert then table.insert(mobs, v.Name) end 
-    end
-    mobdropdown:Refresh(mobs)
-end)
-
-game:GetService("Workspace").Enemies.ChildRemoved:Connect(function() 
-    for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+    game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
+        for _,v2 in pairs(mobs) do table.remove(mobs, _) end
+        
+        for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+            insert = true 
+            for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
+            if insert then table.insert(mobs, v.Name) end 
+        end
+        mobdropdown:Refresh(mobs)
+    end)
     
-    for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
-        insert = true 
-        for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
-        if insert then table.insert(mobs, v.Name) end 
-    end
-    mobdropdown:Refresh(mobs)
-end)
+    game:GetService("Workspace").Enemies.ChildRemoved:Connect(function() 
+        for _,v2 in pairs(mobs) do table.remove(mobs, _) end 
+        
+        for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+            insert = true 
+            for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
+            if insert then table.insert(mobs, v.Name) end 
+        end
+        mobdropdown:Refresh(mobs)
+    end)
     local hakisection = mainpage:addSection("Haki")
     hakisection:addToggle("Auto Buso Haki", nil, function(State)
         AutoBHaki = State
@@ -1672,8 +1698,16 @@ end)
        game:GetService("RunService").RenderStepped:Connect(function()
         pcall(function()
     if _G.KillPlayer then
-    TP(game.Players[Player].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,10))
+
+    for i,v in pairs(game.Workspace.Characters:GetChildren()) do
+    if v.Name == Player then
+    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+    v.HumanoidRootPart.Transparency = 1   
+
+    TP(game.Players[Player].Character.HumanoidRootPart.CFrame * CFrame.new(0,5,15))
     click()
+    end
+end
     end
     end)
     end)
