@@ -2661,3 +2661,16 @@ end
                         end
                     end
                 end
+
+                function NoWall()
+                    local character = game.Players.LocalPlayer.Character
+                    for _, v in pairs(character:GetChildren()) do
+                        if v:IsA("BasePart") then
+                            v.CanCollide = false
+                        end
+                    end
+                end     
+                
+                function DeleteMDF()
+                    game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+                end
