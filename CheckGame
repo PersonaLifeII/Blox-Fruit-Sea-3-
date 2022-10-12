@@ -4,6 +4,8 @@ if PlaceId == 4442272183 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit%20Sea%202")()
 elseif PlaceId == 7449423635 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit%20Sea%203")()
+elseif PlaceId == 2753915549 then
+loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit%20Sea%203")()
 elseif PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/King%20Legacy%20Sea%202")()
 end
