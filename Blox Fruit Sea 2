@@ -235,10 +235,10 @@ end
       _G.AutoFarm = vu
             Auto_Farm = vu
             SelectMonster = ""
+	    DeleteMDF()
             if vu == false then
                 wait(1)
                 TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-                DeleteMDF()
             end
     end)
     
