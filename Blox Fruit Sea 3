@@ -807,22 +807,14 @@ local Tp = tppage:addSection("Tween Island")
             end
         end
     end
-    
-    function EquipWeapon(Weapon)
-        if game.Players.LocalPlayer.Backpack:FindFirstChild(Weapon) then
-            local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Weapon)
-            wait(.4)
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-        end
-    end
-    
-    Type = 1
-    spawn(function()
+
+
+spawn(function()
         while wait(.1) do
             if Type == 1 then
-                Farm_Mode = CFrame.new(0, 10, 10)
+                Farm_Mode = CFrame.new(0, 8, 10)
             elseif Type == 2 then
-                Farm_Mode = CFrame.new(0, -15, 10)
+                Farm_Mode = CFrame.new(0, -10, 10)
             elseif Type == 3 then
                 Farm_Mode = CFrame.new(0, 0, 10)
             end
@@ -909,7 +901,7 @@ local Tp = tppage:addSection("Tween Island")
         
     farmsection:addToggle("Auto Elite Hunter [ In Develop ]", nil, function()
     end)
-	farmsection:addToggle("Auto SetSpawn", _G.SetSpawn, true, function(value)
+	farmsection:addToggle("Auto SetSpawn", nil, function(value)
 	_G.SetSpawn = value
 	end)
     farmsection:addButton("Stop Tween", function()
@@ -923,9 +915,6 @@ local Tp = tppage:addSection("Tween Island")
     Duration = 5; 
     })
     end)
-    farmsection:addButton("Delete Monster Dead Effect", function()
-        DeleteMDF()
-    end)
     farmsection:addButton("Delete Damage Counter", function()
         game:GetService("RunService").Heartbeat:Connect(function()
             for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"]:GetChildren()) do
@@ -937,7 +926,7 @@ local Tp = tppage:addSection("Tween Island")
             end
         end)
     end)
-    farmsection:addButton("Check Time You Have Join", function(value)
+    farmsection:addButton("Check Time You Have Joined", function(value)
         local GameTime = math.floor(workspace.DistributedGameTime+0.5)
         local Hour = math.floor(GameTime/(60^2))%24
         local Minute = math.floor(GameTime/(60^1))%60
@@ -954,50 +943,82 @@ local Tp = tppage:addSection("Tween Island")
     farmsection:addToggle("Auto Farm Sea Beasts", nil, function(a)
         AutoEquiped = a
          _G.SeaBeasts = a
-     
-         task.spawn(function()
-             while task.wait() do
-                 if not _G.SeaBeasts then break end
-                 pcall(function()
-                     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                     for i, v in pairs(game.Workspace.SeaBeasts:GetChildren()) do
-                         if string.find(v.Name, "SeaBeast") and v:FindFirstChild("Humanoid") then
-                               TP(v.HumanoidRootPart.CFrame * CFrame.new(0,100,0))
-                             click()
-                             Haki()
-                         end
-                     end
-                 end)
-             end
-         end)
-     end)
+         if a == false then
+            wait(1)
+            TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    
+            task.spawn(function()
+                while task.wait() do
+                    if not _G.SeaBeasts then break end
+                    pcall(function()
+                        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        for i, v in pairs(game.Workspace.SeaBeasts:GetChildren()) do
+                            if string.find(v.Name, "SeaBeast") and v:FindFirstChild("Humanoid") then
+                                  TP(v.HumanoidRootPart.CFrame * CFrame.new(0,100,0))
+                                click()
+                                Haki()
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+    end)
     farmsection:addToggle("Auto Yama [ In Develop ]", nil, function(ag)
         AutoEquiped = aq
     _G.AutoYama = ag
+    if ag == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Rainbow Haki [ In Develop ]", nil, function(ar)
         AutoEquiped = aq
     _G.AutoRGBHaki = ar
+    if ar == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Superhuman [ In Develop ]", nil, function(aq)
     AutoEquiped = aq
     _G.AutoSuper = aq
+    if aq == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Death Step [ In Develop ]", nil, function(at)
     AutoEquiped = at
     _G.AutoDeathStep = at
+    if at == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Sharkman Karate [ In Develop ]", nil, function(af)
         AutoEquiped = af
     _G.AutoSharkmankarate = af
+    if af == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Electric Claw [ In Develop ]", nil, function(av)
         AutoEquiped = av
     _G.AutoElectricClaw = av
+    if av == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Dragon Talon [ In Develop ]", nil, function(ac)
         AutoEquiped = ac
     _G.AutoDragonTalon = ac
+    if ac == false then
+        wait(1)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
     end)
     farmsection:addToggle("Auto Buy Colors Haki",nil,function(C)
         _G.ColorsHaki = C
@@ -1072,6 +1093,11 @@ local Tp = tppage:addSection("Tween Island")
         end
     
     end)
+
+    TypeList = {1,2,3}
+    farmsection:addDropdown("Select Type Auto Farm Level", TypeList, function(a)
+        Type = a
+    end)
     local Weaponlist = {}
     local Weapon = nil
     
@@ -1088,7 +1114,15 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) 
    table.insert(Weaponlist,v.Name)
 end
 end)
-    
+spawn(function()
+    while wait() do
+    if AutoEquiped then
+    pcall(function()
+    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+    end)
+    end
+    end
+    end)
     local massection = mainpage:addSection("Auto Farm Mastery")
     massection:addToggle("Auto Farm Mastery Devil Fruit [ In Develop ]", nil, function()
     end)
@@ -1104,6 +1138,15 @@ end)
     massection:addDropdown("Select Weapon", Weaponlist, function(a)
         Weapon = a
     end)
+    spawn(function()
+        while wait() do
+        if AutoEquiped then
+        pcall(function()
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+        end)
+        end
+        end
+        end)
 massection:addButton("Refresh Weapon", function(a)
     table.clear(Weaponlist)
 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
