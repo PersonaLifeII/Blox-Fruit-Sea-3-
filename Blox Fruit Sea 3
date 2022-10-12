@@ -211,13 +211,14 @@ local Tp = tppage:addSection("Tween Island")
     end
     
     
-    farmsection:addToggle("Auto Farm Level :)", nil, function(vu)
+    farmsection:addToggle("Auto Farm Level", nil, function(vu)
       _G.AutoFarm = vu
             Auto_Farm = vu
             SelectMonster = ""
             if vu == false then
                 wait(1)
                 TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                DeleteMDF()
             end
     end)
     
@@ -583,7 +584,7 @@ local Tp = tppage:addSection("Tween Island")
                 NameMon = "Sea Soldier"
                 CFrameQ = CFrame.new(-3054.5827636719, 236.87213134766, -10147.790039063)
                 CFrameMon = CFrame.new(-3185.0153808594, 58.789089202881, -9663.6064453125)
-            elseif Lv >= 1450 or SelectMonster == "Water Fighter [Lv. 1450]" then -- Water Fighter
+            elseif Lv > 1450 or SelectMonster == "Water Fighter [Lv. 1450]" then -- Water Fighter
                 Ms = "Water Fighter [Lv. 1450]"
                 NameQuest = "ForgottenQuest"
                 QuestLv = 2
@@ -796,7 +797,7 @@ local Tp = tppage:addSection("Tween Island")
                 NameMon = "Sweet Thief" 
                 CFrameQ = CFrame.new(147.37564086914062, 24.7938289642334, -12779.0478515625)
                 CFrameMon = CFrame.new(-22.53498649597168, 64.85152435302734, -12684.798828125)
-            elseif Lv > 2375 or Lv <= 9999 or SelectMonster == "Candy Rebel [Lv. 2375]" then -- Posessed Mummy
+            elseif Lv > 2375 or SelectMonster == "Candy Rebel [Lv. 2375]" then -- Posessed Mummy
                 Ms = "Candy Rebel [Lv. 2375]"
                 NameQuest = "ChocQuest2"
                 QuestLv = 2	 
