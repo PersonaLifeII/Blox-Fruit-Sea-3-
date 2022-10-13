@@ -212,7 +212,6 @@ local Tp = tppage:addSection("Tween Island")
     
     
     farmsection:addToggle("Auto Farm Level", nil, function(vu)
-      _G.AutoFarm = vu
             Auto_Farm = vu
             SelectMonster = ""
 	    DeleteMDF()
@@ -1910,16 +1909,8 @@ end)
        game:GetService("RunService").RenderStepped:Connect(function()
         pcall(function()
     if _G.KillPlayer then
-
-    for i,v in pairs(game.Workspace.Characters:GetChildren()) do
-    if v.Name == Player then
-    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-    v.HumanoidRootPart.Transparency = 1   
-
     TP(game.Players[Player].Character.HumanoidRootPart.CFrame * CFrame.new(0,5,15))
     click()
-    end
-end
     end
     end)
     end)
@@ -2183,7 +2174,7 @@ spawn(function()
         end
     end
 end)
-dfsection:addToggle("Auto Store Devil Fruit", function(a)
+dfsection:addToggle("Auto Store Devil Fruit", nil, function(a)
 	Inventory_Fruit = a
 	_G.Setting_table.Inventory_Fruit = a
 end)
