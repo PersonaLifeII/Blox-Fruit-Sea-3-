@@ -184,6 +184,10 @@ game.Players.PlayerRemoving:Connect(function(player)
 end)
 plysection:addToggle("Kill Player", nil, function(a)
 _G.KillPlayer = a
+            if a == false then
+                wait(1)
+                TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            end
 end)
 plysection:addToggle("Fast Attack", nil,function(a)
     _G.FastAttack = a
@@ -218,7 +222,6 @@ end
 
 
 farmsection:addToggle("Auto Farm Level", nil, function(vu)
-  _G.AutoFarm = vu
         Auto_Farm = vu
         SelectMonster = ""
         if vu == false then
@@ -1876,16 +1879,8 @@ end)
         game:GetService("RunService").RenderStepped:Connect(function()
          pcall(function()
      if _G.KillPlayer then
- 
-     for i,v in pairs(game.Workspace.Characters:GetChildren()) do
-     if v.Name == Player then
-     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-     v.HumanoidRootPart.Transparency = 1   
- 
      TP(game.Players[Player].Character.HumanoidRootPart.CFrame * CFrame.new(0,5,15))
      click()
-     end
- end
      end
      end)
      end)
