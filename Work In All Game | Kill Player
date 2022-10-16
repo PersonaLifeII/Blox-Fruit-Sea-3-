@@ -78,7 +78,7 @@ spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
          if _G.KillPl then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,6)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
 click()
         end
  end)
