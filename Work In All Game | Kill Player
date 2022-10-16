@@ -50,11 +50,17 @@ end)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
          end)
  S1_1:addSlider("Walk Speed", 50,16,250, function(Value)
- game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    WS = Value
          end)
  S1_1:addSlider("Jump Power", 50,16,250, function(Value)
- game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    JP = Value
          end)
+  S1_1:addToggle("Set Walk Speed", nil, function(Value)
+     _G.SetWS = Value
+         end)
+   S1_1:addToggle("Set Jump Power", nil, function(Value)
+     _G.SetJP = Value
+        end)
 
 S1_1:addToggle("Safe Mode", nil, function(Value)
      _G.SetYokSootTot = Value
@@ -237,6 +243,26 @@ function click()
              if _G.AutoC then
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+            end
+     end)
+    end)
+    end)
+
+        spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+         pcall(function()
+             if _G.SetWS then
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = WS
+            end
+     end)
+    end)
+    end)
+
+    spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+         pcall(function()
+             if _G.SetJP then
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = JP
             end
      end)
     end)
