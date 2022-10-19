@@ -211,6 +211,8 @@ plysection:addButton("Stop Tween", function()
     Clip = false
     TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 end)
+
+
 local placeId = game.PlaceId
 if placeId == 2753915549 then
     Old_World = true
@@ -222,6 +224,7 @@ end
 
 
 farmsection:addToggle("Auto Farm Level", nil, function(a)
+    _G.AutoFarm = a
     Auto_Farm = a
     SelectMonster = ""
     DeleteMDF()
@@ -823,7 +826,7 @@ while wait(.1) do
     if Type == 1 then
         Farm_Mode = CFrame.new(0, 10, 10)
     elseif Type == 2 then
-        Farm_Mode = CFrame.new(0, -15, 10)
+        Farm_Mode = CFrame.new(0, -10, 10)
     elseif Type == 3 then
         Farm_Mode = CFrame.new(0, 0, 10)
     end
@@ -833,11 +836,11 @@ end)
 spawn(function()
 while wait(.1) do
     Type = 1
-    wait(5)
+    wait(10)
     Type = 2
-    wait(5)
+    wait(10)
     Type = 3
-    wait(5)
+    wait(10)
 end
 end)
 
