@@ -49,10 +49,10 @@ end)
  S1_1:addButton("Teleport Player", function(Value)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
          end)
- S1_1:addSlider("Walk Speed", 50,16,250, function(Value)
+ S1_1:addSlider("Walk Speed", 50,16,500, function(Value)
     WS = Value
          end)
- S1_1:addSlider("Jump Power", 50,16,250, function(Value)
+ S1_1:addSlider("Jump Power", 50,16,500, function(Value)
     JP = Value
          end)
   S1_1:addToggle("Set Walk Speed", nil, function(Value)
@@ -115,7 +115,7 @@ Mouse.KeyDown:connect(
                     L = 0,
                     R = 0
                 }
-                local SPEED = 65
+                local SPEED = 40
                 local function FLY()
                     getgenv().Fly = true
                     local BodyGyro = Instance.new("BodyGyro", T)
@@ -216,20 +216,62 @@ Mouse.KeyDown:connect(
 )
 
 end)
+S1_1:addToggle("Noclip",nil,function(a)
+    _G.Noclip = a
+  end)
 S1_1:addToggle("Auto Click", nil, function(a)
     _G.AutoC = a
 end)
 S1_1:addButton("Rejoin", function()
 game:GetService'TeleportService':TeleportToPlaceInstance(game.PlaceId,game.JobId,game:GetService'Players'.LocalPlayer)
 end)
-local page3 = venyx:addPage("Esp",5012544693)
-local S3_2 = page3:addSection("Esp")
+local S3_2 = page:addSection("Esp")
 
-local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Karrot-Esp"))()
-
-S3_2:addToggle("Esp Players", nil, function(a)
-ESP:Toggle(a)
+S3_2:addToggle("ESP Player", nil,function(Value)
+    PlayerESP = Value
+	while PlayerESP do wait()
+		UpdatePlayer()
+	end
 end)
+
+Number = math.random(1,1000000)
+function UpdatePlayer()
+	for i,v in pairs(game:GetService("Players"):GetChildren()) do
+		pcall(function()
+			if v.Character then
+				if PlayerESP then
+					if v.Character.Head and not v.Character.Head:FindFirstChild("PlayerESP"..Number) then
+						local Bb = Instance.new("BillboardGui", v.Character.Head)
+						Bb.Name = "PlayerESP"..Number
+						Bb.ExtentsOffset = Vector3.new(0, 1, 0)
+						Bb.Size = UDim2.new(1, 200, 1, 30)
+						Bb.Adornee = v.Character.Head
+						Bb.AlwaysOnTop = true
+						local Textlb = Instance.new("TextLabel", Bb)
+						Textlb.Font = "GothamBold"
+						Textlb.FontSize = "Size14"
+						Textlb.Text = v.Name.."\n"..math.round((v.Character.Head.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+						Textlb.Size = UDim2.new(1,0,1,0)
+						Textlb.BackgroundTransparency = 1
+						Textlb.TextStrokeTransparency = 0.5
+						if v.Team == game:GetService("Players").LocalPlayer.Team then
+							Textlb.TextColor3 = Color3.new(0, 255, 0)
+						else
+							Textlb.TextColor3 = Color3.new(0, 0, 204)
+						end
+					else
+						v.Character.Head["PlayerESP"..Number].TextLabel.Text = v.Name.."\n"..math.round((v.Character.Head.Position - game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude/3).." m."
+					end
+				else
+					if v.Character.Head:FindFirstChild("PlayerESP"..Number) then
+						v.Character.Head:FindFirstChild("PlayerESP"..Number):Destroy()
+					end
+				end
+			end
+		end)
+	end
+end
+
 
 
 function click()
@@ -266,6 +308,20 @@ function click()
             end
      end)
     end)
+    end)
+
+    spawn(function()
+        pcall(function()
+            game:GetService("RunService").Stepped:Connect(function()
+                if _G.Noclip == true then
+                    for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                        if v:IsA("BasePart") then
+                            v.CanCollide = false    
+                        end
+                    end
+                end
+            end)
+        end)
     end)
 
     local themes = {
