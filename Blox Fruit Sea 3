@@ -2705,35 +2705,36 @@ end
                     game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
                 end
 
-                spawn(function()
-                    pcall(function()
-                        while wait() do
-                            if _G.AutoFarm or _G.KillPlayer or _G.FarmChest1 or _G.FarmChest2 or _G.FarmChest3 or _G.FarmAllChest == true then
-                                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                                    local Noclip = Instance.new("BodyVelocity")
-                                    Noclip.Name = "BodyClip"
-                                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                                    Noclip.Velocity = Vector3.new(0,0,0)
-                                end
-                            end
-                        end
-                    end)
-                end)
-                
-                spawn(function()
-                    pcall(function()
-                        game:GetService("RunService").Stepped:Connect(function()
-                            if _G.AutoFarm or _G.KillPlayer or _G.Noclip or _G.FarmChest1 or _G.FarmChest2 or _G.FarmChest3 or _G.FarmAllChest == true then
-                                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                                    if v:IsA("BasePart") then
-                                        v.CanCollide = false    
-                                    end
-                                end
-                            end
-                        end)
-                    end)
-                end)
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.AutoFarm or _G.KillPlayer == true then
+                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.AutoFarm or _G.KillPlayer or _G.Noclip == true then
+                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false    
+                    end
+                end
+            end
+        end)
+    end)
+end)
+
 
                 function UnClip()
                 if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
