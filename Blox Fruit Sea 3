@@ -212,6 +212,7 @@ local Tp = tppage:addSection("Tween Island")
     
     
     farmsection:addToggle("Auto Farm Level", nil, function(a)
+        _G.AutoFarm = a
         Auto_Farm = a
         SelectMonster = ""
         DeleteMDF()
@@ -813,7 +814,7 @@ local Tp = tppage:addSection("Tween Island")
         if Type == 1 then
             Farm_Mode = CFrame.new(0, 10, 10)
         elseif Type == 2 then
-            Farm_Mode = CFrame.new(0, -15, 10)
+            Farm_Mode = CFrame.new(0, -10, 10)
         elseif Type == 3 then
             Farm_Mode = CFrame.new(0, 0, 10)
         end
@@ -823,11 +824,11 @@ local Tp = tppage:addSection("Tween Island")
     spawn(function()
     while wait(.1) do
         Type = 1
-        wait(5)
+        wait(10)
         Type = 2
-        wait(5)
+        wait(10)
         Type = 3
-        wait(5)
+        wait(10)
     end
     end)
     
@@ -887,7 +888,7 @@ local Tp = tppage:addSection("Tween Island")
             end
         end
     end
-    end)
+    end)    
             farmsection:addToggle("Fast Attack", nil,function(a)
                 _G.FastAttack = a
             end)
