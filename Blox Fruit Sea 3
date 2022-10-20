@@ -155,6 +155,16 @@ local Tp = tppage:addSection("Tween Island")
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-12463.6025390625, 378.3270568847656, -7566.0830078125))
 	end)
 
+    local Tp3 = tppage:addSection("Teleport Server")
+
+    Tp3:addButton("Server Hop", function()
+        Hop()
+    end)
+    Tp3:addButton("Rejoin",function()
+        Rejoin()
+    end)
+
+
     
     local plypage = painx:addPage("Players", 7252023075)
     local plysection = plypage:addSection("Players")
@@ -218,7 +228,6 @@ local Tp = tppage:addSection("Tween Island")
                         [2] = game:GetService("Players"):FindFirstChild(Player).Character.HumanoidRootPart
                     }
                     game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(unpack(args))
-                    click()
                 end)
             end
         end
@@ -300,9 +309,11 @@ local Tp = tppage:addSection("Tween Island")
                                     NameTarget = v.Name
                                     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
                                         TP(v.HumanoidRootPart.CFrame * CFrame.new(0,40,20))
+                                        click()
                                     elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
                                         if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
                                             TP(v.HumanoidRootPart.CFrame * CFrame.new(0,40,20))
+                                            click()
                                         end
                                     end
                                     spawn(function()
@@ -338,7 +349,7 @@ local Tp = tppage:addSection("Tween Island")
                 if _G.AutoFarmBounty then
                     if TargetSelectHunt ~= nil then
                         if StartCheckTarget then
-                            wait(6.5)
+                            wait(5)
                             if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
                                 NextplySelect = true
                                 TargetSelectHunt = nil
@@ -348,6 +359,20 @@ local Tp = tppage:addSection("Tween Island")
                 end
             end
         end)
+    end)
+    plysection2:addToggle("Auto Server Hop", nil,function(value)
+        _G.AutoHop = value
+    end)
+    
+    spawn(function()
+        while wait() do
+                if _G.AutoHop then
+                    pcall(function()
+                        wait(120)
+                        Hop()
+                end)
+            end
+        end
     end)
     plysection2:addButton("Go To Next Player",function()
         NextplySelect = true
@@ -2074,77 +2099,33 @@ end)
         end)
     end)
     local chestsection = mainpage:addSection("Chest Farm")
-    chestsection:addToggle("Auto Farm Wood Chest",nil,function(a)
-        _G.FarmChest1 = a
-
-        task.spawn(function()
-            while task.wait() do
-                if not _G.FarmChest1 then break end
-                pcall(function()
-                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    for i, v in pairs(game.Workspace:GetChildren()) do
-                       if v.Name == "Chest1" and v:FindFirstChild("Mesh") then
-                        CHESTTP(v.CFrame)
-                            BusoHaki()
-                        end
-                    end
-                end)
-            end
-        end)
+    chestsection:addToggle("Auto Farm Wood Chest",nil,function(value)
+        _G.FarmChest1 = value
+        if value == false then
+            CHESTTP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
+        end
     end)
-    chestsection:addToggle("Auto Farm Gold Chest",nil,function(a)
-        _G.FarmChest2 = a
-
-        task.spawn(function()
-            while task.wait() do
-                if not _G.FarmChest2 then break end
-                pcall(function()
-                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    for i, v in pairs(game.Workspace:GetChildren()) do
-                       if v.Name == "Chest2" and v:FindFirstChild("Mesh") then
-                        CHESTTP(v.CFrame)
-                            BusoHaki()
-                        end
-                    end
-                end)
-            end
-        end)
+    chestsection:addToggle("Auto Farm Gold Chest",nil,function(value)
+        _G.FarmChest2 = value
+        if value == false then
+            CHESTTP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
+        end
     end)
-    chestsection:addToggle("Auto Farm Diamond Chest",nil,function(a)
-        _G.FarmChest3= a
-
-        task.spawn(function()
-            while task.wait() do
-                if not _G.FarmChest3 then break end
-                pcall(function()
-                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    for i, v in pairs(game.Workspace:GetChildren()) do
-                       if v.Name == "Chest3" and v:FindFirstChild("Mesh") then
-                        CHESTTP(v.CFrame)
-                            BusoHaki()
-                        end
-                    end
-                end)
-            end
-        end)
+    chestsection:addToggle("Auto Farm Diamond Chest",nil,function(value)
+        _G.FarmChest3 = value
+        if value == false then
+            CHESTTP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
+        end
     end)
-    chestsection:addToggle("Auto Farm All Chest",nil,function(a)
-        _G.FarmAllChest = a
-
-        task.spawn(function()
-            while task.wait() do
-                if not _G.FarmAllChest then break end
-                pcall(function()
-                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    for i, v in pairs(game.Workspace:GetChildren()) do
-                        if string.find(v.Name, "Chest") and v:FindFirstChild("Mesh") then
-                            CHESTTP(v.CFrame)
-                            BusoHaki()                     
-                        end
-                    end
-                end)
-            end
-        end)
+    chestsection:addToggle("Auto Farm All Chest",nil,function(value)
+        _G.FarmAllChest = value
+        if value == false then
+            CHESTTP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
+        end
     end)
 
     missection:addToggle("Infinite Agility", nil, function(vu)
@@ -3701,7 +3682,7 @@ end
                 spawn(function()
                     pcall(function()
                         while wait() do
-                            if Auto_Farm or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland == true then
+                            if Auto_Farm or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.FarmChest1 or _G.FarmChest2 or _G.FarmChest3 or _G.FarmAllChest  == true then
                                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                                     local Noclip = Instance.new("BodyVelocity")
                                     Noclip.Name = "BodyClip"
@@ -3942,3 +3923,136 @@ end
                     end
                 end)
             end)
+
+
+            spawn(function()
+                pcall(function()
+                    game:GetService("RunService").Stepped:Connect(function()
+                        if _G.FarmChest1 == true then
+                            for i, v in pairs(game.Workspace:GetChildren()) do
+                                if v.Name == "Chest1" and v:FindFirstChild("Mesh") then
+                                 CHESTTP(v.CFrame)
+                                 BusoHaki()
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+
+            spawn(function()
+                pcall(function()
+                    game:GetService("RunService").Stepped:Connect(function()
+                        if _G.FarmChest2 == true then
+                            for i, v in pairs(game.Workspace:GetChildren()) do
+                                if v.Name == "Chest2" and v:FindFirstChild("Mesh") then
+                                 CHESTTP(v.CFrame)
+                                 BusoHaki()
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+
+            spawn(function()
+                pcall(function()
+                    game:GetService("RunService").Stepped:Connect(function()
+                        if _G.FarmChest3 == true then
+                            for i, v in pairs(game.Workspace:GetChildren()) do
+                                if v.Name == "Chest3" and v:FindFirstChild("Mesh") then
+                                 CHESTTP(v.CFrame)
+                                 BusoHaki()
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+            spawn(function()
+                pcall(function()
+                    game:GetService("RunService").Stepped:Connect(function()
+                        if _G.FarmAllChest == true then
+                            for i, v in pairs(game.Workspace:GetChildren()) do
+                                if string.find(v.Name, "Chest") and v:FindFirstChild("Mesh") then
+                                 CHESTTP(v.CFrame)
+                                 BusoHaki()
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+
+            function Hop()
+                local PlaceID = game.PlaceId
+                local AllIDs = {}
+                local foundAnything = ""
+                local actualHour = os.date("!*t").hour
+                local Deleted = false
+                function TPReturner()
+                    local Site;
+                    if foundAnything == "" then
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+                    else
+                        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+                    end
+                    local ID = ""
+                    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                        foundAnything = Site.nextPageCursor
+                    end
+                    local num = 0;
+                    for i,v in pairs(Site.data) do
+                        local Possible = true
+                        ID = tostring(v.id)
+                        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                            for _,Existing in pairs(AllIDs) do
+                                if num ~= 0 then
+                                    if ID == tostring(Existing) then
+                                        Possible = false
+                                    end
+                                else
+                                    if tonumber(actualHour) ~= tonumber(Existing) then
+                                        local delFile = pcall(function()
+                                            AllIDs = {}
+                                            table.insert(AllIDs, actualHour)
+                                        end)
+                                    end
+                                end
+                                num = num + 1
+                            end
+                            if Possible == true then
+                                table.insert(AllIDs, ID)
+                                wait()
+                                pcall(function()
+                                    wait()
+                                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                                end)
+                                wait(4)
+                            end
+                        end
+                    end
+                end
+                function Teleport() 
+                    while wait() do
+                        pcall(function()
+                            TPReturner()
+                            if foundAnything ~= "" then
+                                TPReturner()
+                            end
+                        end)
+                    end
+                end
+                Teleport()
+            end                   
+            
+            function isnil(thing)
+                return (thing == nil)
+            end
+            local function round(n)
+                return math.floor(tonumber(n) + 0.5)
+            end
+
+            function Rejoin()
+                game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+            end
