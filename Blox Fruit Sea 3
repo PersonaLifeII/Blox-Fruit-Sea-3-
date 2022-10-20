@@ -1155,10 +1155,10 @@ end)
         end
     end)
 
-    farmsection:addToggle("Auto Farm Sea Beasts", nil, function(a)
+    farmsection:addToggle("Auto Farm Sea Beasts", nil, function(value)
         AutoEquiped = a
          _G.SeaBeasts = a
-         if a == false then
+         if value == false then
             wait(1)
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     
@@ -1181,6 +1181,10 @@ end)
     end)
     farmsection:addToggle("Auto Unlock Dough Raid", nil,function(value)
         _G.AutoDoughDungeon = value
+        if value == false then
+            UnClip()
+            TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        end
         end)
 
         spawn(function()
