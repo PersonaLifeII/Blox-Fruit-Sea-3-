@@ -1179,7 +1179,7 @@ end)
             end)
         end
     end)
-    farmsection:addToggle("Auto Dough King", nil,function(value)
+    farmsection:addToggle("Auto Unlock Dough Raid", nil,function(value)
         _G.AutoDoughDungeon = value
         end)
 
@@ -3734,7 +3734,7 @@ end
                 spawn(function()
                     pcall(function()
                         while wait() do
-                            if Auto_Farm or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty == true then
+                            if Auto_Farm or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon == true then
                                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                                     local Noclip = Instance.new("BodyVelocity")
                                     Noclip.Name = "BodyClip"
@@ -3750,7 +3750,7 @@ end
                 spawn(function()
                     pcall(function()
                         game:GetService("RunService").Stepped:Connect(function()
-                            if Auto_Farm or _G.KillPlayer or _G.Noclip or _G.FarmChest1 or _G.FarmChest2 or _G.FarmChest3 or _G.FarmAllChest or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty == true then
+                            if Auto_Farm or _G.KillPlayer or _G.Noclip or _G.FarmChest1 or _G.FarmChest2 or _G.FarmChest3 or _G.FarmAllChest or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.AutoFarmBoss or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon == true then
                                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                                     if v:IsA("BasePart") then
                                         v.CanCollide = false    
