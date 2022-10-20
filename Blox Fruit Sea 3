@@ -1098,6 +1098,7 @@ end)
 
         if value == false then
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
         end
     end)
     
@@ -1159,7 +1160,6 @@ end)
         AutoEquiped = a
          _G.SeaBeasts = a
          if value == false then
-            wait(1)
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     
             task.spawn(function()
@@ -1182,8 +1182,8 @@ end)
     farmsection:addToggle("Auto Unlock Dough Raid", nil,function(value)
         _G.AutoDoughDungeon = value
         if value == false then
-            UnClip()
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
         end
         end)
 
