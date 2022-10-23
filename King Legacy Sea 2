@@ -1791,25 +1791,25 @@ function CheckQuest()
 		 CFrameMon = CFrame.new(-257.12750244141, 109.84118652344, 7219.068359375)
 		 levelquest = 3075
 	  elseif MyLevel >= 3100 and MyLevel <= 3124 then
-		 Ms = "Desert Thief [Lv.3125]"
+		 Ms = "Desert Thief [Lv. 3125]"
 		 CFrameQuest = CFrame.new(8847.94238, 14.4670143, 1400.72119, -0.322491169, 0, 0.946572542, 0, 1, 0, -0.946572542, 0, -0.322491169)
 		 NameMon = "Desert Thief"
 		 CFrameMon = CFrame.new(8331.119140625, 266.55130004883, 1398.7974853516)
 		 levelquest = 3100
 	  elseif MyLevel >= 3125 and MyLevel <= 3149 then
-		 Ms = "Anubis [Lv.3150]"
+		 Ms = "Anubis [Lv. 3150]"
 		 CFrameQuest = CFrame.new(9141.8457, 14.469614, 1055.01233, -0.894592047, 0, 0.446883589, 0, 1, 0, -0.446883589, 0, -0.894592047)
 		 NameMon = "Anubis"
 		 CFrameMon = CFrame.new(9568.6044921875, 86.315910339355, 1232.5357666016)
 		 levelquest = 3125
 	  elseif MyLevel >= 3150  and MyLevel <= 3174 then
-		 Ms = "Pharaoh [Lv.3175]"
+		 Ms = "Pharaoh [Lv. 3175]"
 		 CFrameQuest = CFrame.new(9554.38672, 14.4762154, 1545.59363, 0.31220305, 0, 0.950015426, 0, 1, 0, -0.950015426, 0, 0.31220305)
 		 NameMon = "Pharaoh"
 		 CFrameMon = CFrame.new(9116.03125, 47.920093536377, 1914.4226074219)
 		 levelquest = 3150
 	  elseif MyLevel >= 3175 and MyLevel <= 3199 then
-		 Ms = "Flame User [Lv.3200]"
+		 Ms = "Flame User [Lv. 3200]"
 		 CFrameQuest = CFrame.new(9857.44727, 14.7451639, 1684.2052, -0.0956259966, 0, 0.995417356, 0, 1, 0, -0.995417356, 0, -0.0956259966)
 		 NameMon = "Flame User"
 		 CFrameMon = CFrame.new(9780.2236328125, 316.51937866211, 1732.7475585938)
@@ -1821,7 +1821,7 @@ function CheckQuest()
 		 CFrameMon = CFrame.new(6842.9458, 113.897461, 8166.92139, -0.978180647, 0, -0.207756639, 0, 1, 0, 0.207756639, 0, -0.978180647)
 		 levelquest = 3200
 	  elseif MyLevel >= 3225 and MyLevel <= 3249 then
-		 Ms = "Sunken Vessel [Lv.3225]"
+		 Ms = "Sunken Vessel [Lv. 3225]"
 		 CFrameQuest = CFrame.new(6430.80225, 28.7034626, 7979.43799, -0.896995902, 0, -0.442038745, 0, 1, 0, 0.442038745, 0, -0.896995902)
 		 NameMon = "Sunken Vessel"
 		 CFrameMon = CFrame.new(6260.2124, 23.7355881, 8518.10645, -0.135348797, 0, -0.990798056, 0, 1, 0, 0.990798056, 0, -0.135348797)
