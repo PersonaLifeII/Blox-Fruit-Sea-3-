@@ -1,3 +1,4 @@
+-- KL 2
 wait(0)
 game.StarterGui:SetCore("SendNotification", {
     Title = "Impact Hub"; 
@@ -22,11 +23,52 @@ local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1
 local UI  = Venyx.new("Impact Hub | King Legacy", 5013109572)
 
 local page1 = UI:addPage("Main Tab", 7040391851)
-local FARM = page1:addSection("")
+local FARMS = page1:addSection("")
+
+AutoFarmType = "[Default : Bellow] Type Farm : Bellow"
+spawn(function()
+while wait(.1) do
+    if AutoFarmType == "[Default : Bellow] Type Farm : Upper" then
+        Farm_Mode = CFrame.Angles(math.rad(-90),0,0)
+    elseif AutoFarmType == "[Default : Bellow] Type Farm : Bellow" then
+        Farm_Mode = CFrame.Angles(math.rad(90),0,0)
+    end
+end
+end)
+
+TypeFarm = {"[Default : Bellow] Type Farm : Upper","[Default : Bellow] Type Farm : Bellow"}
+FARMS:addDropdown(""..AutoFarmType, TypeFarm, function(a)
+    AutoFarmType = a
+end)
+
+Weaponlist = {}
+
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+	if v:IsA("Tool") then
+		table.insert(Weaponlist ,v.Name)
+    end
+end
+
+FARMS:addDropdown("Select Weapon : nil",Weaponlist,function(value)
+    WeaponName = value
+end)
+FARMS:addSlider("Distance", 6,-50,200, function(a)
+    DistanceMob = a
+end)
+FARMS:addButton("Refresh Weapon", function(a)
+    table.clear(Weaponlist)
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+   table.insert(Weaponlist,v.Name)
+end
+end
+end)
+
+local FARM = page1:addSection("Auto Farm")
 
 
-FARM:addToggle("Auto Farm Level", nil, function(asd)
-    _G.AutoFarm = asd
+FARM:addToggle("Auto Farm Level", nil, function(value)
+    _G.AutoFarm = value
 
     while _G.AutoFarm do wait()
         pcall(function()
@@ -70,7 +112,6 @@ FARM:addToggle("Auto Farm Level", nil, function(asd)
     
                   game:GetService'VirtualUser':Button1Down(Vector2.new(50,50))
               game:GetService'VirtualUser':Button1Up(Vector2.new(50,50))
-                                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
                                        EquipWeapon(WeaponName)
                                        click()
@@ -78,7 +119,6 @@ FARM:addToggle("Auto Farm Level", nil, function(asd)
                                     end
                                     else
                                          CheckQuest()
-                                            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
                                       if not game:GetService("Workspace").AllNPC:FindFirstChild("QuestLvl"..levelquest) then
                                          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("ReplicatedStorage").MAP["QuestLvl"..levelquest].HumanoidRootPart.CFrame * CFrame.new(0,0,3)
                                       else 
@@ -140,11 +180,11 @@ FARM:addToggle("Auto Farm Mon", nil, function(v)
         local mob = game:GetService("Workspace").Monster.Mon:FindFirstChild(getgenv().mob)
         if mob == nil then
             game.StarterGui:SetCore("SendNotification", { 
-                Title = "Info!",
-                Text = "There is currently no spawned mobs of this type\nJust wait until they spawn", 
+                Title = "Impact Hub",
+                Text = "There is currently no spawned Mons of this type\nJust wait until they spawn", 
                 Icon = "", 
                 Duration = 2.5
-            })
+            }) 
             while wait() do 
                 wait() 
                 if getgenv().autofarmmobs == false then return end 
@@ -218,22 +258,6 @@ end)
         _G.KenHaki = a
     end)
 
-    Weaponlist = {}
-
-for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
-	if v:IsA("Tool") then
-		table.insert(Weaponlist ,v.Name)
-    end
-end
-FARM:addDropdown("Select Weapon", Weaponlist, function(value)
-    WeaponName = value
-end)
-FARM:addButton("Refresh Weapon", function(a)
-    table.clear(Weaponlist)
-for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-   table.insert(Weaponlist,v.Name)
-end
-end)
 local FARM2 = page1:addSection("Sea King")
 
 FARM2:addToggle("Auto Farm Sea Beast", nil, function(value)
@@ -310,7 +334,7 @@ FARM3:addToggle("Auto Adventure Knife", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
     for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
         if v.Name == "Flame User [Lv.3200]" and v:FindFirstChild("Humanoid") then
-            plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+            plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
             EquipWeapon(WeaponName)
             click()
             Haki()
@@ -334,7 +358,7 @@ FARM3:addToggle("Auto Anubis Axe", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Anubis [Lv.3150]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
                         EquipWeapon(WeaponName)
 						click()
                         Haki()
@@ -362,7 +386,7 @@ FARM4:addToggle("Auto Farm Dragon Orbs", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
                         EquipWeapon(WeaponName)
 						click()
                         Haki()
@@ -410,7 +434,7 @@ FARM4:addToggle("Auto Spawn Dragon [In Develop]", nil, function(value)
 end)
 FARM4:addButton("Teleport To Dragon", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+    for i, v in pairs(game.ReplicatedStorage.MOB:GetChildren()) do
         if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
             plr.CFrame = v.HumanoidRootPart.CFrame
         end
@@ -433,7 +457,7 @@ FARM5:addToggle("Auto Farm Mother", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Ms. Mother [Lv.7500]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
                         EquipWeapon(WeaponName)
 						click()
                         Haki()
@@ -446,7 +470,7 @@ end)
 
 FARM5:addButton("Teleport To Mother", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+    for i, v in pairs(game.ReplicatedStorage.MOB:GetChildren()) do
         if v.Name == "Ms. Mother [Lv.7500]" and v:FindFirstChild("Humanoid") then
             plr.CFrame = v.HumanoidRootPart.CFrame
         end
@@ -469,7 +493,7 @@ FARM5:addToggle("Auto Farn King Samurai", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
                         EquipWeapon(WeaponName)
 						click()
                         Haki()
@@ -482,7 +506,7 @@ end)
 
 FARM5:addButton("Teleport To King Samurai", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+    for i, v in pairs(game.ReplicatedStorage.MOB:GetChildren()) do
         if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
             plr.CFrame = v.HumanoidRootPart.CFrame
         end
@@ -505,7 +529,7 @@ FARM6:addToggle("Auto Farm Dough Master", nil, function(value)
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Dough Master [Lv.3275]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,0) * Farm_Mode
+                        plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
                         EquipWeapon(WeaponName)
 						click()
                         Haki()
@@ -518,7 +542,7 @@ end)
 
 FARM6:addButton("Teleport To Dough Master", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+    for i, v in pairs(game.ReplicatedStorage.MOB:GetChildren()) do
         if v.Name == "Dough Master [Lv.3275]" and v:FindFirstChild("Humanoid") then
             plr.CFrame = v.HumanoidRootPart.CFrame
         end
@@ -572,26 +596,6 @@ FARM7:addButton("Teleport To Ghost Ship", function(a)
     end
 end)
 
-local FARMS = page1:addSection("Farm Setting")
-
-AutoFarmType = "Bellow"
-spawn(function()
-while wait(.1) do
-    if AutoFarmType == "Upper" then
-        Farm_Mode = CFrame.Angles(math.rad(-90),0,0)
-    elseif AutoFarmType == "Bellow" then
-        Farm_Mode = CFrame.Angles(math.rad(90),0,0)
-    end
-end
-end)
-
-TypeFarm = {"Upper","Bellow"}
-FARMS:addDropdown("Type Farm [Default : Bellow]", TypeFarm, function(a)
-    AutoFarmType = a
-end)
-FARMS:addSlider("Distance", 6,-50,200, function(a)
-    DistanceMob = a
-end)
 local AutoSkill = page1:addSection("Auto Skill")
 AutoSkill:addToggle("Auto Skill [ Z ]", nil, function(Value)
     _G.Z = Value
@@ -719,14 +723,17 @@ PLYS:addToggle("Spectate Player", nil, function(State)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
          end)
 
-local PLYS2 = PLY:addSection("")
-
-
-local ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/Karrot-Esp"))()
+local PLYS2 = PLY:addSection("Esp")
 
 PLYS2:addToggle("Esp Players", nil, function(a)
-ESP:Toggle(a)
+    ESPPlayer = a
+    FindPlayer()
 end)
+
+if ESPPlayer then
+    FindPlayer()
+end
+
 
 PLYS2:addToggle("Esp Devil Fruit",nil,function(Value)
     DevilFruitESP = Value
@@ -1004,15 +1011,18 @@ game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
  end)
 end)
 end)
-        Character:addToggle("Fly [ G ]", nil, function(f)
-        FL = f
+Character:addTextbox("[Only Small Letter] Toggle Fly", "g", function(value)
+    FlyBind = value
+end)
+        Character:addToggle("Fly", nil, function(value)
+        FL = value
         local Max = 0
         local Players = game.Players
         local LP = Players.LocalPlayer
         local Mouse = LP:GetMouse()
         Mouse.KeyDown:connect(
             function(k)
-                if k:lower() == "g" then
+                if k:lower() == FlyBind then
                     Max = Max + 1
                     getgenv().Fly = false
                     if FL then
@@ -1150,13 +1160,48 @@ end)
                 vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
             end)
         end)
-local page7 = UI:addPage("Setting", 5012544693)
-local Setting = page7:addSection("Setting")
+    
+local page7 = UI:addPage("Shop", 7294901968)
+local itsection = page7:addSection("Teleport Shop")
+Shoplist = {"Reset Stat Shop", "Random Devil Fruit Shop","Devil Fruit Shop", "", "Expert Dark Leg Shop", "Half Robot Shop", "Real Water Style Shop", "Random Appearance Shop","Your Pussy Shop"}
+_G.ShopSelected = "Reset Stat Shop"
+
+itsection:addDropdown("Select Shop : ".._G.ShopSelected, Shoplist, function(a)
+_G.ShopSelected = a
+end)
+itsection:addButton("Teleport To Shop", function()
+				if _G.ShopSelected == "Reset Stat Shop" then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2433.93115, 57.4331322, 137.138245, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+                elseif _G.ShopSelected == "Random Devil Fruit Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2362, 58, 267)
+                    elseif _G.ShopSelected == "Devil Fruit Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3516, 61, 323)
+                    elseif _G.ShopSelected == "Random Appearance Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3512, 57, 201)
+                    elseif _G.ShopSelected == "Expert Dark Leg Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2368, 57, 134)
+                    elseif _G.ShopSelected == "Half Robot Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2324, 57, 235)
+                    elseif _G.ShopSelected == "Real Water Style Shop" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2454, 57, 225)
+                    elseif _G.ShopSelected == "Your Pussy Shop" then
+                        game.StarterGui:SetCore("SendNotification", {
+                            Title = "Impact Hub...."; 
+                            Text = "Why You Select This. Are You Girl?. Oh Sorry I Am Very Sorry"; 
+                            Icon = ""; 
+                            Duration = 2;
+                        })
+
+end
+end)
+
+
+local page8 = UI:addPage("Setting", 5012544693)
+local Setting = page8:addSection("UI Setting")
 Setting:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function()
     UI:toggle()
 end)
-local UISetting = page7:addSection("UI Setting")
-UISetting:addButton("Destroy UI", function()
+Setting:addButton("Destroy UI", function()
     for i, v in pairs(game.CoreGui:GetChildren()) do
         if v.Name == "Impact Hub | King Legacy" then
             v:Destroy()
@@ -1923,11 +1968,51 @@ CheckQuest()
     end                   
     
     function isnil(thing)
-        return (thing == nil)
-    end
-    local function round(n)
-        return math.floor(tonumber(n) + 0.5)
-    end
+		return (thing == nil)
+	end
+	local function round(n)
+		return math.floor(tonumber(n) + 0.5)
+	end
+
+	Number = math.random(1, 1000000)
+	function FindPlayer()
+		for i,v in pairs(game:GetService'Players':GetChildren()) do
+			pcall(function()
+				if not isnil(v.Character) then
+					if ESPPlayer then
+						if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+							local bill = Instance.new('BillboardGui',v.Character.Head)
+							bill.Name = 'NameEsp'..Number
+							bill.ExtentsOffset = Vector3.new(0, 1, 0)
+							bill.Size = UDim2.new(1,200,1,30)
+							bill.Adornee = v.Character.Head
+							bill.AlwaysOnTop = true
+							local name = Instance.new('TextLabel',bill)
+							name.Font = "GothamBold"
+							name.FontSize = "Size14"
+							name.TextWrapped = true
+							name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M')
+							name.Size = UDim2.new(1,0,1,0)
+							name.TextYAlignment = 'Top'
+							name.BackgroundTransparency = 1
+							name.TextStrokeTransparency = 0.5
+							if v.Team == game.Players.LocalPlayer.Team then
+								name.TextColor3 = Color3.new(0,255,0)
+							else
+								name.TextColor3 = Color3.new(255,0,0)
+							end
+						else
+							v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+						end
+					else
+						if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+							v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
 
     function Rejoin()
         game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
