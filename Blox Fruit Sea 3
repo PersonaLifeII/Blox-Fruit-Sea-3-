@@ -1,3 +1,4 @@
+-- BF 3
 -- Blox Fruit Sea 3
 game.StarterGui:SetCore("SendNotification", {
     Title = "Impact Hub"; 
@@ -396,7 +397,7 @@ local Tp = tppage:addSection("Tween Island")
     end
     
     farmsection:addToggle("Auto Farm Level", nil, function(value)
-        _G.AutoFarm = value
+        _G.AutoFamr = value
         Auto_Farm = value
         DeleteMDF()
         if value == false then
@@ -1435,7 +1436,11 @@ end)
     end)
     farmsection:addToggle("Auto Superhuman",nil,function(value)
         _G.AutoSuperhuman = value
-    end)
+        if value == false then
+            TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
+        end
+        end)
     
     spawn(function()
         pcall(function()
@@ -1448,19 +1453,29 @@ end)
                     end   
                     if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
                         _G.SelectWeapon = "Superhuman"
+                        Auto_Farm = true
+                        _G.AutoFarm = true
                     end  
                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
                             _G.SelectWeapon = "Black Leg"
+                            Auto_Farm = true
+                            _G.AutoFarm = true
                         end
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
-                            _G.SelectWeapon = "Electro"
+                            _G.SelectWeapon = "Electro"   
+                            Auto_Farm = true
+                            _G.AutoFarm = true
                         end
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
                             _G.SelectWeapon = "Fishman Karate"
+                            Auto_Farm = true
+                            _G.AutoFarm = true
                         end
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
                             _G.SelectWeapon = "Dragon Claw"
+                            Auto_Farm = true
+                            _G.AutoFarm = true
                         end
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
                             UnEquipWeapon("Black Leg")
@@ -1512,6 +1527,10 @@ end)
     
     farmsection:addToggle("Auto Death Step",nil,function(value)
         _G.AutoDeathStep = value
+        if value == false then
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        UnClip()
+        end
     end)
     
     spawn(function()
@@ -1528,9 +1547,13 @@ end)
                     end  
                     if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Black Leg") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 399 then
                         _G.SelectWeapon = "Black Leg"
+                        Auto_Farm = true
+                        _G.AutoFarm = true
                     end 
                 else 
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+                    Auto_Farm = true
+                    _G.AutoFarm = true
                 end
             end
         end
@@ -1587,6 +1610,7 @@ end)
         _G.AutoElectricClaw = value
         if value == false then
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            UnClip()
         end
     end)
     
@@ -1605,9 +1629,13 @@ end)
                         end  
                         if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Electro") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 399 then
                             _G.SelectWeapon = "Electro"
+                            Auto_Farm = true
+                            _G.AutoFarm = true
                         end 
                     else
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+                        Auto_Farm = true
+                        _G.AutoFarm = true
                     end
                 end
                 if _G.AutoElectricClaw then
@@ -1636,6 +1664,7 @@ end)
                                 wait(1.1)
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
                                 _G.SelectWeapon = "Electric Claw"
+                                Auto_Farm = true
                                 _G.AutoFarm = true
                             end
                         end
@@ -1647,6 +1676,10 @@ end)
     
     farmsection:addToggle("Auto Dragon Talon",nil,function(value)
         _G.AutoDragonTalon = value
+        if value == false then
+        TP(game.Players.Character.HumanoidRootPart.CFrame)
+        UnClip()
+        end
     end)
     
     spawn(function()
@@ -1663,9 +1696,13 @@ end)
                     end  
                     if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 399 then
                         _G.SelectWeapon = "Dragon Claw"
+                        Auto_Farm = true
+                        _G.AutoFarm = true
                     end 
                 else 
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
+                    Auto_Farm = true
+                _G.AutoFarm = true
                 end
             end
         end
