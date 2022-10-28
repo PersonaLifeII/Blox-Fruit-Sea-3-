@@ -1059,8 +1059,6 @@ Raid:addToggle("Auto Raid", nil, function(value)
  end)
  end
  end)
- end
-
 Raid:addToggle("Auto Rejoin Raid [ In Develop ]", nil, function(value)
 	_G.Reraid = value
    end)
@@ -1079,6 +1077,7 @@ end)
 Raid:addToggle("Auto Skill [ V ]", nil, function(Value)
     _G.v = Value
 end)
+end
 local page6 = UI:addPage("FE - Others", 5012544693)
 local Character = page6:addSection("My Character")
 
