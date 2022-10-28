@@ -487,15 +487,15 @@ FARM4:addToggle("Auto Farm Dragon Orbs", nil, function(value)
 		end
 	end)
 end)
-FARM4:addToggle("Auto Spawn Dragon", nil, function(value)
-	_G.SpawnDragon = value
+FARM4:addToggle("Auto Summon Dragon", nil, function(value)
+	_G.SummonDragon = value
     if value == false then
         UnClip()
     end
 
     task.spawn(function()
         while task.wait() do
-            if not _G.SpawnDragon then break end
+            if not _G.SummonDragon then break end
 			pcall(function()
 				local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 				for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
