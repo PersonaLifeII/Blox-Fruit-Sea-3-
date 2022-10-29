@@ -45,7 +45,7 @@ MainWeaponList = {}
 
 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
 	if v:IsA("Tool") then
-		table.insert(MainWeapon ,v.Name)
+		table.insert(MainWeaponList ,v.Name)
     end
 end
 
