@@ -113,7 +113,7 @@ FARM:addToggle("Auto Farm Level", nil, function(value)
                   game:GetService'VirtualUser':Button1Down(Vector2.new(50,50))
               game:GetService'VirtualUser':Button1Up(Vector2.new(50,50))
                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                                       EquipWeapon(MainWeaponName)
+                                       EquipWeapon1(MainWeaponName)
                                        click()
                                        Haki()
                                     end
@@ -202,7 +202,7 @@ FARM:addToggle("Auto Farm Mon", nil, function(v)
                     end
                     if mob:FindFirstChild("HumanoidRootPart") then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = mob.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
                         click()
                         Haki()
                     end
@@ -277,7 +277,7 @@ FARM2:addToggle("Auto Farm Sea Beast", nil, function(value)
 				for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
 					if v.Name == "SeaKing" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
                     if v.Humanoid.Health <= 0 then -- < = น้อยกว่า | > = มากกว่า ไอเหี้ยเรื่องแค่นี้กูจำไม่ได้
@@ -355,7 +355,7 @@ FARM3:addToggle("Auto Adventure Knife", nil, function(value)
     for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
         if v.Name == "Flame User [Lv.3200]" and v:FindFirstChild("Humanoid") then
             plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-            EquipWeapon(MainWeaponName)
+            EquipWeapon1(MainWeaponName)
             click()
             Haki()
         end
@@ -379,7 +379,7 @@ FARM3:addToggle("Auto Anubis Axe", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Anubis [Lv.3150]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -403,7 +403,7 @@ FARM3:addToggle("Auto Metal Trident", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Dough Master [Lv.3275]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -427,7 +427,7 @@ FARM3:addToggle("Auto Sunken Blade", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Sunken Vessel [Lv.3225]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -451,7 +451,7 @@ FARM3:addToggle("Auto Cookie Sword", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Biscuit Man [Lv.3250]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -478,7 +478,7 @@ FARM4:addToggle("Auto Farm Dragon Orbs", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -501,7 +501,7 @@ FARM4:addToggle("Auto Summon Dragon", nil, function(value)
 				for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 					if v.Name == "DragonGem" and v:FindFirstChild("Handle") then
                         plr.CFrame = CFrame.new(1295, 462, 7368)
-                        EquipWeapon("DragonGem")
+                        EquipWeapon1("DragonGem")
                         Haki()
 					end
 				end
@@ -524,7 +524,7 @@ FARM4:addToggle("Auto Farm Dragon", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -559,7 +559,7 @@ FARM5:addToggle("Auto Farm Mother", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "Ms. Mother [Lv.7500]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -595,7 +595,7 @@ FARM5:addToggle("Auto Farn King Samurai", nil, function(value)
 				for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
 					if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DistanceMob,-1) * Farm_Mode
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -630,7 +630,7 @@ FARM7:addToggle("Auto Farm Ghost Ship", nil, function(value)
 				for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
 					if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                        EquipWeapon(MainWeaponName)
+                        EquipWeapon1(MainWeaponName)
 						click()
                         Haki()
 					end
@@ -1041,7 +1041,7 @@ Raid:addToggle("Auto Raid", nil, function(value)
                         if v.Humanoid.Health > 0 then
                         local plr = game.Players.localPlayer.Character.HumanoidRootPart
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,DisRaid,-1) * Farm_Mode
-                        EquipWeapon(RaidWeaponName)
+                        EquipWeapon2(RaidWeaponName)
                         Haki()
                         click()
                     end
