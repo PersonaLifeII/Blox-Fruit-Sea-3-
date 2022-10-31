@@ -2,9 +2,11 @@
 -- If You See This You Are Gay But Not Me
 ----- Don't Steal
 ---------- If You Steal Like A Gay I Will Hunt You And Take You Into A Void
+if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" or "Kakura-975321Key" then
+
 repeat wait(1) until game:IsLoaded()
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
-local UI  = Venyx.new("Impact Hub | King Legacy | Using At "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572)
+local UI  = Venyx.new("Kakura Edition | Premium Access | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572)
 
 local page1 = UI:addPage("Main Tab", 7040391851)
 local FARMS = page1:addSection("Auto Farm Setting")
@@ -1376,6 +1378,8 @@ game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
  end)
 end)
 end)
+
+FlyBind = "g"
 Character:addTextbox("[Only Small Letter] Toggle Fly", "g", function(value)
     FlyBind = value
 end)
@@ -2501,7 +2505,7 @@ function click()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
  end
 ------------- Just A Notification แค่แจ้งเตือนเฉย ๆ Just A Notification แค่แจ้งเตือนเฉย ๆ
-UI:Notify("Impact Hub", "Welcom To Impact Hub. Thank For Using My Hub.\nYou Can Access To Premium In Discord")
+UI:Notify("Impact Hub", "Welcom To Impact Hub.\nPremium Accessing...")
 wait(6)
-UI:Notify("Impact Hub", "Here Is The Link\nhttps://discord.gg/Q58apbXB")
-------------- Just A Notification แค่แจ้งเตือนเฉย ๆ Just A Notification แค่แจ้งเตือนเฉย ๆ
+UI:Notify("Impact Hub", "Premium End At 16/11/2022\nD/M/Y")
+end
