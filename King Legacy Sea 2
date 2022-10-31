@@ -1285,6 +1285,8 @@ end
 RaidS:addDropdown("Select Weapon : nil", RaidWeapon,function(value)
     RaidWeaponName = value
 end)
+
+DisRaid = 13
 RaidS:addSlider("Distance", 13,-50,200, function(a)
     DisRaid = a
 end)
