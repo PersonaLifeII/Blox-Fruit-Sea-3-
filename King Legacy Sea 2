@@ -293,7 +293,7 @@ if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" 
          end
         end
     end)
-    FARM2:addToggle("Auto Grab Chest", true, function(a)
+    FARM2:addToggle("Auto Grab Chest", nil, function(a)
         _G.GrabChest = a
     
         task.spawn(function()
@@ -514,7 +514,7 @@ if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" 
         end)
     end)
     
-    FARM7:addToggle("Auto Grab Chest", true, function(value)
+    FARM7:addToggle("Auto Grab Chest", nil, function(value)
         _G.GrabGhostChest = value
         if value == false then
             UnClip()
@@ -537,14 +537,14 @@ if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" 
     FARM7:addButton("Teleport To Ghost Ship", function(a)
         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
         if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ghost Ship")  then
-            plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ghost Ship"].HumanoidRootPart.CFrame
+            plr.CFrame = game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ghost Ship").HumanoidRootPart.CFrame
         end
     end)
 
     local FARM8 = page1:addSection("Hydra")
     FARM8:addToggle("Auto Farm Hydra", nil, function(value)
         _G.Hydra = value
-        FindHPIsland()
+        FindHDIsland()
         TPHDIsland()
         if value == false then
             UnClip()
@@ -578,7 +578,7 @@ if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" 
          end
         end
     end)
-    FARM8:addToggle("Auto Grab Chest", true, function(a)
+    FARM8:addToggle("Auto Grab Chest", nil, function(a)
         _G.GrabHydraChest = a
     
         task.spawn(function()
@@ -595,10 +595,84 @@ if _G.Key == "Kakura-GiftedKey" or "Kakura-851912Key" or "Kakura-1255239581Key" 
     end
 end
 end)
-         end
+end
+end)
+end)
+
+FARM8:addButton("Teleport To Hydra Island", function()
+    FindHDIsland()
+    TPHDIsland()
+end)
+
+local FARM9 = page1:addSection("Black Beard")
+
+FARM9:addToggle("Auto Farm Dark Beard", nil, function(value)
+    _G.BlackBeard = value
+    if value == false then
+        UnClip()
+    end
+    for i,v in pairs(game:GetService("ReplicatedStorage").MOB:GetChildren()) do
+    if v.Name == "Dark Beard [Lv. 3475]" and v:FindFirstChild("Humanoid") then
+        game.Players.LocalPlayer.Character.HumanoidRootPart = CFrame.new(-10160, 145, -5140)
+    end
+end
+end)
+
+task.spawn(function()
+    while task.wait() do
+        if _G.BlackBeard then
+        pcall(function()
+            for i,v in pairs(game:GetService("Workspace").Monster:GetDescendants()) do
+                   if v.Name == "Dark Beard [Lv. 3475]" and v:FindFirstChild("Humanoid") then
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                    EquipWeapon1(MainWeaponName)
+                    click()
+                    Haki()
+                     if not game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName) then
+                        InventoryWeapon1()
+                    end  
+                  if v.Humanoid.Health <= 0 then
+                   plr.CFrame = CFrame.new(-10160, 145, -5140)
+                    end
+                end
+            end
         end)
+     end
+    end
+end)
+FARM9:addToggle("Auto Permisson", nil, function(value)
+    _G.Permisson = value
+    game.Players.LocalPlayer.Character.HumanoidRootPart = CFrame.new(-10160, 145, -5140)
+    if value == false then
+        UnClip()
+    end
+end)
+
+    task.spawn(function()
+        while task.wait() do
+            if _G.Permisson then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Monster:GetDescendants()) do
+                    if v.Name == "Dark Beard Servant [Lv. 3400]" or v.Name == "Supreme Swordman [Lv. 3425]" or v.Name == "Sally [Lv. 3450]" and v:IsA("Model") and v:FindFirstChild("Humanoid") then
+                        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                        EquipWeapon1(MainWeaponName)
+                        click()
+                        Haki()
+                    if v.Humanoid.Health <= 0 then
+                        return end
+                    if not game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName) then
+                            InventoryWeapon1()
+                        end  
+                    end
+                end
+            end)
+         end
+        end
     end)
-    local FARM_SWORD = page1:addSection("Auto Swords")
+
+local FARM_SWORD = page1:addSection("Auto Swords")
     
     FARM_SWORD:addToggle("Auto Adventure Knife", nil, function(value)
         _G.Knife = value
@@ -2577,7 +2651,7 @@ end)
         spawn(function()
             pcall(function()
                 while wait() do
-                    if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.AutoFarm or _G.Hydra == true then
+                    if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.AutoFarm or _G.Hydra or _G.Permisson == true then
                         if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                             local Noclip = Instance.new("BodyVelocity")
                             Noclip.Name = "BodyClip"
@@ -2593,7 +2667,7 @@ end)
         spawn(function()
             pcall(function()
                 game:GetService("RunService").Stepped:Connect(function()
-                    if _G.AutoFarm or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.GrabChest or _G.Noclip or _G.SummonDragon or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.GrabHydraChest or _G.GrabGhostChest == true then
+                    if _G.AutoFarm or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.GrabChest or _G.Noclip or _G.SummonDragon or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.GrabHydraChest or _G.GrabGhostChest or _G.Permisson == true then
                         for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                             if v:IsA("BasePart") then
                                 v.CanCollide = false    
@@ -2644,14 +2718,21 @@ end)
     function TPHDIsland()
         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
         if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-           plr.CFrame = game:GetService("Workspace").Island:FindFirstChild("Sea King Water").Main.CFrame * CFrame.new(0,100,0)
+           plr.CFrame = game:GetService("Workspace").Island:FindFirstChild("Sea King Water").Main.CFrame * CFrame.new(0,80,0)
+        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
+           plr.CFrame = game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").Main.CFrame * CFrame.new(0,100,0)
+            else
+            plr.CFrame = plr.CFrame * CFrame.new(0,100,0)
+            print("Baka. If This Bug Please Rejoin or Don't Care This")
         end
     end
+end
 
     function FindHDIsland()
-        if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-            UI:Notify("Impact Hub", "Hydra Island Is Up From The Sea!")
-            print("Sea King Water")
+         for i,v in pairs(game.Workspace.Island:GetChildren()) do
+             if string.find(v.Name, "Sea King") and v:IsA("Model") then
+             UI:Notify("Impact Hub", "Hydra Island Is Up From The Sea!")
+            print("Hydra Island")
        end
     end
 
@@ -2677,23 +2758,6 @@ end)
     UI:Notify("Impact Hub", "Premium End At 2 January 2023")
     end
     end
---------------------- Boss Notification แจ้งเตือนบอสเกิด
-game:GetService("RunService").RenderStepped:wait()
-for i, v in pairs(game.ReplicatedStorage.MOB:GetChildren()) do
-if v:IsA("Model") then
-if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
-WorldStatus = "King Samurai was Spawned!"
-if v.Name == "Ms. Mother [Lv.7500]" and v:FindFirstChild("Humanoid") then
-WorldStatus = "Ms. Mother was Spawned!"
-if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
-WorldStatus = "Dragon was Spawned!"
----------------------------------------------------------------------
-UI:Notify("Impact Hub", "Sea Status : "..WorldStatus)
-        end
-      end
-     end
-    end
-  end
 
 game:GetService("RunService").RenderStepped:wait()
 wait(.1)
@@ -2702,9 +2766,6 @@ FindGayIsland()
 
 function ConFig()
     _G.Buso = true
-    _G.GrabChest = true
-    _G.GrabGhostChest = true
-    _G.GrabHydraChest = true
 end
 
 ConFig()
@@ -2724,4 +2785,3 @@ function InventoryWeapon3()
         [1] = PlyWeaponName}
     game:GetService("ReplicatedStorage").Remotes.Functions.InventoryEq:InvokeServer(unpack(args))
     end
- 
