@@ -3170,6 +3170,14 @@ end)
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
           end
         end
+
+        function EquipWeapon4(BountyWeaponName)
+            if game.Players.LocalPlayer.Backpack:FindFirstChild(BountyWeaponName) then
+            local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BountyWeaponName)
+            wait(.4)
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+          end
+        end
     
         function Hop()
             local PlaceID = game.PlaceId
