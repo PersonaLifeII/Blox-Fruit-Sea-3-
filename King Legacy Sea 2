@@ -2247,8 +2247,8 @@ end)
          BountyWeaponName = a
      end)
      
-     DisBounty = 13
-     BountySet:addSlider("Distance", 13,-50,200, function(a)
+     DisBounty = 9
+     BountySet:addSlider("Distance", 9,-50,200, function(a)
         DisBounty = a
      end)
      BountySet:addButton("Refresh Weapon", function(a)
