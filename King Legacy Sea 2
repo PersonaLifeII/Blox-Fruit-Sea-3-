@@ -37,8 +37,7 @@ CheckPremium = "IS A"
         end
     end
 
-    MainWeaponName = (MainWeaponList[2])
-    FARMS:addDropdown("Select Weapon : "..MainWeaponName, MainWeaponList,function(a)
+    FARMS:addDropdown("Select Weapon : nil", MainWeaponList,function(a)
         MainWeaponName = a
     end)
     
@@ -54,7 +53,16 @@ CheckPremium = "IS A"
     end
     end
     end)
-    
+    FARMS:addToggle("Auto Attacking Sword", nil, function(value)
+        _G.AttackSWMain = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
+
+    FARMS:addToggle("Auto Attacking Melee", nil, function(value)
+        _G.AttackFSMain = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
+
     local FARM = page1:addSection("Auto Farm")
     
     FARM:addToggle("Auto Farm Level", nil, function(value)
@@ -238,7 +246,7 @@ end
     -------------------------------- Nothing
     local CoreGui = game:GetService("StarterGui")
         FARM:addButton("Check Server Time", function()
-            UI:Notify("Impact Hub", "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
+             UI:Notify("Impact Hub", "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
         end)
         FARM:addButton("Teleport To Current Quest", function()
             CheckQuest()
@@ -256,10 +264,6 @@ end
         FARM:addToggle("Auto Ken Haki",  nil, function(a)
             _G.KenHaki = a
         end)
-    
-
-    local placeId = game.PlaceId
-    if placeId == 6381829480 then
     
     local FARM2 = page1:addSection("Sea King")
     
@@ -614,11 +618,13 @@ end
                 if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                 if NumChest == 1 then
                 plr.CFrame = v.RootPart.CFrame
-                elseif NumChest == 1 then
+                elseif NumChest == 2 then
                 plr.CFrame = v.RootPart.CFrame
-                elseif NumChest == 1 then
+                elseif NumChest == 3 then
                 plr.CFrame = v.RootPart.CFrame
-                elseif NumChest == 1 then
+                elseif NumChest == 4 then
+                plr.CFrame = v.RootPart.CFrame
+                elseif NumChest == 5 then
                 plr.CFrame = v.RootPart.CFrame
                 end
             end
@@ -1468,79 +1474,47 @@ local FARM_SWORD = page1:addSection("Auto Swords")
             end
         end
     end
-    end
-    end
+end
+end
     end)
     end)
-    end
-    local AutoSkill = page1:addSection("Auto Skill")
-    AutoSkill:addToggle("Auto Skill [ Z ]", nil, function(Value)
-        _G.Z = Value
-    end)
-     
-    AutoSkill:addToggle("Auto Skill [ X ]", nil, function(Value)
-        _G.X = Value
-    end)
-     
-    AutoSkill:addToggle("Auto Skill [ C ]", nil, function(Value)
-        _G.c = Value
-    end)
-     
-    AutoSkill:addToggle("Auto Skill [ V ]", nil, function(Value)
-        _G.v = Value
-    end)
-    local AutoStat = page1:addSection("Stats")
-    AutoStat:addToggle("Auto Defense Stats", nil, function(value)
-        _G.Defense = value
-    end)
-    
-    AutoStat:addToggle("Auto Melee Stats", nil, function(value)
-        _G.Melee = value
-    end)
-    
-    AutoStat:addToggle("Auto Sword Stats", nil, function(value)
-        _G.Sword = value
-    end)
-    AutoStat:addToggle("Auto Power Fruit Stats", nil, function(value)
-        _G.DF = value
-    end)
+
+local AutoSkill = page1:addSection("Auto Skills")
+AutoSkill:addToggle("Auto Skill [ Z ]", nil, function(Value)
+  _G.Z = Value
+end)
+ 
+AutoSkill:addToggle("Auto Skill [ X ]", nil, function(Value)
+    _G.X = Value
+end)
+ 
+AutoSkill:addToggle("Auto Skill [ C ]", nil, function(Value)
+    _G.c = Value
+end)
+ 
+AutoSkill:addToggle("Auto Skill [ V ]", nil, function(Value)
+    _G.v = Value
+end)
+
+local AutoStat = page1:addSection("Stats")
+AutoStat:addToggle("Auto Defense Stats", nil, function(value)
+    _G.Defense = value
+end)
+
+AutoStat:addToggle("Auto Melee Stats", nil, function(value)
+    _G.Melee = value
+end)
+
+AutoStat:addToggle("Auto Sword Stats", nil, function(value)
+    _G.Sword = value
+end)
+AutoStat:addToggle("Auto Power Fruit Stats", nil, function(value)
+    _G.DF = value
+end)
+
+
     local page3 = UI:addPage("Teleport", 7044233235)
     local Teleport = page3:addSection("Teleport")
-    
-    local placeId = game.PlaceId
-    if placeId == 4520749081 then
-    
-     Teleport:addButton("nil", function()
-            TP(CFrame.new(3715.0246582031, 57.582931518555, 242.97595214844))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(2159.26171875, 57.310802459717, 1954.7755126953))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(2069.0112304688, 57.26078414917, 844.32257080078))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(2754.6274414062, 135.85949707031, -818.09289550781))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(2515.318359375, 40.783447265625, 1192.7305908203))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(772.94323730469, 57.728282928467, 5940.908203125))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(8483.5400390625, 14.412169456482, 974.11181640625))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(6531.0122070312, 28.585693359375, 7557.81640625))
-        end)
-        Teleport:addButton("nil", function()
-            TP(CFrame.new(7111.25146484375, 201.3352508544922, -2862.224609375))
-        end)
-    
-    local placeId = game.PlaceId
-    elseif placeId == 6381829480 then
-        
     Teleport:addButton("Floresco", function()
         TP(CFrame.new(-3675, 57, 169))
     end)
@@ -1574,7 +1548,7 @@ local FARM_SWORD = page1:addSection("Auto Swords")
     Teleport:addButton("Soldier Headquater", function()
         TP(CFrame.new(-9696, 38, 955))
     end)
-    end
+
     local Teleport2 = page3:addSection("Sea")
     Teleport2:addButton("Teleport To First Sea", function()
     game:GetService("TeleportService"):Teleport(4520749081, game:GetService("Players").LocalPlayer)
@@ -1618,6 +1592,16 @@ local FARM_SWORD = page1:addSection("Auto Swords")
      end
      end
      end)
+
+     PLYSETTING:addToggle("Auto Attacking Sword", nil, function(value)
+        _G.AttackSWPly = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
+
+    PLYSETTING:addToggle("Auto Attacking Melee", nil, function(value)
+        _G.AttackFSPly = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
 
      local PLYS = PLY:addSection("Players")
     
@@ -1688,19 +1672,6 @@ local FARM_SWORD = page1:addSection("Auto Swords")
     PLYS:addToggle("Safe Mode", nil, function(a)
         _G.SafeModeOn = a
     end)
-    PLYS:addTextbox("Player Username", "None", function(a)
-        JoinPlayerName = a
-    end)
-    PLYS:addButton("Join Player Server", function(Value)
-        if JoinPlayerName == nil then
-            UI:Notify("Impact Hub", "Please Type The Player Username")
-        else
-        local args = {
-            [1] = "!join "..JoinPlayerName,
-            [2] = "All"}
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))    
-        end   
-       end)
     
     PLYS:addButton("Teleport To Player", function(a)
     if game.Players:FindFirstChild(Select) then
@@ -1815,9 +1786,6 @@ local FARM_SWORD = page1:addSection("Auto Swords")
     DevilFruit:addToggle("Auto Buy Devil Fruit", nil, function(value)
         _G.SniperDF = value
     end)
-    
-    local placeId = game.PlaceId
-    if placeId == 6381829480 then
      
     RandomDFTable = {"Random Devil Fruit Type : Beli", "Random Devil Fruit Type : Gem"}
     RandomDFType = "Beli"
@@ -1931,7 +1899,17 @@ local FARM_SWORD = page1:addSection("Auto Swords")
     end
     end
     end)
-    
+
+    RaidS:addToggle("Auto Attacking Sword", nil, function(value)
+        _G.AttackSWRaid = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
+
+    RaidS:addToggle("Auto Attacking Melee", nil, function(value)
+        _G.AttackFSRaid = value
+        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+    end)
+
     local Raid = page5:addSection("Raid")
                ---------- ทำไมกูใช้ ตัวแปร ไม่ได้ วะ ไอเหี้ย ? เช่น "if newworld then ไรงี้ แต่ว่ากูใช้ไม่ได้ ต้องสร้างตัวแปรไหม่หรอ แต่ว่า ขก อ่ะ :>"
     Raid:addButton("Teleport To Raid Entrance", function()
@@ -1969,6 +1947,7 @@ local FARM_SWORD = page1:addSection("Auto Swords")
      end)
      end
      end)
+    
     Raid:addToggle("Auto Rejoin Raid [IN DEVELOP]", nil, function(value)
         _G.Reraid = value
     end)
@@ -2190,6 +2169,7 @@ local FARM_SWORD = page1:addSection("Auto Swords")
             Character:addButton("Beautiful Graphic", function()
                    YourHeartIsSoBeautiful()
             end)
+
             Character:addToggle("Anti AFK", true ,function(vu)
                 local vu = game:GetService("VirtualUser")
                 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -2255,6 +2235,31 @@ local FARM_SWORD = page1:addSection("Auto Swords")
         DisBounty = a
      end)
 
+     BountyWeaponList = {}
+    
+     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+         if v:IsA("Tool") then
+             table.insert(BountyWeaponList, v.Name)
+         end
+     end
+ 
+     BountySet:addDropdown("Select Weapon : nil", BountyWeaponList,function(a)
+         BountyWeaponName = a
+     end)
+     
+     DisBounty = 13
+     BountySet:addSlider("Distance", 13,-50,200, function(a)
+        DisBounty = a
+     end)
+     BountySet:addButton("Refresh Weapon", function(a)
+         table.clear(BountyWeaponList)
+     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+         if v:IsA("Tool") then
+        table.insert(BountyWeaponList,v.Name)
+     end
+     end
+     end)
+
      BountySet:addToggle("Auto Equip Sword", nil, function(value)
         _G.AutoEquip_SW = value
 
@@ -2296,59 +2301,97 @@ local FARM_SWORD = page1:addSection("Auto Swords")
         end)
         end
         end)
-    
 
+BountySet:addButton("", function(value)
+    print(value)
+end)
 
-     BountySet:addButton("Refresh Weapon", function(a)
-        table.clear(MainWeaponList)
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") then
-       table.insert(MainWeaponList,v.Name)
-    end
-    end
-    end)
+BountySet:addToggle("Auto Attacking Sword", nil, function(value)
+    _G.AttackSWBounty = value
+    UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+end)
+
+BountySet:addToggle("Auto Attacking Melee", nil, function(value)
+    _G.AttackFSBounty = value
+    UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
+end)
+
 
      local BountySec = page7:addSection("Bounty")
 
-     BountySec:addToggle("Auto Farm Bounty [IN DEVELOP]", nil ,function(value)
+     BountySec:addToggle("Auto Farm Bounty", nil ,function(value)
         _G.AutoFarmBounty = value
         if value == false then
             UnClip()
         end
+    end)
 
-     task.spawn(function()
-        while task.wait() do
-            if _G.AutoFarmBounty == true then
+
+    spawn(function()
+        while wait() do
             pcall(function()
-              for i,v in pairs(game.Players.Character:GetDescendants()) do
-                    if v:IsA("Model") and v:FindFirstChild("Humanoid") then
-                        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                        plr.CFrame = v.HumanoidRootPart.CFrame * Bounty_Mode
-                        EquipWeapon1(MainWeaponName)
-                        Haki()
-                    if v.Humanoid.Health >= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent or NextplySelect == true then
-                     NextplySelect = false
-                     StartCheckTarget = false
+                if _G.AutoFarmBounty then
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    for i,v in pairs(game:GetService("Workspace").PlayerCharacters:GetChildren()) do
+                        if v.Name ~= game.Players.LocalPlayer.Name then
+                            if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 17000 then
+                                plyselecthunthelpold = v.Humanoid.Health
+                                repeat task.wait()
+                                    NameTarget = v.Name
+                                    plr.CFrame = v.HumanoidRootPart.CFrame * Bounty_Mode
+                                    spawn(function()
+                                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 150 then
+                                            StartCheckTarget = true
+                                        end
+                                    end)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    spawn(function()
+                                        pcall(function()
+                                            print("Bounty Time")
+                                        end)
+                                    end)
+                                    TargetSelectHunt = v.Humanoid
+                                until _G.AutoFarmBounty == false or v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent or NextplySelect == true
+                                NextplySelect = false
+                                StartCheckTarget = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoFarmBounty then
+                    if TargetSelectHunt ~= nil then
+                        if StartCheckTarget then
+                            wait(5)
+                            if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+                                NextplySelect = true
+                                TargetSelectHunt = nil
+                            end
+                        end
                     end
                 end
             end
         end)
-    end
-        end
-            end)
     end)
+
      BountySec:addToggle("Auto Hop", nil,function(value)
         _G.AutoHop2 = value
      end)
 
      HopSec = 10
-     Character:addSlider("Hop Delay", 10,5,200, function(a)
+     BountySec:addSlider("Hop Delay", 10,5,200, function(a)
         HopSec = a
      end)
 
      task.spawn(function()
         while task.wait() do
-            if _G.AutoHop then
+            if _G.AutoHop2 then
             pcall(function()
                 wait(HopSec)
                 Hop()
@@ -3242,6 +3285,141 @@ local FARM_SWORD = page1:addSection("Auto Swords")
             game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
         end
 
+
+        ------------------------------------- Attacking Function -----------------------------------------------
+        spawn(function()
+            pcall(function()
+                 while wait() do
+                    if _G.AttackSWMain == true then
+                          local args = {
+                                [1] = "SW_"..MainWeaponName.."_M1"}
+                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                end
+                            end
+                        end)
+                        end)
+
+                        spawn(function()
+                            pcall(function()
+                                 while wait() do
+                                    if _G.AttackFSMain == true then
+                                          local args = {
+                                                [1] = "FS_"..MainWeaponName.."_M1"}
+                                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                        end
+                                    end
+                                end)
+                                end)
+                                    spawn(function()
+                                            pcall(function()
+                                         while wait() do
+                                            if _G.AttackSWPly == true then
+                                                  local args = {
+                                                        [1] = "SW_"..PlyWeaponName.."_M1"}
+                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                        end
+                                                    end
+                                                end)
+                                                end)
+                        
+                                                spawn(function()
+                                                    pcall(function()
+                                                         while wait() do
+                                                            if _G.AttackFSPly == true then
+                                                                  local args = {
+                                                                        [1] = "FS_"..PlyWeaponName.."_M1"}
+                                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                                end
+                                                            end
+                                                        end)
+                                                        end)
+                                                        spawn(function()
+                                                            pcall(function()
+                                                         while wait() do
+                                                            if _G.AttackSWRaid == true then
+                                                                  local args = {
+                                                                        [1] = "SW_"..RaidWeaponName.."_M1"}
+                                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                                        end
+                                                                    end
+                                                                end)
+                                                                end)
+                                        
+                                                                spawn(function()
+                                                                    pcall(function()
+                                                                         while wait() do
+                                                                            if _G.AttackFSRaid == true then
+                                                                                  local args = {
+                                                                                        [1] = "FS_"..RaidWeaponName.."_M1"}
+                                                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                                                end
+                                                                            end
+                                                                        end)
+                                                                        end)
+                                                                        spawn(function()
+                                                                            pcall(function()
+                                                                         while wait() do
+                                                                            if _G.AttackSWBounty == true then
+                                                                                  local args = {
+                                                                                        [1] = "SW_"..BountyWeaponName.."_M1"}
+                                                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                                                        end
+                                                                                    end
+                                                                                end)
+                                                                                end)
+                                                        
+                                                                                spawn(function()
+                                                                                    pcall(function()
+                                                                                         while wait() do
+                                                                                            if _G.AttackFSBounty == true then
+                                                                                                  local args = {
+                                                                                                        [1] = "FS_"..BountyWeaponName.."_M1"}
+                                                                                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                                                                                end
+                                                                                            end
+                                                                                        end)
+                                                                                        end)
+     ------------------------------------- End Attacking Function -----------------------------------------------
+
+            
+        spawn(function()
+            pcall(function()
+                 while wait() do
+                    if _G.AutoRaid == true then
+                        if RaidWeaponName == "Muramasa" or RaidWeaponName == "Pheonix Blade" or RaidWeaponName == "Bisento" or RaidWeaponName == "Katana" or RaidWeaponName == "Tashi Blade" or RaidWeaponName == "Authentic Triple Katana" or RaidWeaponName == "Authentic Mace" or RaidWeaponName == "Night Blade" or RaidWeaponName == "Hell Sword" or RaidWeaponName == "Sunken Blade" or RaidWeaponName == "Kioru" or RaidWeaponName == "Jitter" or RaidWeaponName == "Anubis Axe" or RaidWeaponName == "Soul Cane" or RaidWeaponName == "Adventure Knife" or RaidWeaponName == "Metal Trident" or RaidWeaponName == "Saber"
+                        or RaidWeaponName == "Cookie Sword" or RaidWeaponName == "Pipe" or RaidWeaponName == "Pole" or RaidWeaponName == "Shark Blade" or RaidWeaponName == "Acroscyth" or RaidWeaponName == "Longaevus" or RaidWeaponName == "Pumpkin Smasher" or RaidWeaponName == "Gold Spear" or RaidWeaponName == "Aquatic Anchor" or RaidWeaponName == "Scepters of Flames" or RaidWeaponName == "Barbaric Axe" or RaidWeaponName == "Demon Trident" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Hunter Blade" then
+                          local args = {
+                                [1] = "SW_"..PlyWeaponName.."_M1"}
+                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                            elseif RaidWeaponName == "Combat" or RaidWeaponName == "DarkLeg" or RaidWeaponName == "WaterStyle" or RaidWeaponName == "Cyborg" or RaidWeaponName == "DragonClaw" or RaidWeaponName == "Electro" or RaidWeaponName == "" then
+                                local args = {
+                                    [1] = "FS_"..RaidWeaponName.."_M1"}
+                                game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                end
+                            end
+                        end
+                        end)
+                    end)
+                
+        spawn(function()
+            pcall(function()
+                 while wait() do
+                    if _G.KillPl == true then
+                        if MainWeaponName == "Muramasa" or MainWeaponName == "Pheonix Blade" or MainWeaponName == "Bisento" or MainWeaponName == "Katana" or MainWeaponName == "Tashi Blade" or MainWeaponName == "Authentic Triple Katana" or MainWeaponName == "Authentic Mace" or MainWeaponName == "Night Blade" or MainWeaponName == "Hell Sword" or MainWeaponName == "Sunken Blade" or MainWeaponName == "Kioru" or MainWeaponName == "Jitter" or MainWeaponName == "Anubis Axe" or MainWeaponName == "Soul Cane" or MainWeaponName == "Adventure Knife" or MainWeaponName == "Metal Trident" or MainWeaponName == "Saber"
+                        or MainWeaponName == "Cookie Sword" or MainWeaponName == "Pipe" or MainWeaponName == "Pole" or MainWeaponName == "Shark Blade" or MainWeaponName == "Acroscyth" or MainWeaponName == "Longaevus" or MainWeaponName == "Pumpkin Smasher" or MainWeaponName == "Gold Spear" or MainWeaponName == "Aquatic Anchor" or MainWeaponName == "Scepters of Flames" or MainWeaponName == "Barbaric Axe" or MainWeaponName == "Demon Trident" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Hunter Blade" then
+                          local args = {
+                                [1] = "SW_"..PlyWeaponName.."_M1"}
+                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                            elseif MainWeaponName == "Combat" or MainWeaponName == "DarkLeg" or MainWeaponName == "WaterStyle" or MainWeaponName == "Cyborg" or MainWeaponName == "DragonClaw" or MainWeaponName == "Electro" or MainWeaponName == "" then
+                                local args = {
+                                    [1] = "FS_"..MainWeaponName.."_M1"}
+                                game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                end
+                            end
+                        end
+                        end)
+                    end)
+
                 spawn(function()
                     pcall(function()
                          while wait() do
@@ -3255,7 +3433,6 @@ local FARM_SWORD = page1:addSection("Auto Swords")
                                         local args = {
                                             [1] = "FS_"..MainWeaponName.."_M1"}
                                         game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
-                                        
                                         end
                                     end
                                 end
@@ -3272,7 +3449,7 @@ local FARM_SWORD = page1:addSection("Auto Swords")
                             Noclip.MaxForce = Vector3.new(100000,100000,100000)
                             Noclip.Velocity = Vector3.new(0,0,0)
                         end
-                    end
+                      end
                 end
             end)
         end)
@@ -3290,6 +3467,8 @@ local FARM_SWORD = page1:addSection("Auto Swords")
                 end)
             end)
         end)
+
+
     
         function UnClip()
         if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
@@ -3336,12 +3515,9 @@ local FARM_SWORD = page1:addSection("Auto Swords")
            plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].Main.CFrame * CFrame.new(0,80,0)
         elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
             plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].Main.CFrame * CFrame.new(0,80,0)
-        else
-            print("หาเกาะไฮดร้าไม่พบ !!")
-           end
-          end
         end
-    
+    end
+
 function InventoryWeapon1()
     local args = {
         [1] = MainWeaponName}
@@ -3358,17 +3534,15 @@ function InventoryWeapon3()
     game:GetService("ReplicatedStorage").Remotes.Functions.InventoryEq:InvokeServer(unpack(args))
     end
    
-
-
         ------------- Just A Starter Notify แค่แจ้งเตือนเฉย ๆ Just A Starter Notify แค่แจ้งเตือนเฉย ๆ
         UI:Notify("Impact Hub", "Welcom To Impact Hub.")
         wait(6)
         UI:Notify("Impact Hub", "Premium End At 2 January 2023")
         wait(5)
         FindGayIsland()
-else 
+
+else
+    print("Not vaild key\nKicking...")
+    game.Players.LocalPlayer:Kick("Invaild Key, Please Retrying...")
     game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-    game.Players.LocalPlayer:Kick("\nINVAILD KEY\nPlease Redeem Key On Discord :)\nWe Hope On You")
-    print("Invaild Key.. Kicked!")
 end
