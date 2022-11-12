@@ -1,4 +1,3 @@
-_G.Key = "Kakura-GiftedKey"
 if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Kakura-1255239581Key" or _G.Key == "Kakura-975321Key" then
 CheckPremium = "IS A"
 -- This Is King Legacy Script Revamp!
