@@ -55,15 +55,6 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         end
         end
         end)
-        FARMS:addToggle("Auto Attacking Sword", nil, function(value)
-            _G.AttackSWMain = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
-    
-        FARMS:addToggle("Auto Attacking Melee", nil, function(value)
-            _G.AttackFSMain = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
     
         local FARM = page1:addSection("Auto Farm")
         
@@ -1631,15 +1622,6 @@ end)
          end
          end)
     
-         PLYSETTING:addToggle("Auto Attacking Sword", nil, function(value)
-            _G.AttackSWPly = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
-    
-        PLYSETTING:addToggle("Auto Attacking Melee", nil, function(value)
-            _G.AttackFSPly = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
     
          local PLYS = PLY:addSection("Players")
         
@@ -1870,6 +1852,7 @@ end)
         DevilFruit:addToggle("Bring All Devil Fruit", nil, function(value)
             BringFruit = value
         end)
+        
         spawn(function()
             pcall(function()
                 while wait(.1) do
@@ -1938,24 +1921,14 @@ end)
         end
         end)
     
-        RaidS:addToggle("Auto Attacking Sword", nil, function(value)
-            _G.AttackSWRaid = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
-    
-        RaidS:addToggle("Auto Attacking Melee", nil, function(value)
-            _G.AttackFSRaid = value
-            UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-        end)
-    
         local Raid = page5:addSection("Raid")
                    ---------- ทำไมกูใช้ ตัวแปร ไม่ได้ วะ ไอเหี้ย ? เช่น "if newworld then ไรงี้ แต่ว่ากูใช้ไม่ได้ ต้องสร้างตัวแปรไหม่หรอ แต่ว่า ขก อ่ะ :>"
         Raid:addButton("Teleport To Raid Entrance", function()
             TP(CFrame.new(2723.12841796875, 223.11941528320312, -7.604184150695801))
            end)    
         
-        Raid:addToggle("Auto Raid", nil, function(value)
-            _G.AutoRaid = value
+        Raid:addToggle("Auto Kill All Monster", nil, function(value)
+            _G.KillRaidMon = value
         
             while _G.AutoRaid do wait()
                 pcall(function()
@@ -1974,9 +1947,9 @@ end)
                                 else
                                     repeat game:GetService("RunService").Heartbeat:wait()
                                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,1000,0)
-                                    until _G.AutoRaid == false or game.Players.LocalPlayer.Character.Humanoid.Health == game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+                                    until _G.KillRaidMon == false or game.Players.LocalPlayer.Character.Humanoid.Health == game.Players.LocalPlayer.Character.Humanoid.MaxHealth
                                 end
-                            until not v.Parent or v.Humanoid.Health <= 0 or _G.AutoRaid == false
+                            until not v.Parent or v.Humanoid.Health <= 0 or _G.KillRaidMon == false
                         end
                     end
                 else
@@ -2345,20 +2318,6 @@ end)
         end
     end)
     
-    BountySet:addButton("", function(value)
-        print(value)
-    end)
-    
-    BountySet:addToggle("Auto Attacking Sword", nil, function(value)
-        _G.AttackSWBounty = value
-        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then Click this")
-    end)
-    
-    BountySet:addToggle("Auto Attacking Melee", nil, function(value)
-        _G.AttackFSBounty = value
-        UI:Notify("Impact Hub", "If You Cannot Using This Please Rejoin And Select Weapon First then CLick this")
-    end)
-    
     
          local BountySec = page7:addSection("Bounty")
     
@@ -2521,7 +2480,7 @@ end)
         end)
         USetting:addButton("Destroy UI", function()
             for i, v in pairs(game.CoreGui:GetChildren()) do
-                if string.find(v.Name, "Kakura Edition") then   
+                if string.find(v.Name, "KAKURA EDITION") then   
                     v:Destroy()
                 end
             end
@@ -3451,11 +3410,11 @@ end)
          spawn(function()
             pcall(function()
                  while wait() do
-                    if _G.AutoRaid == true then
+                    if _G.KillRaidMon == true then
                         if RaidWeaponName == "Muramasa" or RaidWeaponName == "Pheonix Blade" or RaidWeaponName == "Bisento" or RaidWeaponName == "Katana" or RaidWeaponName == "Tashi Blade" or RaidWeaponName == "Authentic Triple Katana" or RaidWeaponName == "Authentic Mace" or RaidWeaponName == "Night Blade" or RaidWeaponName == "Hell Sword" or RaidWeaponName == "Sunken Blade" or RaidWeaponName == "Kioru" or RaidWeaponName == "Jitter" or RaidWeaponName == "Anubis Axe" or RaidWeaponName == "Soul Cane" or RaidWeaponName == "Adventure Knife" or RaidWeaponName == "Metal Trident" or RaidWeaponName == "Saber"
                         or RaidWeaponName == "Cookie Sword" or RaidWeaponName == "Pipe" or RaidWeaponName == "Pole" or RaidWeaponName == "Shark Blade" or RaidWeaponName == "Acroscyth" or RaidWeaponName == "Longaevus" or RaidWeaponName == "Pumpkin Smasher" or RaidWeaponName == "Gold Spear" or RaidWeaponName == "Aquatic Anchor" or RaidWeaponName == "Scepters of Flames" or RaidWeaponName == "Barbaric Axe" or RaidWeaponName == "Demon Trident" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Hunter Blade" then
                           local args = {
-                                [1] = "SW_"..PlyWeaponName.."_M1"}
+                                [1] = "SW_"..RaidWeaponName.."_M1"}
                             game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
                             elseif RaidWeaponName == "Combat" or RaidWeaponName == "DarkLeg" or RaidWeaponName == "WaterStyle" or RaidWeaponName == "Cyborg" or RaidWeaponName == "DragonClaw" or RaidWeaponName == "Electro" or RaidWeaponName == "" then
                                 local args = {
@@ -3528,7 +3487,7 @@ end)
             spawn(function()
                 pcall(function()
                     while wait() do
-                        if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                        if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.KillRaidMon== true then
                             if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                                 local Noclip = Instance.new("BodyVelocity")
                                 Noclip.Name = "BodyClip"
