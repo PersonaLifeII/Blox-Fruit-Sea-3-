@@ -1,7 +1,6 @@
-print("Impact Hub") 
-print("By Kakura Team")
+-- KL 2
 if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Kakura-1255239581Key" or _G.Key == "Kakura-975321Key" then
-    print("Whitelist!")
+print("Whitelist!")
 -- This Is King Legacy Script Revamp!
     
         repeat wait(1) until game:IsLoaded()
@@ -334,6 +333,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                                EquipWeapon1(MainWeaponName)
                                 Haki()
                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") or v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-6058, 201, 7239)
@@ -351,10 +351,11 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             if value == false then
                 UnClip()
             end
-      
+        end)
+
             task.spawn(function()
                 while task.wait() do
-                    if not _G.SummonDragon then break end
+                    if _G.SummonDragon == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                         if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("DragonGem") then
@@ -365,8 +366,9 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                         end
                     end)
                 end
-            end)
+            end
         end)
+
         FARM4:addToggle("Auto Farm Dragon", nil, function(value)
             _G.Dragon = value
         if value == false then
