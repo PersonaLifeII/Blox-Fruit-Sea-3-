@@ -1,6 +1,5 @@
 print("Impact Hub") 
 print("By Kakura Team")
-_G.Key = "Kakura-GiftedKey"
 if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Kakura-1255239581Key" or _G.Key == "Kakura-975321Key" then
     print("Whitelist!")
 -- This Is King Legacy Script Revamp!
@@ -414,6 +413,10 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
              if AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" then
              UI:Notify("Impact Hub" ,"The Bellow Type, Distance 8 - 10")
         end
+        CheckQuest()
+        if MyLevel <= 3075 then
+            UI:Notify("Impact Hub" ,"Level 3075 Require")
+       end
     end)
     
             task.spawn(function()
@@ -842,7 +845,8 @@ end)
     
     FARM9:addToggle("Auto Farm Dark Beard Quest [QUEST] [IN DEVELOP]", nil, function(value)
         _G.BlackBeardQ = value
-        if not game.Players.LocalPlayer.PlayerStats:FindFirstChild("lvl").Value >= 3475 then
+        CheckQuest()
+        if MyLevel <= 3475 then
         UI:Notify("Impact Hub", "Level 3475 Require")
         end
         if value == false then
@@ -879,6 +883,9 @@ end)
             if value == false then
                 UnClip()
              end
+             if MyLevel <= 3400 then
+                UI:Notify("Impact Hub", "Level 3400 Require")
+            end
              if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
              UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
              end
@@ -1066,14 +1073,20 @@ end)
             if value == false then
                 UnClip()
             end
+            if MyLevel <= 3575 then
+                UI:Notify("Impact Hub", "Level 3575 Require")
+            end
         end)
     FARM10:addToggle("Auto Permission [QUEST]", nil, function(value)
             _G.Permission2Q = value
              if value == false then
                 UnClip()
+             end
              if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
                 UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
                 end
+            if MyLevel <= 3500 then
+                UI:Notify("Impact Hub", "Level 3500 Require")
             end
         end)
     
@@ -1852,7 +1865,7 @@ end)
         DevilFruit:addToggle("Bring All Devil Fruit", nil, function(value)
             BringFruit = value
         end)
-        
+
         spawn(function()
             pcall(function()
                 while wait(.1) do
