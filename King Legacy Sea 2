@@ -15,9 +15,9 @@ CheckPremium = "IS A"
     spawn(function()
     while wait(.1) do
         if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
-            Farm_Mode = CFrame.new(0,DisFarm,1) * CFrame.Angles(math.rad(-90),0,0)
+            Farm_Mode = CFrame.new(0,DisFarm,-1) * CFrame.Angles(math.rad(-90),0,0)
         elseif AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" then
-            Farm_Mode = CFrame.new(0,DisFarm,-1) * CFrame.Angles(math.rad(90),0,0)
+            Farm_Mode = CFrame.new(0,DisFarm,1) * CFrame.Angles(math.rad(90),0,0)
         elseif AutoFarmType == "[Default : Above] Auto Farm Type : Behind" then
             Farm_Mode = CFrame.new(0,0,DisFarm) * CFrame.Angles(math.rad(0),0,0)
         end
@@ -613,23 +613,33 @@ end
                 if _G.GrabGhostChest == true then 
                 pcall(function()
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                for i, v in pairs(game.Workspace:GetChildren()) do
                 local NumChest = math.random(1,5)
+                for i, v in pairs(game.Workspace:GetChildren()) do
                 if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                 if NumChest == 1 then
-                plr.CFrame = v.RootPart.CFrame
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                     plr.CFrame = v.RootPart.CFrame
                 elseif NumChest == 2 then
-                plr.CFrame = v.RootPart.CFrame
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                    plr.CFrame = v.RootPart.CFrame
                 elseif NumChest == 3 then
-                plr.CFrame = v.RootPart.CFrame
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                   plr.CFrame = v.RootPart.CFrame
                 elseif NumChest == 4 then
-                plr.CFrame = v.RootPart.CFrame
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                  plr.CFrame = v.RootPart.CFrame
                 elseif NumChest == 5 then
-                plr.CFrame = v.RootPart.CFrame
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                 plr.CFrame = v.RootPart.CFrame
+                  end
                 end
             end
         end
-    end)
+    end
+end
+end
+end
+end)
         end
     end
 end)
@@ -694,7 +704,7 @@ end)
     end)
     end)
 
-    FARM8:addToggle("Grab Chest [Just A Testing Of Dev]", nil, function(a)
+    FARM8:addToggle("Auto Grab Chest [IN TESTING]", nil, function(a)
         _G.GrabHydraChest2 = a
     
         task.spawn(function()
@@ -1862,9 +1872,9 @@ end)
     spawn(function()
     while wait(.1) do
         if AutoRaidType == "[Default : Above] Type Farm : Above" then
-            Raid_Mode = CFrame.new(0,DisRaid,1) * CFrame.Angles(math.rad(-90),0,0)
+            Raid_Mode = CFrame.new(0,DisRaid,-2) * CFrame.Angles(math.rad(-90),0,0)
         elseif AutoRaidType == "[Default : Above] Type Farm : Bellow" then
-            Raid_Mode = CFrame.new(0,DisRaid,-1) * CFrame.Angles(math.rad(90),0,0)
+            Raid_Mode = CFrame.new(0,DisRaid,2) * CFrame.Angles(math.rad(90),0,0)
         elseif AutoRaidType == "[Default : Above] Type Farm : Behind" then
             Raid_Mode = CFrame.new(0,0,DisRaid) * CFrame.Angles(math.rad(0),0,0)
         end
@@ -2217,9 +2227,9 @@ end)
      spawn(function()
      while wait(.1) do
          if FarmBountyType == "[Default : Above] Auto Farm Type : Above" then
-            Bounty_Mode = CFrame.new(0,DisBounty,2) * CFrame.Angles(math.rad(-90),0,0)
+            Bounty_Mode = CFrame.new(0,DisBounty,-2) * CFrame.Angles(math.rad(-90),0,0)
          elseif FarmBountyType == "[Default : Above] Auto Farm Type : Bellow" then
-            Bounty_Mode = CFrame.new(0,DisBounty,-2) * CFrame.Angles(math.rad(90),0,0)
+            Bounty_Mode = CFrame.new(0,DisBounty,2) * CFrame.Angles(math.rad(90),0,0)
          elseif FarmBountyType == "[Default : Above] Auto Farm Type : Behind" then
             Bounty_Mode = CFrame.new(0,0,DisBounty) * CFrame.Angles(math.rad(0),0,0)
          end
@@ -2397,23 +2407,6 @@ end)
                 Hop()
             end)
          end
-        end
-    end)
-
-     spawn(function()
-        while wait() do
-            pcall(function()
-                if _G.AutoFarmBounty then
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-                        if v:IsA("Shirt") then
-                            v:Destroy()
-                        end
-                        if v:IsA("Accessory") then
-                            v:Destroy()
-                    end
-                end
-            end
-        end)
         end
     end)
      
@@ -3166,14 +3159,6 @@ end)
         function EquipWeapon3(PlyWeaponName)
             if game.Players.LocalPlayer.Backpack:FindFirstChild(PlyWeaponName) then
             local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(PlyWeaponName)
-            wait(.4)
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-          end
-        end
-
-        function EquipWeapon4(BountyWeaponName)
-            if game.Players.LocalPlayer.Backpack:FindFirstChild(BountyWeaponName) then
-            local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(BountyWeaponName)
             wait(.4)
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
           end
