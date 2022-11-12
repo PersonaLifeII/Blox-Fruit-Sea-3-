@@ -1,11 +1,13 @@
-print("Gay")
+print("Impact Hub") 
+print("By Kakura Team")
+_G.Key = "Kakura-GiftedKey"
 if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Kakura-1255239581Key" or _G.Key == "Kakura-975321Key" then
-    CheckPremium = "IS A"
-    -- This Is King Legacy Script Revamp!
+    print("Whitelist!")
+-- This Is King Legacy Script Revamp!
     
         repeat wait(1) until game:IsLoaded()
         local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
-        local UI  = Venyx.new("Kakura Edition | "..CheckPremium.." PREMUIM | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
+        local UI  = Venyx.new("KAKURA EDITION | PREMUIM | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
     
         local page1 = UI:addPage("Main Tab", 7040391851)
         local FARMS = page1:addSection("Auto Farm Setting")
@@ -258,10 +260,10 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             end)
     
             _G.Buso = true
-            FARM:addToggle("Auto Buso Haki",  true, function(a)
+            FARM:addToggle("Auto Armament Haki",  true, function(a)
                 _G.Buso = a
                     end)
-            FARM:addToggle("Auto Ken Haki",  nil, function(a)
+            FARM:addToggle("Auto Observation Haki",  nil, function(a)
                 _G.KenHaki = a
             end)
         
@@ -337,14 +339,15 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                     if _G.Orbs == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        if not game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") then
                         plr.CFrame = CFrame.new(-6058, 201, 7239)
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                                EquipWeapon1(MainWeaponName)
                                 Haki()
-                                if v.Humanoid.Health <= 0 then
+                                if game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") or v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-6058, 201, 7239)
+                                  end
                                 end
                             end
                         end
@@ -405,16 +408,22 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         FARM4:addButton("Teleport To Dragon", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]")  then
-                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Dragon [Lv. 5000]"].HumanoidRootPart.CFrame
+                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Dragon [Lv. 5000]"].HumanoidRootPart.CFrame * CFrame.new(0,50,0)
             end
         end)
             
-        FARM4:addToggle("Auto Farm Dragon Gem [QUEST]", nil, function(value)
+        FARM4:addToggle("Auto Dragon Gem [QUEST]", nil, function(value)
             _G.OrbsQ = value
             if value == false then
                 UnClip()
-            end
-        end)
+             end
+             if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
+             UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
+             end
+             if AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" then
+             UI:Notify("Impact Hub" ,"The Bellow Type, Distance 8 - 10")
+        end
+    end)
     
             task.spawn(function()
                 while task.wait() do
@@ -441,7 +450,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                     ---"pcallfunction"
                                 CheckQuest()
                                 for i, v in pairs(game:GetService("Workspace").Monster:GetDescendants()) do
-                                    if v.Name == "Dark Beard Servant [Lv. 3400]" then
+                                    if v.Name == "Elite Skeleton [Lv. 3100]" then
                                         repeat wait()
                                             if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestBoard.Visible == true then
                                             if v.Humanoid.Health > 0 then
@@ -483,8 +492,8 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                                                  end
                                               end
                                             end
-                                        until not v.Parent or v.Humanoid.Health <= 0 or _G.Permission2Q == false
-                                    elseif v.Name ~= "Dark Beard Servant [Lv. 3400]" then
+                                        until not v.Parent or v.Humanoid.Health <= 0 or _G.OrbsQ == false
+                                    elseif v.Name ~= "Elite Skeleton [Lv. 3100]" then
                                         if not game:GetService("Workspace").AllNPC:FindFirstChild("QuestLvl3075") then
                                                  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("ReplicatedStorage").MAP["QuestLvl3075"].HumanoidRootPart.CFrame * CFrame.new(0,40,0)
                                               else 
@@ -511,17 +520,19 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                     if _G.Mother == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]")  then
                         plr.CFrame = CFrame.new(-290, 191, 9272)
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "Ms. Mother [Lv. 7500]" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                                 EquipWeapon1(MainWeaponName)
                                 Haki()
-                                if v.Humanoid.Health <= 0 then
+                                if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") or v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-5728, 463, 77)
                                 end
                             end
                         end
+                    end
                     end)
                     end
                 end
@@ -531,7 +542,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         FARM5:addButton("Teleport To Ms. Mother", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]")  then
-                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame
+                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame * CFrame.new(0,50,0)
             end
         end)
         
@@ -542,20 +553,23 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             if value == false then
                 UnClip()
             end
-    
+        end)
+
             task.spawn(function()
                 while task.wait() do
                     if _G.Hell == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]")  then
                         plr.CFrame = CFrame.new(-5728, 463, 77)
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                                 EquipWeapon1(MainWeaponName)
                                 Haki()
-                                if v.Humanoid.Health <= 0 then
+                                if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]") or v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-5728, 463, 77)
+                                  end
                                 end
                             end
                         end
@@ -563,8 +577,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                     end
                 end
             end)
-            end)
-        
+    
         
         FARM5:addButton("Teleport To King Samurai", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
@@ -579,22 +592,25 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             _G.Ghost = value
             if value == false then
                 UnClip()
+            end
             if not game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
             UI:Notify("Impact Hub", "There Are No Spawned Ghost Ship")
             end
-        end
+
             
             task.spawn(function()
                 while task.wait() do
                     if not _G.Ghost then break end
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                        for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
+                        if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
+                            for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
                             if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisFarm)
                                 v.HumanoidRootPart.CanCollide = false
                                 EquipWeapon1(MainWeaponName)
                                 Haki()
+                               end
                             end
                         end
                     end)
@@ -614,21 +630,24 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                     pcall(function()
                     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                     local NumChest = math.random(1,5)
-                    for i, v in pairs(game.Workspace:GetChildren()) do
-                    if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                     if NumChest == 1 then
+                    for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                          plr.CFrame = v.RootPart.CFrame
                     elseif NumChest == 2 then
+                        for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                         plr.CFrame = v.RootPart.CFrame
                     elseif NumChest == 3 then
+                        for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                        plr.CFrame = v.RootPart.CFrame
                     elseif NumChest == 4 then
+                        for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                       plr.CFrame = v.RootPart.CFrame
                     elseif NumChest == 5 then
+                        for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
                      plr.CFrame = v.RootPart.CFrame
                       end
@@ -639,22 +658,27 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
     end
     end
     end
-    end)
-            end
-        end
-    end)
+    end
+end
+end
+end)
+     end
+    end
+end)
     end)
         FARM7:addButton("Teleport To Ghost Ship", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
-                plr.CFrame = game:GetService("Workspace").GhostMonster["Ghost Ship"].HumanoidRootPart.CFrame
+                plr.CFrame = game:GetService("Workspace").GhostMonster["Ghost Ship"].HumanoidRootPart.CFrame * CFrame.new(0,100,0)
             end
         end)
     
         local FARM8 = page1:addSection("Hydra")
         FARM8:addToggle("Auto Farm Hydra", nil, function(value)
             _G.Hydra = value
+            if game:GetService("Workspace").SeaMonster:FindFirstChild("HydraSeaKing") then
             UI:Notify("Impact Hub", "Recommended For Distance 150 - 200")
+            end
             if value == false then
             UnClip()
             end
@@ -715,17 +739,20 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                         for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
                         if v.Name == "HydraSeaKing" and v:FindFirstChild("Humanoid") then
                         if v.Humanoid.Health <= 0 then
-                        for i, v in pairs(game.Workspace.Island:GetDescendants()) do
-                        if string.find(v.Name, "Sea King") and v:IsA("Model") and v:FindFirstChild("Main") then
-                        if string.find(v.Name, "Chest") and v:IsA("Model") and v:FindFirstChild("RootPart") then
-                        plr.CFrame = v.RootPart.CFrame
+                        if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
+                         if game:GetService("Workspace").Island:FindFirstChild("Sea King Water").SeaBeastChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].SeaBeastChest.RootPart.CFrame
+                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Water").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
+                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Water").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
+                    end
                 end
             end
         end
     end
-    end
-    end
     end)
+
             end
         end)
         end)
@@ -738,10 +765,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
     FARM8:addButton("Teleport To Hydra Island", function()
         TPHDIsland()
     end)
-    
-    FARM8:addButton("TP To Hydra Island [ This is Just A Testing of Dev ]", function()
-        SpecialTPHD()
-    end)
+
     local FARM9 = page1:addSection("Dark Beard")
     
     FARM9:addToggle("Auto Farm Dark Beard", nil, function(value)
@@ -755,14 +779,16 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             if _G.BlackBeard == true then
             pcall(function()
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dark Beard [Lv. 3475]")  then
                 plr.CFrame = CFrame.new(-10160, 145, -5140)
                 for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                     if v.Name == "Dark Beard [Lv. 3475]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                         EquipWeapon1(MainWeaponName)
                         Haki()
-                        if v.Humanoid.Health <= 0 then
+                        if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dark Beard [Lv. 3475]") or v.Humanoid.Health <= 0 then
                             plr.CFrame = CFrame.new(-10160, 145, -5140)
+                          end
                         end
                     end
                 end
@@ -825,12 +851,12 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
     
     FARM9:addToggle("Auto Farm Dark Beard Quest [QUEST] [IN DEVELOP]", nil, function(value)
         _G.BlackBeardQ = value
-    if not game.Players.LocalPlayer.PlayerStats:FindFirstChild("lvl").Value >= 3475 then
+        if not game.Players.LocalPlayer.PlayerStats:FindFirstChild("lvl").Value >= 3475 then
         UI:Notify("Impact Hub", "Level 3475 Require")
-        if value == false then
-                UnClip()
-            end
         end
+        if value == false then
+            UnClip()
+         end
     
             task.spawn(function()
                 while task.wait() do
@@ -861,9 +887,11 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             _G.PermissionQ = value
             if value == false then
                 UnClip()
-            elseif AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
+             end
+             if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
              UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
-             elseif AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" then
+             end
+             if AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" then
              UI:Notify("Impact Hub" ,"The Bellow Type, Distance 8 - 10")
         end
     end)
@@ -1491,19 +1519,19 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
     
     local AutoSkill = page1:addSection("Auto Skills")
     AutoSkill:addToggle("Auto Skill [ Z ]", nil, function(Value)
-      _G.Z = Value
+      _G.Z_Skill = Value
     end)
      
     AutoSkill:addToggle("Auto Skill [ X ]", nil, function(Value)
-        _G.X = Value
+        _G.X_Skill = Value
     end)
      
     AutoSkill:addToggle("Auto Skill [ C ]", nil, function(Value)
-        _G.c = Value
+        _G.C_Skill = Value
     end)
      
     AutoSkill:addToggle("Auto Skill [ V ]", nil, function(Value)
-        _G.v = Value
+        _G.V_Skill = Value
     end)
     
     local AutoStat = page1:addSection("Stats")
@@ -1963,19 +1991,19 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         end)
         
         Raid:addToggle("Auto Skill [ Z ]", nil, function(Value)
-            _G.Z = Value
+            _G.Z_Skill = Value
         end)
     
         Raid:addToggle("Auto Skill [ X ]", nil, function(Value)
-            _G.X = Value
+            _G.X_Skill = Value
         end)
     
         Raid:addToggle("Auto Skill [ C ]", nil, function(Value)
-            _G.c = Value
+            _G.C_Skill = Value
         end)
     
         Raid:addToggle("Auto Skill [ V ]", nil, function(Value)
-            _G.v = Value
+            _G.V_Skill = Value
         end)
     
         local page6 = UI:addPage("FE - Others", 5012544693)
@@ -2417,33 +2445,71 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
          
          local itsection = page7:addSection("Teleport Shop")
     
-        Shoplist = {"Reset Stat Shop", "Random Devil Fruit Shop","Devil Fruit Shop", "", "Expert Dark Leg Shop", "Half Robot Shop", "Real Water Style Shop", "Random Appearance Shop", "Dragon Claw Shop", "Dark Leg V.2 Shop / Master Of Dark Leg"}
-        _G.ShopSelected = "Reset Stat Shop"
+        Shoplist = {"Select Shop : Reset Stat Shop", "Select Shop : Random Devil Fruit Shop", "Select Shop : Devil Fruit Shop", "", "Select Shop : Expert Dark Leg Shop", "Select Shop : Half Robot Shop", "Select Shop : Real Water Style Shop",
+
+         "", "Select Shop : Random Appearance Shop", "Select Shop : Dragon Claw Shop",
+
+         "Select Shop : Master Of Dark Leg", "", "Select Shop : Surgit", "Select Shop : Night Blade Master", "Select Shop : Conqueror Shade"}
+
+        _G.ShopSelected = "Select Shop : Reset Stat Shop"
         
-        itsection:addDropdown("Select Shop : ".._G.ShopSelected, Shoplist, function(a)
+        itsection:addDropdown("".._G.ShopSelected, Shoplist, function(a)
         _G.ShopSelected = a
         end)
         itsection:addButton("Teleport To Shop", function()
-                        if _G.ShopSelected == "Reset Stat Shop" then
+                        if _G.ShopSelected == "Select Shop : Reset Stat Shop" then
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4845, 57, 69)
-                        elseif _G.ShopSelected == "Random Devil Fruit Shop" then
+                        elseif _G.ShopSelected == "Select Shop : Random Devil Fruit Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4783, 57, 78)
-                            elseif _G.ShopSelected == "Devil Fruit Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Devil Fruit Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3780, 61, 245)
-                            elseif _G.ShopSelected == "Random Appearance Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Random Appearance Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3775, 57, 132)
-                            elseif _G.ShopSelected == "Expert Dark Leg Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Expert Dark Leg Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4923, 58, 57)
-                            elseif _G.ShopSelected == "Half Robot Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Half Robot Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4968, 57, 164)
-                            elseif _G.ShopSelected == "Real Water Style Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Real Water Style Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4830, 57, 151)        
-                            elseif _G.ShopSelected == "Dragon Claw Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Dragon Claw Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4603, 337, 599)           
-                            elseif _G.ShopSelected == "Dark Leg V.2 Shop / Master Of Dark Leg" then
+                            elseif _G.ShopSelected == "Select Shop : Master Of Dark Leg" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11089, 373, 974)        
-                            elseif _G.ShopSelected == "Awakening Shop" then
+                            elseif _G.ShopSelected == "Select Shop : Awakening Shop" then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4416, 81, 2129)          
+                            elseif _G.ShopSelected == "Select Shop : Armament Shade" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9712, 38, 991)   
+                            elseif _G.ShopSelected == "Select Shop : Surgit" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(562, 148, -2850)   
+                            elseif _G.ShopSelected == "Select Shop : Night Blade Master" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(707, 148, -2592)   
+                            elseif _G.ShopSelected == "Select Shop : Conqueror Shade" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(479, 148, -2535)   
+        end
+        end)
+
+        Shoplist2 = {"Select Npc : Lee", "Select Npc : Pung", "Select Npc : Stranger Uncle", "", "Select Npc : Jump Hint", "Select Npc : Tier Rate Hint",
+         "Select Npc : Kioru Sword Quest", "", "Select Npc : Fat Man"}
+        _G.ShopSelected2 = "Select Npc : Lee"
+        
+        itsection:addDropdown("".._G.ShopSelected2, Shoplist2, function(a)
+        _G.ShopSelected2 = a
+        end)
+        itsection:addButton("Teleport To Npc", function()
+                        if _G.ShopSelected2 == "Select Npc : Lee" then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9615, 38, 1041)
+                        elseif _G.ShopSelected2 == "Select Npc : Pung" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9327, 109, -5201)
+                            elseif _G.ShopSelected2 == "Select Npc : Stranger Uncle" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10870, 708, 972)
+                            elseif _G.ShopSelected2 == "Select Npc : Jump Hint" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3775, 57, 132)
+                            elseif _G.ShopSelected2 == "Select Npc : Tier Rate Hint" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-496, 57, 8179)
+                            elseif _G.ShopSelected2 == "Select Npc : Kioru Sword Quest" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-385, 57, 8083)
+                            elseif _G.ShopSelected2 == "Select Npc : Fat Man" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4602, 223, -42)
         end
         end)
         
@@ -2467,7 +2533,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         spawn(function()
             game:GetService("RunService").RenderStepped:Connect(function()
              pcall(function()
-         if _G.Z then
+         if _G.Z_Skill then
             game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
             game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
         end
@@ -2477,7 +2543,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
          spawn(function()
             game:GetService("RunService").RenderStepped:Connect(function()
              pcall(function()
-         if _G.X then
+         if _G.X_Skill then
             game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
             game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
         end
@@ -2487,7 +2553,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
          spawn(function()
             game:GetService("RunService").RenderStepped:Connect(function()
              pcall(function()
-         if _G.c then
+         if _G.C_Skill then
             game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
             game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
         end
@@ -2497,7 +2563,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
          spawn(function()
             game:GetService("RunService").RenderStepped:Connect(function()
              pcall(function()
-         if _G.v then
+         if _G.V_Skill then
             game:GetService("VirtualInputManager"):SendKeyEvent(true,118,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
             game:GetService("VirtualInputManager"):SendKeyEvent(false,118,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
          end
@@ -2511,7 +2577,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                local args = {
               [1] = true}
         game:GetService("Players").LocalPlayer.Services.Client.KenEvent:InvokeServer()
-            end
+           end
         end
          
          function Haki()
@@ -3284,7 +3350,7 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
             end
     
     
-            ------------------------------------- Attacking Function Main -----------------------------------------------
+            ------------------------------------- Main Attacking Function ของโง่ ๆ ไม่ต้องสน -----------------------------------------------
             spawn(function()
                 pcall(function()
                      while wait() do
@@ -3382,7 +3448,83 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
                                                                                             end)
          ------------------------------------- End Attacking Function -----------------------------------------------
     
-        
+         spawn(function()
+            pcall(function()
+                 while wait() do
+                    if _G.AutoRaid == true then
+                        if RaidWeaponName == "Muramasa" or RaidWeaponName == "Pheonix Blade" or RaidWeaponName == "Bisento" or RaidWeaponName == "Katana" or RaidWeaponName == "Tashi Blade" or RaidWeaponName == "Authentic Triple Katana" or RaidWeaponName == "Authentic Mace" or RaidWeaponName == "Night Blade" or RaidWeaponName == "Hell Sword" or RaidWeaponName == "Sunken Blade" or RaidWeaponName == "Kioru" or RaidWeaponName == "Jitter" or RaidWeaponName == "Anubis Axe" or RaidWeaponName == "Soul Cane" or RaidWeaponName == "Adventure Knife" or RaidWeaponName == "Metal Trident" or RaidWeaponName == "Saber"
+                        or RaidWeaponName == "Cookie Sword" or RaidWeaponName == "Pipe" or RaidWeaponName == "Pole" or RaidWeaponName == "Shark Blade" or RaidWeaponName == "Acroscyth" or RaidWeaponName == "Longaevus" or RaidWeaponName == "Pumpkin Smasher" or RaidWeaponName == "Gold Spear" or RaidWeaponName == "Aquatic Anchor" or RaidWeaponName == "Scepters of Flames" or RaidWeaponName == "Barbaric Axe" or RaidWeaponName == "Demon Trident" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Pondere Blade" or RaidWeaponName == "Hunter Blade" then
+                          local args = {
+                                [1] = "SW_"..PlyWeaponName.."_M1"}
+                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                            elseif RaidWeaponName == "Combat" or RaidWeaponName == "DarkLeg" or RaidWeaponName == "WaterStyle" or RaidWeaponName == "Cyborg" or RaidWeaponName == "DragonClaw" or RaidWeaponName == "Electro" or RaidWeaponName == "" then
+                                local args = {
+                                    [1] = "FS_"..RaidWeaponName.."_M1"}
+                                game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                end
+                            end
+                        end 
+                        end)
+                    end)
+                
+        spawn(function()
+            pcall(function()
+                 while wait() do
+                    if _G.KillPl == true then
+                        if PlyWeaponName == "Muramasa" or PlyWeaponName == "Pheonix Blade" or PlyWeaponName == "Bisento" or PlyWeaponName == "Katana" or PlyWeaponName == "Tashi Blade" or PlyWeaponName == "Authentic Triple Katana" or PlyWeaponName == "Authentic Mace" or PlyWeaponName == "Night Blade" or PlyWeaponName == "Hell Sword" or PlyWeaponName == "Sunken Blade" or PlyWeaponName == "Kioru" or PlyWeaponName == "Jitter" or PlyWeaponName == "Anubis Axe" or PlyWeaponName == "Soul Cane" or PlyWeaponName == "Adventure Knife" or PlyWeaponName == "Metal Trident" or PlyWeaponName == "Saber"
+                        or PlyWeaponName == "Cookie Sword" or PlyWeaponName == "Pipe" or PlyWeaponName == "Pole" or PlyWeaponName == "Shark Blade" or PlyWeaponName == "Acroscyth" or PlyWeaponName == "Longaevus" or PlyWeaponName == "Pumpkin Smasher" or PlyWeaponName == "Gold Spear" or PlyWeaponName == "Aquatic Anchor" or PlyWeaponName == "Scepters of Flames" or PlyWeaponName == "Barbaric Axe" or PlyWeaponName == "Demon Trident" or PlyWeaponName == "Pondere Blade" or PlyWeaponName == "Pondere Blade" or PlyWeaponName == "Hunter Blade" then
+                          local args = {
+                                [1] = "SW_"..PlyWeaponName.."_M1"}
+                            game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                            elseif PlyWeaponName == "Combat" or PlyWeaponName == "DarkLeg" or PlyWeaponName == "WaterStyle" or PlyWeaponName == "Cyborg" or PlyWeaponName == "DragonClaw" or PlyWeaponName == "Electro" or PlyWeaponName == "" then
+                                local args = {
+                                    [1] = "FS_"..PlyWeaponName.."_M1"}
+                                game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                end
+                            end
+                        end
+                        end)
+                    end)
+
+                spawn(function()
+                    pcall(function()
+                         while wait() do
+                            if _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                                if MainWeaponName == "Muramasa" or MainWeaponName == "Pheonix Blade" or MainWeaponName == "Bisento" or MainWeaponName == "Katana" or MainWeaponName == "Tashi Blade" or MainWeaponName == "Authentic Triple Katana" or MainWeaponName == "Authentic Mace" or MainWeaponName == "Night Blade" or MainWeaponName == "Hell Sword" or MainWeaponName == "Sunken Blade" or MainWeaponName == "Kioru" or MainWeaponName == "Jitter" or MainWeaponName == "Anubis Axe" or MainWeaponName == "Soul Cane" or MainWeaponName == "Adventure Knife" or MainWeaponName == "Metal Trident" or MainWeaponName == "Saber"
+                                or MainWeaponName == "Cookie Sword" or MainWeaponName == "Pipe" or MainWeaponName == "Pole" or MainWeaponName == "Shark Blade" or MainWeaponName == "Acroscyth" or MainWeaponName == "Longaevus" or MainWeaponName == "Pumpkin Smasher" or MainWeaponName == "Gold Spear" or MainWeaponName == "Aquatic Anchor" or MainWeaponName == "Scepters of Flames" or MainWeaponName == "Barbaric Axe" or MainWeaponName == "Demon Trident" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Hunter Blade" then
+                                  local args = {
+                                        [1] = "SW_"..MainWeaponName.."_M1"}
+                                    game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                    elseif MainWeaponName == "Combat" or MainWeaponName == "DarkLeg" or MainWeaponName == "WaterStyle" or MainWeaponName == "Cyborg" or MainWeaponName == "DragonClaw" or MainWeaponName == "Electro" or MainWeaponName == "" then
+                                        local args = {
+                                            [1] = "FS_"..MainWeaponName.."_M1"}
+                                        game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))
+                                        end
+                                    end
+                                end
+                                end)
+                            end)
+
+                            --spawn(function()
+                              --  pcall(function()
+                                --     while wait() do
+                                  --      if _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                                    --        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                                      --        if v.ClassName == "Tool" then
+                                        --        if v.ToolTip == "Sword" then
+                                          --        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                            --    local args = {
+                                              --      [1] = "SW_"..MainWeaponName.."_M1"}
+                                             --   game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))       
+                                               --   end
+                                              ---end
+       --                                     end
+         --                               end
+           --                         end
+             --                   end
+               --                     end)
+                 --               end)
+                        
             spawn(function()
                 pcall(function()
                     while wait() do
@@ -3436,30 +3578,30 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
         end
     
         function FindGayIsland()
-            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-            if game:GetService("Workspace").Island:FindFirstChild("Legacy Island1") then
+            for i, v in pairs(game.Workspace.Island:GetChildren()) do
+            if string.find(v.Name, "Legacy Island") and v:IsA("Model") and v:FindFirstChild("Main") then
                 UI:Notify("Impact Hub", "Legacy Island Is Up From The Sea!")
-                print("Legacy Island 1")
-            elseif game:GetService("Workspace").Island:FindFirstChild("Legacy Island2") then
-                UI:Notify("Impact Hub", "Legacy Island Is Up From The Sea!")
-                print("Legacy Island 2")
-            elseif game:GetService("Workspace").Island:FindFirstChild("Legacy Island3") then
-                UI:Notify("Impact Hub", "Legacy Island Is Up From The Sea!")
-                print("Legacy Island 3")
-            elseif game:GetService("Workspace").Island:FindFirstChild("Legacy Island4") then
-                UI:Notify("Impact Hub", "Legacy Island Is Up From The Sea!")
-                print("Legacy Island 4")
-           end
+                print("Legayc Island")
+                end
+            end
+        end
+        function FindHDIsland()
+            for i, v in pairs(game.Workspace.Island:GetChildren()) do
+            if string.find(v.Name, "Sea King") and v:IsA("Model") and v:FindFirstChild("Main") then
+                UI:Notify("Impact Hub", "Hydra Island Is Up From The Sea!")
+                print("Hydra Island")
+                end
+            end
         end
         
         function TPHDIsland()
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-                plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].Main.CFrame * CFrame.new(0,80,0)
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].Main.CFrame * CFrame.new(0,120,0)
             elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
-               plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].Main.CFrame * CFrame.new(0,80,0)
+               plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].Main.CFrame * CFrame.new(0,120,0)
             elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
-                plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].Main.CFrame * CFrame.new(0,80,0)
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].Main.CFrame * CFrame.new(0,120,0)
             end
         end
     
@@ -3481,13 +3623,15 @@ if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Ka
        
             ------------- Just A Starter Notify แค่แจ้งเตือนเฉย ๆ Just A Starter Notify แค่แจ้งเตือนเฉย ๆ
             UI:Notify("Impact Hub", "Welcom To Impact Hub.")
-            wait(6)
+            wait(3)
             UI:Notify("Impact Hub", "Premium End At 2 January 2023")
             wait(5)
             FindGayIsland()
-    
+            wait(5)
+            FindHDIsland()
+
     else
-        print("Not vaild key\nKicking...")
-        game.Players.LocalPlayer:Kick("Invaild Key, Please Retrying...")
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+    game.Players.LocalPlayer:Kick("Invaild Key, Please Retrying....")
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+    print("Invalid Key !!!")
     end
