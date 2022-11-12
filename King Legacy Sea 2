@@ -2272,9 +2272,13 @@ end)
 
      BountySet:addToggle("Auto Equip Sword", nil, function(value)
         _G.AutoEquip_SW = value
+     end)
 
-        while _G.AutoEquip_SW do wait()
-               pcall(function()
+
+     task.spawn(function()
+        while task.wait() do
+            if _G.AutoEquip_SW == true then
+            pcall(function()
                for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
                   if v.ClassName == "Tool" then
                       if v.ToolTip == "Sword" then
@@ -2287,9 +2291,10 @@ end)
             end
         end
     end
-    end)
+end)
     end
-    end)
+    end
+end)
 
      BountySet:addToggle("Auto Equip Melee", nil, function(value)
         _G.AutoEquip_ML = value
