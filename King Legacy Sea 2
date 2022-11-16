@@ -6,7 +6,7 @@ print("Whitelist!")
     
         repeat wait(1) until game:IsLoaded()
         local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
-        local UI  = Venyx.new("Ura Hub | Premium | Revamp Script | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
+        local UI  = Venyx.new("Impact Hub | Premium | Revamp Script | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
     
         local page1 = UI:addPage("Main Tab", 7040391851)
         local FARMS = page1:addSection("Auto Farm Setting")
