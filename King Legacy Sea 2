@@ -1,11 +1,12 @@
 -- KL 2
+_G.Key = "Kakura-GiftedKey" -- อย่าลืมลบด้วย ใน GitHub อ่ะไอสัส
 if _G.Key == "Kakura-GiftedKey" or _G.Key == "Kakura-851912Key" or _G.Key == "Kakura-1255239581Key" or _G.Key == "Kakura-975321Key" then
 print("Whitelist!")
 -- This Is King Legacy Script Revamp!
     
         repeat wait(1) until game:IsLoaded()
         local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
-        local UI  = Venyx.new("KAKURA EDITION | PREMUIM | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
+        local UI  = Venyx.new("Ura Hub | Premium | Revamp Script | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
     
         local page1 = UI:addPage("Main Tab", 7040391851)
         local FARMS = page1:addSection("Auto Farm Setting")
@@ -60,12 +61,12 @@ print("Whitelist!")
             _G.LvFarm = value
         if value == false then
         UnClip()
+        end
         if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
         UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
+        end
         if MainWeaponName == nil then
         UI:Notify("Impact Hub", "Please Select Your Weapon") 
-        end
-    end
         end
         end)
         
@@ -260,7 +261,9 @@ print("Whitelist!")
         
         FARM2:addToggle("Auto Farm Sea King", nil, function(value)
             _G.SeaKing = value
+            if game:GetService("Workspace").SeaMonster:FindFirstChild("SeaKing") then
             UI:Notify("Impact Hub", "Recommended For Distance 200")
+            end
             if value == false then
                 UnClip()
             end
@@ -294,7 +297,7 @@ print("Whitelist!")
                     pcall(function()
                         for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
                         if v.Name == "SeaKing" and v:FindFirstChild("Humanoid") then
-                        if v.Humanoid.Health <= 0 then
+                            if v.Humanoid.Health <= 0 then
                             if game:GetService("Workspace").Island:FindFirstChild("Legacy Island1") then
                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Island:FindFirstChild("Legacy Island1").ChestSpawner.CFrame
                             elseif game:GetService("Workspace").Island:FindFirstChild("Legacy Island2") then
@@ -333,6 +336,7 @@ print("Whitelist!")
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                                v.Humanoid.WalkSpeed = 0
                                 EquipWeapon1(MainWeaponName)
                                 Haki()
                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") or v.Humanoid.Health <= 0 then
@@ -380,6 +384,7 @@ print("Whitelist!")
                     if _G.Dragon == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]")  then
                         plr.CFrame = CFrame.new(-6025, 442, 7440)
                         for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                             if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
@@ -389,6 +394,7 @@ print("Whitelist!")
                                 Haki()
                                 if v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-5728, 463, 77)
+                                  end
                                 end
                             end
                         end
@@ -538,7 +544,7 @@ print("Whitelist!")
         FARM5:addButton("Teleport To Ms. Mother", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]")  then
-                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame * CFrame.new(0,50,0)
+                plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame * CFrame.new(0,80,0)
             end
         end)
         
@@ -578,7 +584,7 @@ print("Whitelist!")
         FARM5:addButton("Teleport To King Samurai", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]")  then
-                plr.CFrame = game:GetService("ReplicatedStorage").MOB["King Samurai [Lv. 3500]"].HumanoidRootPart.CFrame
+                plr.CFrame = game:GetService("ReplicatedStorage").MOB["King Samurai [Lv. 3500]"].HumanoidRootPart.CFrame * CFrame.new(0,30,0)
             end
         end)
         
@@ -592,16 +598,16 @@ print("Whitelist!")
             if not game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
             UI:Notify("Impact Hub", "There Are No Spawned Ghost Ship")
             end
-
+        end)
             
             task.spawn(function()
                 while task.wait() do
-                    if not _G.Ghost then break end
-                    pcall(function()
+                    if _G.Ghost == true then
+                        pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                         if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
                             for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
-                            if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") then
+                            if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisFarm)
                                 v.HumanoidRootPart.CanCollide = false
                                 EquipWeapon1(MainWeaponName)
@@ -611,57 +617,40 @@ print("Whitelist!")
                         end
                     end)
                 end
+            end
             end)
-        end)
         
         FARM7:addToggle("Auto Grab Chest", nil, function(value)
             _G.GrabGhostChest = value
             if value == false then
                 UnClip()
             end
-    
+        end)
+
+
             task.spawn(function()
                 while task.wait() do
                     if _G.GrabGhostChest == true then 
                     pcall(function()
                     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    local NumChest = math.random(1,5)
-                    if NumChest == 1 then
+                    if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
+                        for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
+                        if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") then
+                    if v.Humanoid.Health <= 0 then
                     for i, v in pairs(game.Workspace:GetChildren()) do
                     if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
-                         plr.CFrame = v.RootPart.CFrame
-                    elseif NumChest == 2 then
-                        for i, v in pairs(game.Workspace:GetChildren()) do
-                    if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
-                        plr.CFrame = v.RootPart.CFrame
-                    elseif NumChest == 3 then
-                        for i, v in pairs(game.Workspace:GetChildren()) do
-                    if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
-                       plr.CFrame = v.RootPart.CFrame
-                    elseif NumChest == 4 then
-                        for i, v in pairs(game.Workspace:GetChildren()) do
-                    if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
-                      plr.CFrame = v.RootPart.CFrame
-                    elseif NumChest == 5 then
-                        for i, v in pairs(game.Workspace:GetChildren()) do
-                    if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
-                     plr.CFrame = v.RootPart.CFrame
-                      end
+                    plr.CFrame = v.RootPart.CFrame
                     end
+                end
                 end
             end
         end
     end
-    end
-    end
-    end
-end
-end
 end)
-     end
     end
-end)
+    end
     end)
+
         FARM7:addButton("Teleport To Ghost Ship", function(a)
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
@@ -699,42 +688,22 @@ end)
              end
             end
         end)
-        FARM8:addToggle("Auto Grab Chest [IN DEVELOP]", nil, function(a)
-            _G.GrabHydraChest = a
-        
-            task.spawn(function()
-                while task.wait() do
-                    if not _G.GrabHydraChest then break end
-                    pcall(function()
-                        for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
-                        if v.Name == "HydraSeaKing" and v:FindFirstChild("Humanoid") then
-                        if v.Humanoid.Health <= 0 then
-                        if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-                        plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
-                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
-                        plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
-                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
-                        plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
-                    end
-                end
-            end
-        end
-    end)
-            end
-        end)
-        end)
     
         FARM8:addToggle("Auto Grab Chest [IN TESTING]", nil, function(a)
             _G.GrabHydraChest2 = a
-        
+        if _G.GrabHydraChest2 then
+            UI:Notify("Impact Hub", "Please Can You Test For Me ? I Don't Have A Time For Testing.....")
+        end
+    end)
             task.spawn(function()
                 while task.wait() do
-                    if not _G.GrabHydraChest2 then break end
+                    if _G.GrabHydraChest2 == true then
                     pcall(function()
                         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                         for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
                         if v.Name == "HydraSeaKing" and v:FindFirstChild("Humanoid") then
                         if v.Humanoid.Health <= 0 then
+                        --------------------------------------------------------------------------------------------------  Water
                         if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
                          if game:GetService("Workspace").Island:FindFirstChild("Sea King Water").SeaBeastChest then
                             plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].SeaBeastChest.RootPart.CFrame
@@ -742,6 +711,26 @@ end)
                             plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
                         elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Water").DragonChest then
                             plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
+                        ------------------------------------------------------------------------------------------------------- Thunder
+                        if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
+                            if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").SeaBeastChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].SeaBeastChest.RootPart.CFrame
+                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
+                        elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
+                        ------------------------------------------------------------------------------------------------------- Lava
+                        if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
+                            if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").SeaBeastChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].SeaBeastChest.RootPart.CFrame
+                            elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
+                            elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
+                            plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
+                             end
+                         end
+                        end
+                     end
                     end
                 end
             end
@@ -750,8 +739,8 @@ end)
     end)
 
             end
-        end)
-        end)
+        end
+    end)
     
         -- for i, v in pairs(game.Workspace.Island:GetChildren()) do
         -- if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
@@ -845,7 +834,7 @@ end)
     end
     end)
     
-    FARM9:addToggle("Auto Farm Dark Beard Quest [QUEST] [IN DEVELOP]", nil, function(value)
+    FARM9:addToggle("Auto Farm Dark Beard Quest [QUEST]", nil, function(value)
         _G.BlackBeardQ = value
         CheckQuest()
         if MyLevel <= 3475 then
@@ -854,7 +843,10 @@ end)
         if value == false then
             UnClip()
          end
-    
+         if _G.BlackBeardQ then
+            UI:Notify("Impact Hub", "This Function is In Developing...")
+        end
+    end)
             task.spawn(function()
                 while task.wait() do
                     if _G.BlackBeardQ == true then
@@ -868,7 +860,7 @@ end)
                                 plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                                 EquipWeapon1(MainWeaponName)
                                 Haki()
-                                if v.Humanoid.Health <= 0 then
+                                if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dark Beard [Lv. 3475]") or v.Humanoid.Health <= 0 then
                                     plr.CFrame = CFrame.new(-10160, 145, -5140)
                                   end
                                 end
@@ -877,7 +869,6 @@ end)
                     end)
                     end
                 end
-            end)
             end)
     
     FARM9:addToggle("Auto Permission [QUEST]", nil, function(value)
@@ -1070,13 +1061,16 @@ end)
                     end
                 end
             end)
-    FARM10:addToggle("Auto Farm Lucidus [QUEST] [IN DEVELOP]", nil, function(value)
-        _G.InDevelop1 = value
+    FARM10:addToggle("Auto Farm Lucidus [QUEST]", nil, function(value)
+        _G.LucidusQ = value
             if value == false then
                 UnClip()
             end
             if MyLevel <= 3575 then
                 UI:Notify("Impact Hub", "Level 3575 Require")
+            end
+            if _G.LucidusQ then
+                UI:Notify("Impact Hub", "This Function is In Developing...")
             end
         end)
     FARM10:addToggle("Auto Permission [QUEST]", nil, function(value)
@@ -1539,7 +1533,9 @@ end)
     AutoSkill:addToggle("Auto Skill [ V ]", nil, function(Value)
         _G.V_Skill = Value
     end)
-    
+    AutoSkill:addToggle("Auto Skill [ E ]", nil, function(Value)
+        _G.E_Skill = Value
+    end)
     local AutoStat = page1:addSection("Stats")
     AutoStat:addToggle("Auto Defense Stats", nil, function(value)
         _G.Defense = value
@@ -1648,8 +1644,7 @@ end)
             end
         end
         
-        Select = (playerlist[1])
-        local drop = PLYS:addDropdown("Select Players : "..Select, playerlist, function(a)
+        local drop = PLYS:addDropdown("Select Players : nil", playerlist, function(a)
            Select = a
         end)
         
@@ -1694,11 +1689,13 @@ end)
                     while task.wait() do
                         if _G.KillPl then
                         pcall(function()
+                            if game.Players:FindFirstChild(Select) then
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,DisPlayer)
                             EquipWeapon3(PlyWeaponName)
                             Haki()
                             if not game.Players.LocalPlayer.Backpack:FindFirstChild(PlyWeaponName) then
                             InventoryWeapon3()
+                            end
                           end
                         end)
                      end
@@ -1722,15 +1719,19 @@ end)
             ESPPlayer = a
             FindPlayer()
         end)
-        
+
         if ESPPlayer then
             FindPlayer()
-        end
+        end   
         
-        
-        PLYS2:addToggle("Esp Devil Fruit",nil,function(Value)
+         PLYS2:addToggle("Esp Devil Fruit",nil,function(Value)
             DevilFruitESP = Value
             FindDevilFruit(DevilFruitESP)
+         end)
+
+         PLYS2:addToggle("Esp Ghost Ship",nil,function(Value)
+            GhostShipESP = Value
+            FindGhostShip(GhostShipESP)
          end)
         
         local DevilFruit = math.random(1, 50)
@@ -1802,6 +1803,83 @@ end)
                     if track then
                        if ESPStatsDevilFruit then
                           ClearDevilFruit()
+                       end
+                    end
+                 end
+              end
+           )
+        end
+
+        local GhostShip = math.random(1, 50)
+        function CreateGhostShip(base)
+           local bb = Instance.new("BillboardGui", game.CoreGui)
+           bb.Adornee = base.Handle
+           bb.ExtentsOffset = Vector3.new(0, 1, 0)
+           bb.AlwaysOnTop = true
+           bb.Size = UDim2.new(0, 5, 0, 5)
+           bb.StudsOffset = Vector3.new(0, 1, 0)
+           bb.Name = "Ghost_Ship"..GhostShip
+           local frame = Instance.new("Frame", bb)
+           frame.ZIndex = 10
+           frame.BackgroundTransparency = 1
+           frame.Size = UDim2.new(1, 0, 1, 0)
+           local txtlbl = Instance.new("TextLabel", bb)
+           txtlbl.ZIndex = 10
+           txtlbl.BackgroundTransparency = 1
+           txtlbl.Position = UDim2.new(0, 0, 0, -35)
+           txtlbl.Size = UDim2.new(1, 0, 10, 0)
+           txtlbl.Font = "GothamBold"
+           txtlbl.FontSize = "Size18"
+           txtlbl.Text = base.Name
+           txtlbl.TextColor3 = Color3.fromRGB(255, 0, 0)
+           txtlbl.TextStrokeTransparency = 0.5
+        end
+        function ClearGhostShip()
+           for _, v in pairs(game.CoreGui:GetChildren()) do
+              if v.Name == "Ghost_Ship"..GhostShip then
+                 v:Destroy()
+              end
+           end 
+        end
+        function FindGhostShip(Stats)
+           ClearGhostShip()
+           ESPStatsGhostShip = Stats
+           track2 = true
+           spawn(
+              function()
+                 while wait(0.1) do
+                    if track2 then
+                       -- Clear()
+                       for _, v in pairs(game:GetService("Workspace").GhostMonster:GetChildren()) do
+                          if v.Name == "Ghost Ship" then   
+                            if v:FindFirstChild("Humanoid") then
+                                if ESPStatsGhostShip then
+                                    CreateGhostShip(v)
+                                elseif not ESPStatsGhostShip then
+                                   ClearGhostShip()
+                                end
+                             end
+
+                             if v:IsA("Model") then
+                                if ESPStatsGhostShip then
+                                   CreateGhostShip(v)
+                                elseif not ESPStatsGhostShip then
+                                    CreateGhostShip()
+                                end
+                             end
+                          end 
+                       end
+                    end
+                    wait(5)
+                 end
+              end
+           )
+           spawn(
+              function()
+                 while wait(15) do
+                    if track2 then
+                       if ESPStatsGhostShip then
+                          ClearGhostShip()
                        end
                     end
                  end
@@ -1976,6 +2054,9 @@ end)
         
         Raid:addToggle("Auto Rejoin Raid [IN DEVELOP]", nil, function(value)
             _G.Reraid = value
+            if _G.Reraid then
+                UI:Notify("Impact Hub", "This Function is In Developing...")
+            end
         end)
         
         Raid:addToggle("Auto Skill [ Z ]", nil, function(Value)
@@ -1992,6 +2073,9 @@ end)
     
         Raid:addToggle("Auto Skill [ V ]", nil, function(Value)
             _G.V_Skill = Value
+        end)
+        Raid:addToggle("Auto Skill [ E ]", nil, function(Value)
+            _G.E_Skill = Value
         end)
     
         local page6 = UI:addPage("FE - Others", 5012544693)
@@ -2423,7 +2507,7 @@ end)
 
          "", "Select Shop : Random Appearance Shop", "Select Shop : Dragon Claw Shop",
 
-         "Select Shop : Master Of Dark Leg", "", "Select Shop : Surgit", "Select Shop : Night Blade Master", "Select Shop : Conqueror Shade"}
+         "Select Shop : Master Of Dark Leg", "", "Select Shop : Surgit", "Select Shop : Night Blade Master", "Select Shop : Conqueror Shade", "Select Shop : Armament Shade"}
 
         _G.ShopSelected = "Select Shop : Reset Stat Shop"
         
@@ -2463,7 +2547,7 @@ end)
         end)
 
         Shoplist2 = {"Select Npc : Lee", "Select Npc : Pung", "Select Npc : Stranger Uncle", "", "Select Npc : Jump Hint", "Select Npc : Tier Rate Hint",
-         "Select Npc : Kioru Sword Quest", "", "Select Npc : Fat Man"}
+         "Select Npc : Kioru Sword Quest", "Select Npc : Fat Man"}
         _G.ShopSelected2 = "Select Npc : Lee"
         
         itsection:addDropdown("".._G.ShopSelected2, Shoplist2, function(a)
@@ -2544,13 +2628,21 @@ end)
         end)
         end)
         end)
+        spawn(function()
+            game:GetService("RunService").RenderStepped:Connect(function()
+             pcall(function()
+         if _G.E_Skill then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false,118,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+         end
+        end)
+        end)
+        end)
         
         
         function KenHaki()
           if game.Players.LocalPlayer.Character.KenOpen.Value == false then
-               local args = {
-              [1] = true}
-        game:GetService("Players").LocalPlayer.Services.Client.KenEvent:InvokeServer()
+            game:GetService("Players").LocalPlayer.Character.Services.Client.KenEvent:InvokeServer()
            end
         end
          
@@ -3463,7 +3555,7 @@ end)
                 spawn(function()
                     pcall(function()
                          while wait() do
-                            if _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                            if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.KillRaidMon == true then
                                 if MainWeaponName == "Muramasa" or MainWeaponName == "Pheonix Blade" or MainWeaponName == "Bisento" or MainWeaponName == "Katana" or MainWeaponName == "Tashi Blade" or MainWeaponName == "Authentic Triple Katana" or MainWeaponName == "Authentic Mace" or MainWeaponName == "Night Blade" or MainWeaponName == "Hell Sword" or MainWeaponName == "Sunken Blade" or MainWeaponName == "Kioru" or MainWeaponName == "Jitter" or MainWeaponName == "Anubis Axe" or MainWeaponName == "Soul Cane" or MainWeaponName == "Adventure Knife" or MainWeaponName == "Metal Trident" or MainWeaponName == "Saber"
                                 or MainWeaponName == "Cookie Sword" or MainWeaponName == "Pipe" or MainWeaponName == "Pole" or MainWeaponName == "Shark Blade" or MainWeaponName == "Acroscyth" or MainWeaponName == "Longaevus" or MainWeaponName == "Pumpkin Smasher" or MainWeaponName == "Gold Spear" or MainWeaponName == "Aquatic Anchor" or MainWeaponName == "Scepters of Flames" or MainWeaponName == "Barbaric Axe" or MainWeaponName == "Demon Trident" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Pondere Blade" or MainWeaponName == "Hunter Blade" then
                                   local args = {
@@ -3479,25 +3571,27 @@ end)
                                 end)
                             end)
 
-                            --spawn(function()
-                              --  pcall(function()
-                                --     while wait() do
-                                  --      if _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
-                                    --        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                                      --        if v.ClassName == "Tool" then
-                                        --        if v.ToolTip == "Sword" then
-                                          --        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                                            --    local args = {
-                                              --      [1] = "SW_"..MainWeaponName.."_M1"}
-                                             --   game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))       
-                                               --   end
-                                              ---end
-       --                                     end
-         --                               end
-           --                         end
-             --                   end
-               --                     end)
-                 --               end)
+                            --[[
+                                spawn(function()
+                                pcall(function()
+                                     while wait() do
+                                        if _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                                            for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                                              if v.ClassName == "Tool" then
+                                                if v.ToolTip == "Sword" then
+                                                  if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                                                local args = {
+                                                    [1] = "SW_"..MainWeaponName.."_M1"}
+                                                game:GetService("ReplicatedStorage").Remotes.Functions.SkillAction:InvokeServer(unpack(args))       
+                                               end
+                                              end
+                                            end
+                                        end
+                                    end
+                                end
+                                    end)
+                           end)
+                ]]
                         
             spawn(function()
                 pcall(function()
@@ -3599,9 +3693,9 @@ end)
             UI:Notify("Impact Hub", "Welcom To Impact Hub.")
             wait(3)
             UI:Notify("Impact Hub", "Premium End At 2 January 2023")
-            wait(5)
+            wait(3)
             FindGayIsland()
-            wait(5)
+            wait(3)
             FindHDIsland()
 
     else
