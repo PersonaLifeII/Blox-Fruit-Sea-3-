@@ -1,6 +1,4 @@
 repeat wait(1) until game:IsLoaded()
-
-if _G.Key == "Impact-HubClient" or _G.Key == "Impact-HubAllowed" or _G.Key == "Impact-HubFreeAccess" then
 local PlaceId = game.PlaceId
 if PlaceId == 4442272183 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit%20Sea%202")()
@@ -13,4 +11,4 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-H
 
 elseif PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 then
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/King%20Legacy%20Sea%202")()
-end
+   end
