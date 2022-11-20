@@ -1,6 +1,6 @@
 -- KL 2
 -- This Is King Legacy Script Revamp!
-    
+
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/OptusN1/VENYX-UI-2/main/VENYX%20UI%20%3D-%3D"))()
 local UI  = Venyx.new("Impact Hub | Premium | Revamp Script | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
 
@@ -254,7 +254,6 @@ local FARM_NOTIFY = page1:addSection("Boss Noification")
 _G.BossNotify = true
 FARM_NOTIFY:addToggle("Boss Notify", true, function(value)
     _G.BossNotify = value
-    print("Boss Notify : "..value)
 end)
 
 task.spawn(function()
@@ -272,7 +271,6 @@ end)
 
 FARM_NOTIFY:addToggle("Boss Notify Sound", nil, function(value)
     _G.BossNotify_SoundAdd = value
-    print("Boss Notify Sound : "..value)
     if value == false then
         _G.SoundCheck = false
     end
@@ -282,12 +280,11 @@ task.spawn(function()
 while task.wait() do
 if _G.BossNotify_SoundAdd and _G.BossNotify then
 pcall(function()
-
-if _G.SoundCheck then
+if _G.SoundCheck == true then
 if not game:GetService("Workspace"):FindFirstChild("Boss_Notify") then
 a = Instance.new("Sound", game:GetService("Workspace"))
 a.Name = "Boss_Notify"
-a.Volume = 1
+a.Volume = _G.BossNotify_SoundAdd_Volume
 a.Looped = false
 a.SoundId = "rbxassetid://1523818134"
 a.Playing = _G.BossNotify_SoundAdd
@@ -298,19 +295,11 @@ end
 end
 end)
 
---[[local args = {
-[1] = "LightLight",
-[2] = true
-}
+_G.BossNotify_SoundAdd_Volume = 3
+FARM_NOTIFY:addSlider("Boss Notify",  3, 1, 30, function(value)
+    _G.BossNotify_SoundAdd_Volume = value
+end)
 
-game:GetService("ReplicatedStorage").Remotes.Functions.dfbeli:InvokeServer(unpack(args))
-local args = {
-[1] = "IceIce",
-[2] = true
-}
-
-game:GetService("ReplicatedStorage").Remotes.Functions.dfbeli:InvokeServer(unpack(args))
-]]
 
 
 
@@ -439,35 +428,46 @@ FARM4:addToggle("Auto Farm Dragon", nil, function(value)
 if value == false then
         UnClip()
     end
-    
+end)
     task.spawn(function()
         while task.wait() do
             if _G.Dragon == true then
             pcall(function()
-            if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
-                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                plr.CFrame = CFrame.new(-6025, 442, 7440)
-                for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
-                    if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                        v.HumanoidRootPart.CanCollide = false 
-                        EquipWeapon1(MainWeaponName)
-                        Haki()
-                        if v.Humanoid.Health <= 0 then
-                            plr.CFrame = CFrame.new(-5728, 463, 77)
-                          end
+                if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
+                    plr.CFrame = CFrame.new(-6025, 442, 7440)
+                    for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                        if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
+                            if v.Humanoid.Health > 0 then
+                            plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                            EquipWeapon1(MainWeaponName)
+                            Haki()
+                elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
+                    for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                        if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
+                            if v.Humanoid.Health > 0 then
+                            plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                            EquipWeapon1(MainWeaponName)
+                            Haki()
+                                  end
+                               end
+                            end
                         end
                     end
                 end
-            end)
+            end
+        end)
             end
         end
     end)
-    end)
+
 FARM4:addButton("Teleport To Dragon", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]")  then
-        plr.CFrame = game:GetService("ReplicatedStorage").MOB["Dragon [Lv. 5000]"].HumanoidRootPart.CFrame * CFrame.new(0,50,0)
+    if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
+
+        plr.CFrame = game:GetService("ReplicatedStorage").MOB["Dragon [Lv. 5000]"].HumanoidRootPart.CFrame * CFrame.new(0,100,0)
+    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
+
+        plr.CFrame = game:GetService("Workspace").Monster.Boss["Dragon [Lv. 5000]"].HumanoidRootPart.CFrame * CFrame.new(0,100,0)
     end
 end)
     
@@ -587,13 +587,20 @@ FARM5:addToggle("Auto Farm Ms. Mother", nil, function(value)
                         plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                         EquipWeapon1(MainWeaponName)
                         Haki()
-                        if v.Humanoid.Health <= 0 then
-                            plr.CFrame = CFrame.new(-5728, 463, 77)
+                    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Ms. Mother [Lv. 7500]") then
+                        for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                            if v.Name == "Ms. Mother [Lv. 7500]" and v:FindFirstChild("Humanoid") then
+                                if v.Humanoid.Health > 0 then
+                                plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                                EquipWeapon1(MainWeaponName)
+                                Haki()
+                            end
                         end
                     end
                 end
             end
-            end)
+            end
+        end)
             end
         end
     end)
@@ -602,7 +609,11 @@ FARM5:addToggle("Auto Farm Ms. Mother", nil, function(value)
 FARM5:addButton("Teleport To Ms. Mother", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
     if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
+
         plr.CFrame = game:GetService("ReplicatedStorage").MOB["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame * CFrame.new(0,80,0)
+    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Ms. Mother [Lv. 7500]") then
+        
+        plr.CFrame = game:GetService("Workspace").Monster.Boss["Ms. Mother [Lv. 7500]"].HumanoidRootPart.CFrame * CFrame.new(0,100,0)
     end
 end)
 
@@ -628,14 +639,21 @@ end)
                         plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                         EquipWeapon1(MainWeaponName)
                         Haki()
-                    if v.Humanoid.Health <= 0 then
-                            plr.CFrame = CFrame.new(-5728, 463, 77)
-                    end
+                    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
+                        for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                            if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
+                                if v.Humanoid.Health > 0 then
+                                plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                                EquipWeapon1(MainWeaponName)
+                                Haki()
+                                    end
+                                end
                             end
                         end
                     end
                 end
-            end)
+            end
+        end)
             end
         end
     end)
@@ -644,7 +662,11 @@ end)
 FARM5:addButton("Teleport To King Samurai", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
     if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]")  then
+    
         plr.CFrame = game:GetService("ReplicatedStorage").MOB["King Samurai [Lv. 3500]"].HumanoidRootPart.CFrame * CFrame.new(0,30,0)
+    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("King Samurai [Lv. 3500]") then
+        
+        plr.CFrame = game:GetService("Workspace").Monster.Boss["King Samurai [Lv. 3500]"].HumanoidRootPart.CFrame * CFrame.new(0,100,0)
     end
 end)
 
@@ -665,7 +687,7 @@ end)
             if _G.Ghost == true then
                 pcall(function()
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
+            if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
                     for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
                     if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisFarm)
@@ -698,7 +720,15 @@ end)
                 if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") then
             if v.Humanoid.Health <= 0 then
             for i, v in pairs(game.Workspace:GetChildren()) do
-            if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") and v:IsA("Model") then
+            if v.Name == "Chest1" and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                plr.CFrame = v.RootPart.CFrame
+            elseif v.Name == "Chest2" and v:FindFirstChild("RootPart") and v:IsA("Model") then
+            plr.CFrame = v.RootPart.CFrame
+            elseif v.Name == "Chest3" and v:FindFirstChild("RootPart") and v:IsA("Model") then
+             plr.CFrame = v.RootPart.CFrame
+          elseif v.Name == "Chest4" and v:FindFirstChild("RootPart") and v:IsA("Model") then
+                plr.CFrame = v.RootPart.CFrame
+            elseif v.Name == "Chest5" and v:FindFirstChild("RootPart") and v:IsA("Model") then
                 plr.CFrame = v.RootPart.CFrame
             end
         end
@@ -751,40 +781,43 @@ end)
 
 FARM8:addToggle("Auto Grab Chest", nil, function(value)
     _G.GrabHydraChest2 = a
-    print("Auto Grab Chest :"..value)
 end)
     task.spawn(function()
         while task.wait() do
             if _G.GrabHydraChest2 == true then
             pcall(function()
-                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 for i, v in pairs(game.Workspace.SeaMonster:GetChildren()) do
                 if v.Name == "HydraSeaKing" and v:FindFirstChild("Humanoid") then
                 if v.Humanoid.Health <= 0 then
+                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                for i, v in pairs(game.Workspace.Island:GetChildren()) do
                 --------------------------------------------------------------------------------------------------  Water
-                if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-                 if game:GetService("Workspace").Island:FindFirstChild("Sea King Water").SeaBeastChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].SeaBeastChest.RootPart.CFrame
-                elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Water").DragonChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
-                elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Water").DragonChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
+                if v.Name == "Sea King Water" and v:FindFirstChild("Main") then
+                if v:FindFirstChild("SeaBeastChest") then
+                    -- TP
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].SeaBeastChest.RootPart.CFrame
+                elseif v:FindFirstChild("DragonChest") then
+                    -- TP
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].DragonChest.RootPart.CFrame
+
                 ------------------------------------------------------------------------------------------------------- Thunder
-                if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
-                    if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").SeaBeastChest then
+
+                if v.Name == "Sea King Thunder" and v:FindFirstChild("Main") then
+                    if v:FindFirstChild("SeaBeastChest") then
+                        -- TP
                     plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].SeaBeastChest.RootPart.CFrame
-                elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
-                elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
+                    elseif v:FindFirstChild("DragonChest") then
+                        -- TP
                     plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
                 ------------------------------------------------------------------------------------------------------- Lava
-                if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
-                    if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").SeaBeastChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].SeaBeastChest.RootPart.CFrame
-                    elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
-                    elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
-                    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
+
+                if v.Name == "Sea King Lava" and v:FindFirstChild("Main") then
+                if v:FindFirstChild("SeaBeastChest") then
+                    -- TP
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].SeaBeastChest.RootPart.CFrame
+                elseif v:FindFirstChild("DragonChest") then
+                    -- TP
+                plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
                      end
                  end
                 end
@@ -794,16 +827,35 @@ end)
     end
 end
 end
+end
 end)
 
     end
 end
 end)
 
--- for i, v in pairs(game.Workspace.Island:GetChildren()) do
--- if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
-   --  if string.find(v.Name, "Chest") and v:IsA("Model") and v:FindFirstChild("RootPart")
+--[[ for i, v in pairs(game.Workspace.Island:GetChildren()) do
+ if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
+   if string.find(v.Name, "Chest") and v:IsA("Model") and v:FindFirstChild("RootPart")
 
+asdasd
+
+   if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
+    if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").SeaBeastChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].SeaBeastChest.RootPart.CFrame
+elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
+elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder").DragonChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
+------------------------------------------------------------------------------------------------------- Lava
+if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava") then
+    if game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").SeaBeastChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].SeaBeastChest.RootPart.CFrame
+    elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
+    elseif game:GetService("Workspace").Island:FindFirstChild("Sea King Lava").DragonChest then
+    plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].DragonChest.RootPart.CFrame
+]]
 
 FARM8:addButton("Teleport To Hydra Island", function()
 TPHDIsland()
@@ -1914,7 +1966,7 @@ DevilFruitList = {
 DFSelected = "BombBomb"
 DevilFruit:addDropdown("Select Devil Fruit : "..DFSelected, DevilFruitList, function(value)
     DFSelected = value
-    print("Devil Fruit Select Status : "..value)
+    print("Devil Fruit Select Status : "..DFSelected)
 end)
 DevilFruit:addToggle("Auto Buy Devil Fruit", nil, function(value)
     _G.DFSnipe = value
@@ -1925,7 +1977,12 @@ task.spawn(function()
         if _G.DFSnipe == true then
         pcall(function()
         if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(DFSelected) then
-            game:GetService("ReplicatedStorage").Remotes.Functions.dfbeli:InvokeServer(DFSelected(true))
+            local args = 
+            {
+                [1] = DFSelected,
+                [2] = true
+            }         
+                game:GetService("ReplicatedStorage").Remotes.Functions.dfbeli:InvokeServer(unpack(args))
         else
             error("Devil Fruit Are Not In Stock or You Already Own This Devil Fruit")
         end
@@ -2278,7 +2335,7 @@ end)
                 UnClip()
               end
             end)
-            Character:addToggle("Auto Accept Party", nil, function(value)
+            Character:addToggle("Auto Accept Allies", nil, function(value)
                 _G.Accept = value
              end)
 
@@ -2292,7 +2349,7 @@ end)
              end)
             end)
             end)
-            Character:addToggle("Auto Delice Party", nil, function(value)
+            Character:addToggle("Auto Delice Allies", nil, function(value)
                 _G.Delice = value
              end)
 
@@ -3698,7 +3755,7 @@ end
 function FindGayIsland()
     for i, v in pairs(game.Workspace.Island:GetChildren()) do
     if string.find(v.Name, "Legacy Island") and v:IsA("Model") and v:FindFirstChild("Main") then
-        wait(.5)
+        wait(.8)
         UI:Notify("Impact Hub", "Legacy Island Is Up From The Sea!")
         print("Legayc Island")
         _G.SoundCheck = true
@@ -3708,7 +3765,7 @@ end
 function FindHDIsland()
     for i, v in pairs(game.Workspace.Island:GetChildren()) do
     if string.find(v.Name, "Sea King") and v:IsA("Model") and v:FindFirstChild("Main") then
-        wait(.5)
+        wait(.8) 
         UI:Notify("Impact Hub", "Hydra Island Is Up From The Sea!")
         print("Hydra Island")
         _G.SoundCheck = true
@@ -3729,7 +3786,7 @@ end
 
 function FindGS()
         if game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
-            wait(.5)
+            wait(.8)
             UI:Notify("Impact Hub", "Ghost Ship Spawned!")
             print("Ghost Ship")
             _G.SoundCheck = true
@@ -3737,56 +3794,41 @@ function FindGS()
     end
 
     function FindRaidBoss()
-    if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
-       if game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
-        wait(.5)
-     UI:Notify("Impact Hub", "Dragon Spawned!")
-     print("Workspace Monster Boss")
-     _G.SoundCheck = true
-    else
-    if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
-        wait(.5)
-        UI:Notify("Impact Hub", "Dragon Spawned!")
-        print("ReplicatedStorage MOB")
-        _G.SoundCheck = true
-
-
-        if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
-            if game:GetService("Workspace").Monster.Boss:FindFirstChild("Ms. Mother [Lv. 7500]") then
-             wait(.5)
+        if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
+            _G.SoundCheck = true
+            wait(.8)
+           UI:Notify("Impact Hub", "Dragon Spawned!")
+         elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
+            _G.SoundCheck = true
+             UI:Notify("Impact Hub", "Dragon Spawned!")
+            else
+                _G.SoundCheck = false
+            
+        if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
+            _G.SoundCheck = true
+           wait(.8)
           UI:Notify("Impact Hub", "Mother Spawned!")
-          print("Workspace Monster Boss")
-          _G.SoundCheck = true
-         else
-         if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
-             wait(.5)
-             UI:Notify("Impact Hub", "Mother Spawned!")
-             print("ReplicatedStorage MOB")
-             _G.SoundCheck = true
+        elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Ms. Mother [Lv. 7500]") then
+            _G.SoundCheck = true
+            UI:Notify("Impact Hub", "Mother Spawned!")
+        else
+            _G.SoundCheck = false
 
+------------------------------------------------------------------- King Samurai ---------------------
 
-             if not game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]") then
-                if game:GetService("Workspace").Monster.Boss:FindFirstChild("King Samurai [Lv. 3500]") then
-                wait(.5)
-              UI:Notify("Impact Hub", "Dragon Spawned!")
-              print("Workspace Monster Boss")
-              _G.SoundCheck = true
-             else
-             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]") then
-                 wait(.5)
-                 UI:Notify("Impact Hub", "Dragon Spawned!")
-                 print("ReplicatedStorage MOB")
+            if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]") then
+                _G.SoundCheck = true
+                wait(.8)
+               UI:Notify("Impact Hub", "King Samurai Spawned!")
+             elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("King Samurai [Lv. 3500]") then
+                 UI:Notify("Impact Hub", "King Samurai Spawned!")
                  _G.SoundCheck = true
-                  end
-               end
+                else
+                    _G.SoundCheck = false
+             end
             end
         end
     end
-end
-end
-end
-end
-end
 
 UI:Notify("Impact Hub", "Welcom To Impact Hub.")
 wait(3)
