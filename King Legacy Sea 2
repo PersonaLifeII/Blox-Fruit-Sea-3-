@@ -240,7 +240,6 @@ local CoreGui = game:GetService("StarterGui")
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").AllNPC["QuestLvl"..levelquest].HumanoidRootPart.CFrame
          end
     end)
-
     _G.Buso = true
     FARM:addToggle("Auto Armament Haki",  true, function(a)
         _G.Buso = a
@@ -377,31 +376,35 @@ FARM4:addToggle("Auto Dragon Gem", nil, function(value)
     if value == false then
         UnClip()
     end
+end)
     
     task.spawn(function()
         while task.wait() do
             if _G.Orbs == true then
             pcall(function()
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
                 if not game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") then
-                plr.CFrame = CFrame.new(-6058, 201, 7239)
+                plr.CFrame = CFrame.new(-6122, 165, 7168)
+
                 for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
                     if v.Name == "Elite Skeleton [Lv. 3100]" and v:FindFirstChild("Humanoid") then
                         plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                        v.Humanoid.WalkSpeed = 0
                         EquipWeapon1(MainWeaponName)
                         Haki()
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild("DragonGem") or v.Humanoid.Health <= 0 then
-                            plr.CFrame = CFrame.new(-6516, 58, 5883)
+                    if v.Humanoid.Health <= 0 then
+                        plr.CFrame = CFrame.new(-6122, 165, 7168)
+                        wait(5)
+                        print("DEAD")
+                            end
                           end
                         end
                     end
-                end
-            end)
+                end)
             end
-        end
-    end)
-    end)
+            end
+        end)
+
 FARM4:addToggle("Auto Summon Dragon", nil, function(value)
     _G.SummonDragon = value
     if value == false then
@@ -416,6 +419,7 @@ end)
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("DragonGem") then
                     plr.CFrame = CFrame.new(-5998, 462, 7298)
+                    wait()
                         EquipWeapon1("DragonGem")
                 end
             end)
@@ -428,37 +432,35 @@ FARM4:addToggle("Auto Farm Dragon", nil, function(value)
 if value == false then
         UnClip()
     end
+    if value == true then
+    if AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" or AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
+         UI:Notify("Impact Hub", "This Function Is Can Be Using In Behind Type Only")
+      end
+   end
 end)
+
     task.spawn(function()
         while task.wait() do
             if _G.Dragon == true then
             pcall(function()
+                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Dragon [Lv. 5000]") then
                     plr.CFrame = CFrame.new(-6025, 442, 7440)
-                    for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                    wait()
+                for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
                         if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
                             if v.Humanoid.Health > 0 then
-                            plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                            plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisFarm)
                             EquipWeapon1(MainWeaponName)
                             Haki()
-                elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
-                    for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
-                        if v.Name == "Dragon [Lv. 5000]" and v:FindFirstChild("Humanoid") then
-                            if v.Humanoid.Health > 0 then
-                            plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                            EquipWeapon1(MainWeaponName)
-                            Haki()
-                                  end
-                               end
                             end
                         end
-                    end
-                end
-            end
-        end)
-            end
+                            end
+                        end
+                    end)
         end
-    end)
+        end
+            end)
 
 FARM4:addButton("Teleport To Dragon", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
@@ -574,37 +576,30 @@ FARM5:addToggle("Auto Farm Ms. Mother", nil, function(value)
     if value == false then
         UnClip()
     end
-    
+end)
+
     task.spawn(function()
         while task.wait() do
             if _G.Mother == true then
             pcall(function()
-                if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                plr.CFrame = CFrame.new(-290, 191, 9272)
-                for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
-                    if v.Name == "Ms. Mother [Lv. 7500]" and v:FindFirstChild("Humanoid") then
-                        plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                        EquipWeapon1(MainWeaponName)
-                        Haki()
-                    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Ms. Mother [Lv. 7500]") then
-                        for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
-                            if v.Name == "Ms. Mother [Lv. 7500]" and v:FindFirstChild("Humanoid") then
-                                if v.Humanoid.Health > 0 then
-                                plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                                EquipWeapon1(MainWeaponName)
-                                Haki()
-                            end
+                if game:GetService("ReplicatedStorage").MOB:FindFirstChild("Ms. Mother [Lv. 7500]") then
+                    plr.CFrame = CFrame.new(-290, 191, 9272)
+                wait()
+                for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                        if v.Name == "Ms. Mother [Lv. 7500]" and v:FindFirstChild("Humanoid") then
+                            if v.Humanoid.Health > 0 then
+                            plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
+                            EquipWeapon1(MainWeaponName)
+                            Haki()
                         end
                     end
-                end
-            end
-            end
+                        end
+                    end
+                end)
+    end
+    end
         end)
-            end
-        end
-    end)
-    end)
 
 FARM5:addButton("Teleport To Ms. Mother", function(a)
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
@@ -626,36 +621,27 @@ FARM5:addToggle("Auto Farm King Samurai", nil, function(value)
     end
 end)
 
-    task.spawn(function()
-        while task.wait() do
-            if _G.Hell == true then
-            pcall(function()
+task.spawn(function()
+    while task.wait() do
+        if _G.Hell == true then
+        pcall(function()
+            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
             if game:GetService("ReplicatedStorage").MOB:FindFirstChild("King Samurai [Lv. 3500]") then
-                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                plr.CFrame = CFrame.new(-5728, 463, 77)
-                for i, v in pairs(game.Workspace.Monster.Boss:GetChildren()) do
+                plr.CFrame = CFrame.new(-5899, 273, -72)
+                wait()
+            for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
                     if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
                         if v.Humanoid.Health > 0 then
                         plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
                         EquipWeapon1(MainWeaponName)
                         Haki()
-                    elseif game:GetService("Workspace").Monster.Boss:FindFirstChild("Dragon [Lv. 5000]") then
-                        for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
-                            if v.Name == "King Samurai [Lv. 3500]" and v:FindFirstChild("Humanoid") then
-                                if v.Humanoid.Health > 0 then
-                                plr.CFrame = v.HumanoidRootPart.CFrame * Farm_Mode
-                                EquipWeapon1(MainWeaponName)
-                                Haki()
-                                    end
-                                end
-                            end
-                        end
                     end
                 end
-            end
-        end)
-            end
-        end
+                    end
+                end
+            end)
+end
+end
     end)
 
 
@@ -680,6 +666,11 @@ FARM7:addToggle("Auto Farm Ghost Ship", nil, function(value)
     if not game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
     UI:Notify("Impact Hub", "There Are No Spawned Ghost Ship")
     end
+    if value == true then
+    if AutoFarmType == "[Default : Above] Auto Farm Type : Bellow" or AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
+        UI:Notify("Impact Hub", "This Function Is Can Be Using In Behind Type Only")
+    end
+end
 end)
     
     task.spawn(function()
@@ -691,7 +682,6 @@ end)
                     for i, v in pairs(game.Workspace.GhostMonster:GetChildren()) do
                     if v.Name == "Ghost Ship" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                         plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisFarm)
-                        v.HumanoidRootPart.CanCollide = false
                         EquipWeapon1(MainWeaponName)
                         Haki()
                        end
@@ -779,7 +769,7 @@ task.spawn(function()
     end
 end)
 
-FARM8:addToggle("Auto Grab Chest", nil, function(value)
+FARM8:addToggle("Auto Grab Chest [1]", nil, function(value)
     _G.GrabHydraChest2 = a
 end)
     task.spawn(function()
@@ -792,7 +782,7 @@ end)
                 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
                 for i, v in pairs(game.Workspace.Island:GetChildren()) do
                 --------------------------------------------------------------------------------------------------  Water
-                if v.Name == "Sea King Water" and v:FindFirstChild("Main") then
+                if v.Name == "Sea King Water" then
                 if v:FindFirstChild("SeaBeastChest") then
                     -- TP
                 plr.CFrame = game:GetService("Workspace").Island["Sea King Water"].SeaBeastChest.RootPart.CFrame
@@ -802,7 +792,7 @@ end)
 
                 ------------------------------------------------------------------------------------------------------- Thunder
 
-                if v.Name == "Sea King Thunder" and v:FindFirstChild("Main") then
+                if v.Name == "Sea King Thunder" then
                     if v:FindFirstChild("SeaBeastChest") then
                         -- TP
                     plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].SeaBeastChest.RootPart.CFrame
@@ -811,7 +801,7 @@ end)
                     plr.CFrame = game:GetService("Workspace").Island["Sea King Thunder"].DragonChest.RootPart.CFrame
                 ------------------------------------------------------------------------------------------------------- Lava
 
-                if v.Name == "Sea King Lava" and v:FindFirstChild("Main") then
+                if v.Name == "Sea King Lava" then
                 if v:FindFirstChild("SeaBeastChest") then
                     -- TP
                 plr.CFrame = game:GetService("Workspace").Island["Sea King Lava"].SeaBeastChest.RootPart.CFrame
@@ -834,10 +824,30 @@ end)
 end
 end)
 
+FARM8:addToggle("Auto Grab Chest [2]", nil, function(value)
+    _G.GrabHydraChest23 = value
+end)
+
+task.spawn(function()
+    while task.wait() do
+        if _G.GrabHydraChest23 == true then
+        pcall(function()
+            for i, v in pairs(game.Workspace.Island:GetChildren()) do
+                if v.Name == "Sea King Water" or v.Name == "Sea King Thunder" or v.Name == "Sea King Lava" then
+                  if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") then
+                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                  plr.CFrame = v.RootPart.CFrame
+        end
+    end
+end
+end)
+    end
+end
+end)
 --[[ for i, v in pairs(game.Workspace.Island:GetChildren()) do
  if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
    if string.find(v.Name, "Chest") and v:IsA("Model") and v:FindFirstChild("RootPart")
-
+   plr.CFrame = v.RootPart.CFrame
 asdasd
 
    if game:GetService("Workspace").Island:FindFirstChild("Sea King Thunder") then
@@ -1583,40 +1593,56 @@ _G.DF = value
 end)
 
 
-local page3 = UI:addPage("Teleport", 7044233235)
-local Teleport = page3:addSection("Teleport")
-Teleport:addButton("Floresco", function()
-    TP(CFrame.new(-3675, 57, 169))
+local page3 = UI:addPage("Island\nServer", 7044233235)
+local Teleport = page3:addSection("Teleport Island")
+
+IsZonelist = {
+    "Floresco",
+    "Viridans",
+    "Torrefacio",
+    "",
+    "Hibernus",
+    "Carcer",
+    "Skull Island",
+    "",
+    "",
+    "Dead Tundra",
+    "Loaf Island",
+    "Shred Endangering",
+    "",
+    "Pirate Skull Island",
+    "Soldier Headquater",
+    ""
+}
+
+Teleport:addDropdown("Select Island / Zone", IsZonelist, function(value)
+    SelectIsZone = value
 end)
-Teleport:addButton("Viridans", function()
-    TP(CFrame.new(-5128, 57, 1878))
-end)
-Teleport:addButton("Torrefacio", function()
-    TP(CFrame.new(-5226, 57, 798))
-end)
-Teleport:addButton("Hibernus Land", function()
-    TP(CFrame.new(-4547, 136, -889))
-end)
-Teleport:addButton("Carcer", function()
-    TP(CFrame.new(-4171, 29, 744))
-end)
-Teleport:addButton("Skull Island", function()
-    TP(CFrame.new(-6516, 58, 5883))
-end)
-Teleport:addButton("Dead Tundra", function()
-    TP(CFrame.new(1178, 14, 904))
-end)
-Teleport:addButton("Loaf Island", function()
-    TP(CFrame.new(-505, 31, 8112))
-end)
-Teleport:addButton("Shred Endangering", function()
-    TP(CFrame.new(-161, 201, -2935))
-end)
-Teleport:addButton("Pirate Skull Island", function()
-    TP(CFrame.new(-9276, 58, -5039))
-end)
-Teleport:addButton("Soldier Headquater", function()
-    TP(CFrame.new(-9696, 38, 955))
+
+Teleport:addButton("Teleport To Island / Zone", function(a)
+    if SelectIsZone == "Floresco" then
+        TP(CFrame.new(-3675, 57, 169))
+    elseif SelectIsZone == "Viridans" then
+        TP(CFrame.new(-5128, 57, 1878))
+    elseif SelectIsZone == "Torrefacio" then
+        TP(CFrame.new(-5226, 57, 798))
+    elseif SelectIsZone == "Hibernus" then
+        TP(CFrame.new(-4547, 136, -889))
+    elseif SelectIsZone == "Carcer" then
+        TP(CFrame.new(-4171, 29, 744))
+    elseif SelectIsZone == "Skull Island" then
+        TP(CFrame.new(-6516, 58, 5883))
+    elseif SelectIsZone == "Dead Tundra" then
+        TP(CFrame.new(1178, 14, 904))
+    elseif SelectIsZone == "Loaf Island" then
+        TP(CFrame.new(-505, 31, 8112))
+    elseif SelectIsZone == "Shred Endangering" then
+        TP(CFrame.new(-161, 201, -2935))
+    elseif SelectIsZone == "Pirate Skull Island" then
+        TP(CFrame.new(-9276, 58, -5039))
+    elseif SelectIsZone == "Soldier Headquater" then
+        TP(CFrame.new(-9696, 38, 955))
+    end
 end)
 
 local Teleport2 = page3:addSection("Sea")
@@ -1636,7 +1662,7 @@ local Teleport21 = page3:addSection("Server")
         Rejoin()
     end)
 
- local PLY = UI:addPage("Ply - Esp", 7252023075)
+ local PLY = UI:addPage("Player\nEsp", 7252023075)
  local PLYSETTING = PLY:addSection("Player Setting")
 
  PlyWeaonList = {}
@@ -1914,7 +1940,7 @@ function FindGhostShip(Stats)
    )
 end
 
- local page5 = UI:addPage("D Fruit - Raid", 7044284832)
+ local page5 = UI:addPage("Devil Fruit\nRaid", 7044284832)
  local DevilFruit = page5:addSection("Devil Fruit")
 
 DevilFruitList = {
@@ -2112,12 +2138,12 @@ end)
 
 local Raid = page5:addSection("Raid")
            ---------- ทำไมกูใช้ ตัวแปร ไม่ได้ วะ ไอเหี้ย ? เช่น "if newworld then ไรงี้ แต่ว่ากูใช้ไม่ได้ ต้องสร้างตัวแปรไหม่หรอ แต่ว่า ขก อ่ะ :>"
-Raid:addButton("Teleport To Raid Entrance", function()
-    TP(CFrame.new(2723.12841796875, 223.11941528320312, -7.604184150695801))
-   end)    
 
 Raid:addToggle("Auto Kill All Monster", nil, function(value)
     _G.KillRaidMon = value
+    if value == false then
+        UnClip()
+    end
 end)
 
     task.spawn(function()
@@ -2154,12 +2180,16 @@ end)
 
 Raid:addToggle("Auto Rejoin Raid [IN DEVELOP]", nil, function(value)
     _G.Reraid = value
-    if _G.Reraid then
+    if value == true then
         UI:Notify("Impact Hub", "This Function is In Developing...")
     end
 end)
 
-Raid:addToggle("Auto Skill [ Z ]", nil, function(Value)
+Raid:addButton("Teleport To Raid Entrance", function()
+    TP(CFrame.new(-4567, 223, -80))
+   end)    
+
+   Raid:addToggle("Auto Skill [ Z ]", nil, function(Value)
     _G.Z_Skill = Value
 end)
 
@@ -2178,7 +2208,8 @@ Raid:addToggle("Auto Skill [ E ]", nil, function(Value)
     _G.E_Skill = Value
 end)
 
-local page6 = UI:addPage("FE - Others", 5012544693)
+
+local page6 = UI:addPage("Local Player\nOther", 5012544693)
 local Character = page6:addSection("My Character")
 
 Character:addToggle("Auto Click", nil, function(value)
@@ -2420,7 +2451,7 @@ end)
              end
             end
         end)
- local page7 = UI:addPage("Bounty - Shop", 7251993295)
+ local page7 = UI:addPage("Bounty\nShop", 7251993295)
  local BountySet = page7:addSection("Bounty Setting")
 
  FarmBountyType = "[Default : Above] Auto Farm Type : Above"
@@ -2732,9 +2763,9 @@ spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
  if _G.E_Skill then
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,118,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
- end
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,101,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,101,true,game.Players.LocalPlayer.Character.HumanoidRootPart) 
+end
 end)
 end)
 end)
@@ -3719,7 +3750,7 @@ spawn(function()
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.Noclip or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ == true then
+                if _G.Noclip or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.GrabHydraChest23 == true then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
@@ -3836,5 +3867,8 @@ UI:Notify("Impact Hub", "Premium End At 2 January 2023")
 wait(2)
 FindHDIsland()
 FindGayIsland()
-FindGSIsland()
+FindGS()
 FindRaidBoss()
+
+
+
