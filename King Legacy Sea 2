@@ -19,8 +19,15 @@ while wait(.1) do
     end
 end
 end)
-AutoFarmType = "[Default : Above] Auto Farm Type : Above"
-FarmTable = {"[Default : Above] Auto Farm Type : Above","[Default : Above] Auto Farm Type : Bellow", "[Default : Above] Auto Farm Type : Behind"}
+
+AutoFarmType = "[Default : Above] Auto Farm Type : Bellow"
+
+FarmTable = {
+"[Default : Above] Auto Farm Type : Above",
+"[Default : Above] Auto Farm Type : Bellow",
+"[Default : Above] Auto Farm Type : Behind"
+}
+
 FARMS:addDropdown(""..AutoFarmType, FarmTable, function(a)
     AutoFarmType = a
 end)
@@ -33,7 +40,9 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     end
 end
 
-FARMS:addDropdown("Select Weapon : nil", MainWeaponList,function(a)
+wait()
+MainWeaponName = MainWeaponList[2]
+FARMS:addDropdown("Select Weapon : "..MainWeaponName, MainWeaponList,function(a)
     MainWeaponName = a
 end)
 
@@ -58,7 +67,7 @@ if value == false then
 UnClip()
 end
 if AutoFarmType == "[Default : Above] Auto Farm Type : Above" then
-UI:Notify("Impact Hub" ,"This function is only can using Behind and Bellow type. Sorry")
+UI:Notify("Impact Hub" ,"This function is only can using on Behind and Bellow type. Sorry")
 end
 if MainWeaponName == nil then
 UI:Notify("Impact Hub", "Please Select Your Weapon") 
@@ -76,9 +85,11 @@ task.spawn(function()
           else 
              game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").AllNPC["QuestLvl"..levelquest].HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
           end
+
+          wait()
           game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
           game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
-          wait()
+
           for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
              if v.Name == "Dialogue" then
                 v.Accept.Size = UDim2.new(0, 10000, 0, 10000)
@@ -87,7 +98,7 @@ task.spawn(function()
              end
           end
        elseif game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestBoard.Visible == true then
-        ---"pcallfunction"
+        pcall(function()
                     CheckQuest()
                     for i, v in pairs(game:GetService("Workspace").Monster:GetDescendants()) do
                         if v.Name == Ms then
@@ -117,8 +128,8 @@ task.spawn(function()
                                   else 
                                      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").AllNPC["QuestLvl"..levelquest].HumanoidRootPart.CFrame * CFrame.new(0,-4,0)
                                   end
-                                  game:GetService'VirtualUser':Button1Down(Vector2.new(50,50))
-                                game:GetService'VirtualUser':Button1Up(Vector2.new(50,50))
+                                  game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
+                                game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
                                   wait()
                                   for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
                                      if v.Name == "Dialogue" then
@@ -137,11 +148,12 @@ task.spawn(function()
                                   end
                                 end
                         end
-                            end
-                        end)
-                            end
+                            end)
                         end
-                    end)
+                            end)
+                        end
+                end
+            end)
 
 
 local mobs = {} 
@@ -769,9 +781,11 @@ task.spawn(function()
     end
 end)
 
-FARM8:addToggle("Auto Grab Chest [1]", nil, function(value)
-    _G.GrabHydraChest2 = a
+--[[FARM8:addToggle("Auto Grab Chest [1]", nil, function(value)
+    _G.GrabHydraChest2 = value
 end)
+
+
     task.spawn(function()
         while task.wait() do
             if _G.GrabHydraChest2 == true then
@@ -823,14 +837,15 @@ end)
     end
 end
 end)
+]]
 
-FARM8:addToggle("Auto Grab Chest [2]", nil, function(value)
-    _G.GrabHydraChest23 = value
+FARM8:addToggle("Auto Grab Chest", nil, function(value)
+    _G.GrabHydraChest2 = value
 end)
 
 task.spawn(function()
     while task.wait() do
-        if _G.GrabHydraChest23 == true then
+        if _G.GrabHydraChest2 == true then
         pcall(function()
             for i, v in pairs(game.Workspace.Island:GetChildren()) do
                 if v.Name == "Sea King Water" or v.Name == "Sea King Thunder" or v.Name == "Sea King Lava" then
@@ -844,6 +859,7 @@ end)
     end
 end
 end)
+
 --[[ for i, v in pairs(game.Workspace.Island:GetChildren()) do
  if game:GetService("Workspace").Island:FindFirstChild("Sea King Water") then
    if string.find(v.Name, "Chest") and v:IsA("Model") and v:FindFirstChild("RootPart")
@@ -1577,29 +1593,57 @@ AutoSkill:addToggle("Auto Skill [ E ]", nil, function(Value)
 _G.E_Skill = Value
 end)
 local AutoStat = page1:addSection("Stats")
-AutoStat:addToggle("Auto Defense Stats", nil, function(value)
-_G.Defense = value
+
+Statlist = {
+    "Defense",
+    "Melee",
+    "Sword",
+    "Devil Fruit"
+}
+
+StatSelect1 = Statlist[1]
+AutoStat:addDropdown("Select Stat [1] : "..StatSelect1, Statlist, function(value)
+    StatSelect1 = value
 end)
 
-AutoStat:addToggle("Auto Melee Stats", nil, function(value)
-_G.Melee = value
+AutoStat:addToggle("Auto Stat Up", nil, function(value) 
+_G.UpStat = value
 end)
 
-AutoStat:addToggle("Auto Sword Stats", nil, function(value)
-_G.Sword = value
-end)
-AutoStat:addToggle("Auto Power Fruit Stats", nil, function(value)
-_G.DF = value
+StatValue = 2
+AutoStat:addSlider("Point Up", 2,0,10, function(value)
+    StatValue = value
 end)
 
+AutoStat:addButton("Reset Stat", function(value)
+    UI:Notify("Impact Hub", "Baka\nThis Function Is In Develop. Don't Press Again!")
+    print("Baka\nThis Function Is In Develop. Don't Press Again!")
+    print(value)
+    
+end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+     pcall(function()
+if _G.UpStat then
+    local args = {
+        [1] = StatSelect1,
+        [2] = StatValue
+    }
+   game:GetService("Players").LocalPlayer.PlayerGui.Stats.Button.StatsFrame.RemoteEvent:FireServer(unpack(args))
+end
+end)
+end)
+end)
 
 local page3 = UI:addPage("Island\nServer", 7044233235)
-local Teleport = page3:addSection("Teleport Island")
+local Teleport = page3:addSection("Teleport Island / Zone")
 
 IsZonelist = {
     "Floresco",
     "Viridans",
     "Torrefacio",
+    "",
     "",
     "Hibernus",
     "Carcer",
@@ -1610,12 +1654,15 @@ IsZonelist = {
     "Loaf Island",
     "Shred Endangering",
     "",
+    "",
     "Pirate Skull Island",
     "Soldier Headquater",
+    "",
     ""
 }
 
-Teleport:addDropdown("Select Island / Zone", IsZonelist, function(value)
+SelectIsZone = IsZonelist[1]
+Teleport:addDropdown("Select Island / Zone : "..SelectIsZone, IsZonelist, function(value)
     SelectIsZone = value
 end)
 
@@ -1642,6 +1689,8 @@ Teleport:addButton("Teleport To Island / Zone", function(a)
         TP(CFrame.new(-9276, 58, -5039))
     elseif SelectIsZone == "Soldier Headquater" then
         TP(CFrame.new(-9696, 38, 955))
+    elseif SelectIsZone == "" or SelectIsZone == nil then
+        UI:Notify("Impact Hub", "Please Select Island / Zone")
     end
 end)
 
@@ -1672,7 +1721,9 @@ local Teleport21 = page3:addSection("Server")
      end
  end
  
- PLYSETTING:addDropdown("Select Weapon : nil", PlyWeaonList,function(value)
+ wait()
+ PlyWeaponName = PlyWeaonList[2]
+ PLYSETTING:addDropdown("Select Weapon : "..PlyWeaponName, PlyWeaonList,function(value)
      PlyWeaponName = value
  end)
  
@@ -2119,7 +2170,9 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     end
 end
 
-RaidS:addDropdown("Select Weapon : nil", RaidWeapon,function(value)
+wait()
+RaidWeaponName = RaidWeapon[2]
+RaidS:addDropdown("Select Weapon : "..RaidWeaponName, RaidWeapon,function(value)
     RaidWeaponName = value
 end)
 
@@ -2480,7 +2533,9 @@ end)
      end
  end
 
- BountySet:addDropdown("Select Weapon : nil", BountyWeaponList,function(a)
+ wait()
+ BountyWeaponName = BountyWeaponList[2]
+ BountySet:addDropdown("Select Weapon : "..BountyWeaponName, BountyWeaponList,function(a)
      BountyWeaponName = a
  end)
  
@@ -2705,8 +2760,9 @@ end)
 
  local page8 = UI:addPage("Setting", 5012544693)
  local USetting = page8:addSection("UI Setting")
-USetting:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function()
+USetting:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function(value)
     UI:toggle()
+    print(value)
 end)
 USetting:addButton("Destroy UI", function()
     for i, v in pairs(game.CoreGui:GetChildren()) do
@@ -2729,6 +2785,7 @@ end
 end)
 end)
 end)
+
  spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
@@ -2739,6 +2796,7 @@ end
 end)
 end)
 end)
+
  spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
@@ -2749,6 +2807,7 @@ end
 end)
 end)
 end)
+
  spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
@@ -2759,6 +2818,7 @@ end)
 end)
 end)
 end)
+
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
@@ -2772,38 +2832,25 @@ end)
 
 
 function KenHaki()
-  if game.Players.LocalPlayer.Character.KenOpen.Value == false then
+    local pl = game.Players.LocalPlayer.Character
+  if pl.KenOpen.Value == false then
     game:GetService("Players").LocalPlayer.Character.Services.Client.KenEvent:InvokeServer()
-   end
-end
- 
+        print("Ken Haki")
+         end
+      end
+
  function Haki()
-    if game.Players.LocalPlayer.Character.Haki.Value == 0 then
-        local args = {
-        [1] = true}
-       game:GetService("Players").LocalPlayer.Character.Services.Client.Armament:FireServer()
-    end
+    local pl = game.Players.LocalPlayer.Character
+
+    if not pl:FindFirstChild("ArmamentBodyGroup") then
+        if pl.Haki.Value == 0 then
+            pl.Haki.Value += 1
+            game:GetService("Players").LocalPlayer.Character.Services.Client.Armament:FireServer()
+            print("Haki")
+        end
+end
 end
 
-
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-     pcall(function()
- if _G.Buso then
-Haki()
-end
-end)
-end)
-end)
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-     pcall(function()
- if _G.KenHaki then
-KenHaki()
- end
-end)
-end)
-end)
 
 
 spawn(function()
@@ -3734,7 +3781,7 @@ spawn(function()
     spawn(function()
         pcall(function()
             while wait() do
-                if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.KillRaidMon== true then
+                if _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.KillRaidMon == true then
                     if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -3750,7 +3797,7 @@ spawn(function()
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.Noclip or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.GrabHydraChest23 == true then
+                if _G.Noclip or _G.Ghost or _G.Trident or _G.Hell or _G.Mother or _G.Dragon or _G.Orbs or _G.Axe or _G.Knife or _G.SeaKing or _G.Float or _G.Cookie or _G.Sunken or _G.KillPl or _G.OniMask or _G.TenguMask or _G.LvFarm or _G.Hydra or _G.Permission or _G.Permission2 or _G.Biscuit_Shoulder or _G.Blue_Scarf or _G.Lucidus or _G.Hydra or _G.PermissionQ or _G.Permission2Q or _G.OrbsQ or _G.GrabHydraChest2 == true then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
@@ -3761,6 +3808,25 @@ spawn(function()
         end)
     end)
 
+    spawn(function()
+        pcall(function()
+            game:GetService("RunService").Stepped:Connect(function()
+                if _G.Buso == true then
+                                Haki()   
+                        end
+                    end)
+            end)
+        end)
+
+    spawn(function()
+        pcall(function()
+            game:GetService("RunService").Stepped:Connect(function()
+                if _G.KenHaki == true then
+                            KenHaki()  
+                        end
+                    end)
+            end)
+        end)
 
 
     function UnClip()
