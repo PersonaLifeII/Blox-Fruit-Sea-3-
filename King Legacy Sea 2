@@ -2671,8 +2671,8 @@ end)
     _G.AutoHop2 = value
  end)
 
- HopSec = 180
- BountySec:addSlider("Hop Delay", 180,5,500, function(a)
+ HopSec = 120
+ BountySec:addSlider("Hop Delay", 120,5,500, function(a)
     HopSec = a
  end)
 
