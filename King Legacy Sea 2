@@ -40,9 +40,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     end
 end
 
-wait()
-MainWeaponName = MainWeaponList[2]
-FARMS:addDropdown("Select Weapon : "..MainWeaponName, MainWeaponList,function(a)
+FARMS:addDropdown("Select Weapon : nil", MainWeaponList,function(a)
     MainWeaponName = a
 end)
 
@@ -1721,9 +1719,7 @@ local Teleport21 = page3:addSection("Server")
      end
  end
  
- wait()
- PlyWeaponName = PlyWeaonList[2]
- PLYSETTING:addDropdown("Select Weapon : "..PlyWeaponName, PlyWeaonList,function(value)
+ PLYSETTING:addDropdown("Select Weapon : nil", PlyWeaonList,function(value)
      PlyWeaponName = value
  end)
  
@@ -2170,9 +2166,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     end
 end
 
-wait()
-RaidWeaponName = RaidWeapon[2]
-RaidS:addDropdown("Select Weapon : "..RaidWeaponName, RaidWeapon,function(value)
+RaidS:addDropdown("Select Weapon : nil", RaidWeapon,function(value)
     RaidWeaponName = value
 end)
 
@@ -2533,9 +2527,7 @@ end)
      end
  end
 
- wait()
- BountyWeaponName = BountyWeaponList[2]
- BountySet:addDropdown("Select Weapon : "..BountyWeaponName, BountyWeaponList,function(a)
+ BountySet:addDropdown("Select Weapon : nil", BountyWeaponList,function(a)
      BountyWeaponName = a
  end)
  
@@ -2671,8 +2663,8 @@ end)
     _G.AutoHop2 = value
  end)
 
- HopSec = 120
- BountySec:addSlider("Hop Delay", 120,5,500, function(a)
+ HopSec = 80
+ BountySec:addSlider("Hop Delay", 80,5,500, function(a)
     HopSec = a
  end)
 
