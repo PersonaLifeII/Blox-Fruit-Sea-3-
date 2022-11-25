@@ -20,7 +20,7 @@ while wait(.1) do
 end
 end)
 
-AutoFarmType = "[Default : Above] Auto Farm Type : Bellow"
+AutoFarmType = "[Default : Above] Auto Farm Type : Above"
 
 FarmTable = {
 "[Default : Above] Auto Farm Type : Above",
@@ -33,15 +33,14 @@ FARMS:addDropdown(""..AutoFarmType, FarmTable, function(a)
 end)
 
 MainWeaponList = {}
-
 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
     if v:IsA("Tool") then
-        table.insert(MainWeaponList, v.Name)
+        table.insert(MainWeaponList ,v.Name)
     end
 end
 
-FARMS:addDropdown("Select Weapon : nil", MainWeaponList,function(a)
-    MainWeaponName = a
+FARMS:addDropdown("Select Weapon : nil", MainWeaponList, function(value)
+    MainWeaponName = value
 end)
 
 DisFarm = 13
@@ -291,12 +290,12 @@ if _G.BossNotify_SoundAdd and _G.BossNotify then
 pcall(function()
 if _G.SoundCheck == true then
 if not game:GetService("Workspace"):FindFirstChild("Boss_Notify") then
-a = Instance.new("Sound", game:GetService("Workspace"))
-a.Name = "Boss_Notify"
-a.Volume = _G.BossNotify_SoundAdd_Volume
-a.Looped = false
-a.SoundId = "rbxassetid://1523818134"
-a.Playing = _G.BossNotify_SoundAdd
+so = Instance.new("Sound", game:GetService("Workspace"))
+so.Name = "Boss_Notify"
+so.Playing = _G.BossNotify_SoundAdd
+so.Volume = _G.BossNotify_SoundAdd_Volume
+so.SoundId = "rbxassetid://1523818134"
+so.Looped = false
 end
 end
 end)
@@ -305,7 +304,7 @@ end
 end)
 
 _G.BossNotify_SoundAdd_Volume = 3
-FARM_NOTIFY:addSlider("Boss Notify",  3, 1, 30, function(value)
+FARM_NOTIFY:addSlider("Boss Notify Sound Volume",  3, 1, 30, function(value)
     _G.BossNotify_SoundAdd_Volume = value
 end)
 
@@ -404,8 +403,6 @@ end)
                         Haki()
                     if v.Humanoid.Health <= 0 then
                         plr.CFrame = CFrame.new(-6122, 165, 7168)
-                        wait(5)
-                        print("DEAD")
                             end
                           end
                         end
@@ -845,17 +842,15 @@ task.spawn(function()
     while task.wait() do
         if _G.GrabHydraChest2 == true then
         pcall(function()
-            for i, v in pairs(game.Workspace.Island:GetChildren()) do
-                if v.Name == "Sea King Water" or v.Name == "Sea King Thunder" or v.Name == "Sea King Lava" then
-                  if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") then
-                local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                  plr.CFrame = v.RootPart.CFrame
+            for i, v in pairs(game.Workspace.Island:GetDescendants()) do
+                if string.find(v.Name, "Chest") and v:FindFirstChild("RootPart") then
+            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                plr.CFrame = v.RootPart.CFrame
         end
     end
-end
 end)
-    end
 end
+    end
 end)
 
 --[[ for i, v in pairs(game.Workspace.Island:GetChildren()) do
@@ -1600,7 +1595,7 @@ Statlist = {
 }
 
 StatSelect1 = Statlist[1]
-AutoStat:addDropdown("Select Stat [1] : "..StatSelect1, Statlist, function(value)
+AutoStat:addDropdown("Select Stat : "..StatSelect1, Statlist, function(value)
     StatSelect1 = value
 end)
 
@@ -1642,20 +1637,16 @@ IsZonelist = {
     "Viridans",
     "Torrefacio",
     "",
-    "",
     "Hibernus",
     "Carcer",
     "Skull Island",
-    "",
     "",
     "Dead Tundra",
     "Loaf Island",
     "Shred Endangering",
     "",
-    "",
     "Pirate Skull Island",
     "Soldier Headquater",
-    "",
     ""
 }
 
@@ -1747,7 +1738,7 @@ for i,v in pairs(game.Players:GetPlayers())do
     end
 end
 
-local drop = PLYS:addDropdown("Select Players : nil", playerlist, function(a)
+local drop = PLYS:addDropdown("[USERNAME] Select Players : nil", playerlist, function(a)
    Select = a
 end)
 
@@ -1766,8 +1757,8 @@ game.Players.PlayerRemoving:Connect(function(player)
     end
     drop:Refresh(playerlist)
 end)
-PLYS:addToggle("Spectate Player", nil, function(State)
-    SeeYouStatus = State
+PLYS:addToggle("Spectate Player", nil, function(value)
+    SeeYouStatus = value
     local plr1 = game.Players.LocalPlayer.Character.Humanoid
     local plr2 = game.Players:FindFirstChild(Select)
     repeat wait(.1)
@@ -1775,41 +1766,81 @@ PLYS:addToggle("Spectate Player", nil, function(State)
     until SeeYouStatus == false 
     game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
  end)
+ 
  PLYS:addToggle("Kill Player", nil, function(Value)
  _G.KillPl = Value
  if Value == false then
     UnClip()
- end
+ elseif Value == true then
  if Select == nil then
     UI:Notify("Impact Hub", "Please Select Players")
  end
  if PlyWeaponName == nil then
     UI:Notify("Impact Hub", "Please Select Weapon")
  end
-         end)
+    UI:Notify("Impact Hub", "This Function Is Can Be Using In Behind Type Only")
+end
+end)
 
-         task.spawn(function()
+
+    task.spawn(function()
             while task.wait() do
-                if _G.KillPl then
+                if _G.KillPl == true then
                 pcall(function()
-                    if game.Players:FindFirstChild(Select) then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,DisPlayer)
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    if game:GetService("Workspace").PlayerCharacters:FindFirstChild(Select) then
+
+                for i, v in pairs(game:GetService("Workspace").PlayerCharacters:GetChildren()) do
+            if v.Name == Select and v.Humanoid.Health > 0 then
+                plr.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DisPlayer)
                     EquipWeapon3(PlyWeaponName)
                     Haki()
                   end
-                end)
+                end
+            end
+        end)
              end
             end
         end)
+
+
 PLYS:addToggle("Safe Mode", nil, function(a)
     _G.SafeModeOn = a
 end)
 
 PLYS:addButton("Teleport To Player", function(a)
 if game.Players:FindFirstChild(Select) then
- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+ plr.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
 else 
-    UI:Notify("Not Find Player..")
+    UI:Notify("Impact Hub", "Players Not Found..")
+end
+end)
+
+PLYS:addButton("Check Player Backpack", function(a)
+UI:Notify("Impact Hub", "The Weapon Player Have Equiped Will Be Not Show")
+  wait(4)
+if game.Players:FindFirstChild(Select) then
+-------------
+    print("Players Select : "..Select)
+----------
+    for i, v in pairs(game.Players[Select].Backpack:GetChildren()) do
+        if v:IsA("Tool") then
+        ------------------- Sword -----------------------------------
+            if v.ToolTip == "Sword" then
+        UI:Notify("Impact Hub", "Sword : "..v.Name)
+        ----------------- Combat ---------------------
+            elseif v.ToolTip == "Combat" then
+            wait(3)
+        UI:Notify("Impact Hub", "Melee : "..v.Name)
+        ----------------- Devil Fruit -------------------
+            elseif v.ToolTip == "Fruit Power" then
+            wait(3)
+        UI:Notify("Impact Hub", "Power Fruit : "..v.Name)
+           end
+        end
+   end
 end
 end)
 
@@ -3454,19 +3485,19 @@ function CheckQuest()
 CheckQuest()
 
 
-    function EquipWeapon1(MainWeaponName)
-        if game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName) then
-        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName)
-        wait(.4)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-      end
-    end
+function EquipWeapon1(MainWeaponName)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName) then
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName)
+    wait(.4)
+    game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+  end
+end
 
     function EquipWeapon2(RaidWeaponName)
         if game.Players.LocalPlayer.Backpack:FindFirstChild(RaidWeaponName) then
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(RaidWeaponName)
         wait(.4)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
       end
     end
 
@@ -3474,7 +3505,7 @@ CheckQuest()
         if game.Players.LocalPlayer.Backpack:FindFirstChild(PlyWeaponName) then
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(PlyWeaponName)
         wait(.4)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
       end
     end
 
