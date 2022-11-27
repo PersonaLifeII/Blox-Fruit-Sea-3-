@@ -485,12 +485,14 @@ end)
     
 FARM4:addToggle("Auto Dragon Gem [QUEST]", nil, function(value)
     _G.OrbsQ = value
-    if value == false then
+if value == false then
         UnClip()
-     end
+elseif value == true then
+
 CheckQuest()
 if MyLevel <= 3075 then
     UI:Notify("Impact Hub" ,"Level 3075 Require")
+end
 end
 end)
 
@@ -508,7 +510,7 @@ task.spawn(function()
           end
 
           -- wait()
-          game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
+           game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
           game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
 
           for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
@@ -521,9 +523,8 @@ task.spawn(function()
        elseif game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestBoard.Visible == true then
         pcall(function()
                     CheckQuest()
-                    for i, v in pairs(game:GetService("Workspace").Monster.Boss:GetChildren()) do
+                    for i, v in pairs(game:GetService("Workspace").Monster:GetDescendants()) do
                         if v.Name == "Elite Skeleton [Lv. 3100]" then
-                            --repeat wait()
                                 if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestBoard.Visible == true then
                                 if v.Humanoid.Health > 0 then
                                       if not game:GetService("Workspace").AllNPC:FindFirstChild("QuestLvl3075") then
@@ -551,7 +552,7 @@ task.spawn(function()
                                   end
                                   game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
                                 game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
-                                  -- wait()
+                                  wait()
                                   for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
                                      if v.Name == "Dialogue" then
                                         v.Accept.Size = UDim2.new(0, 10000, 0, 10000)
@@ -975,9 +976,10 @@ FARM9:addToggle("Auto Permission [QUEST]", nil, function(value)
     _G.PermissionQ = value
     if value == false then
         UnClip()
-     end
+    elseif value == true then
      if MyLevel <= 3400 then
         UI:Notify("Impact Hub", "Level 3400 Require")
+     end
     end
 end)
 
@@ -1038,7 +1040,7 @@ task.spawn(function()
                                   end
                                   game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
                                 game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
-                                  -- wait()
+                                  wait()
                                   for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
                                      if v.Name == "Dialogue" then
                                         v.Accept.Size = UDim2.new(0, 10000, 0, 10000)
@@ -1126,9 +1128,10 @@ FARM10:addToggle("Auto Permission [QUEST]", nil, function(value)
     _G.Permission2Q = value
      if value == false then
         UnClip()
-     end
+     elseif value == true then
     if MyLevel <= 3500 then
         UI:Notify("Impact Hub", "Level 3500 Require")
+        end
     end
 end)
 
@@ -1189,7 +1192,7 @@ task.spawn(function()
                                   end
                                   game:GetService'VirtualUser':Button1Down(Vector2.new(0,0.8))
                                 game:GetService'VirtualUser':Button1Up(Vector2.new(0,0.8))
-                                  -- wait()
+                                  wait()
                                   for i, v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do
                                      if v.Name == "Dialogue" then
                                         v.Accept.Size = UDim2.new(0, 10000, 0, 10000)
@@ -2322,7 +2325,7 @@ end)
 
 
 local page6 = UI:addPage("Local Player\nOther", 5012544693)
-local Character = page6:addSection("My Character")
+local Character = page6:addSection("Character")
 
 Character:addToggle("Auto Click", nil, function(value)
 _G.AutoC = value
@@ -2531,6 +2534,35 @@ end)
                 vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
             end)
         end)
+
+        HakiColorlist = {
+            "White",
+            "Lime",
+            "Green",
+            "",
+            "Yellow",
+            "Carmine",
+            "Fuchia",
+            "",
+            "Ultramarine",
+            "Azure",
+            "Apricot",
+            "",
+            "Indigo",
+            "Arc",  
+            ""
+        }
+
+        HakiColor = "White"
+        Character:addDropdown("Select Armament Shade : "..HakiColor, HakiColorlist, function(a)
+            HakiColor = a
+        end)  
+
+        Character:addButton("Change Armament Shade", function(a)
+            game:GetService("Players").LocalPlayer.PlayerStats.ArmamentColor.Value = HakiColor
+            print(HakiColorlist)
+        end)
+
         HopAndRejoinSec = 10
         Character:addSlider("Hop And Rejoin Delay", 10,5,200, function(a)
             HopAndRejoinSec = a
@@ -2899,14 +2931,14 @@ end)
 function KenHaki()
     local pl = game.Players.LocalPlayer.Character
   if pl.KenOpen.Value == false then
-    game:GetService("Players").LocalPlayer.Character.Services.Client.KenEvent:InvokeServer()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,121,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,121,false,game.Players.LocalPlayer.Character.HumanoidRootPart) 
         print("Ken Haki")
          end
       end
 
  function Haki()
     local pl = game.Players.LocalPlayer.Character
-
     if not pl:FindFirstChild("ArmamentBodyGroup") then
         if pl.Haki.Value == 0 then
             pl.Haki.Value += 1
@@ -3966,3 +3998,7 @@ FindRaidBoss()
 
 
 
+--[[ArmamentColor
+game:GetService("Players").PersonaLifeIII.PlayerStats.ArmamentColor
+Value = Apricot
+]]
