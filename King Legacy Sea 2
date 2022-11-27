@@ -1834,7 +1834,7 @@ PLYS2:addToggle("Esp Legacy Island", nil,function(Value)
 	end
 end)
 
-PLYS2:addToggle("Esp Hydra Island\n[In Develop]", nil,function(Value)
+PLYS2:addToggle("Esp Hydra Island", nil,function(Value)
     HydraIslandESP = Value
 	while HydraIslandESP do wait()
 		FindHydraIsland()
