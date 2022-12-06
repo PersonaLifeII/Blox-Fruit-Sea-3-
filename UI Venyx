@@ -1,3 +1,4 @@
+-- Create By @\\ C // | Discord | No Number For You :)
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -14,12 +15,12 @@ local utility = {}
 -- themes
 local objects = {}
 local themes = {
-	Background = Color3.fromRGB(0, 0, 0), 
-	Glow = Color3.fromRGB(0, 0, 0), 
-	Accent = Color3.fromRGB(0, 0, 0), 
-	LightContrast = Color3.fromRGB(0, 0, 0), 
-	DarkContrast = Color3.fromRGB(0, 0, 0),  
-	TextColor = Color3.fromRGB(0, 158, 255)
+	Background = Color3.fromRGB(24, 24, 24),
+	Glow = Color3.fromRGB(0, 0, 0),
+	Accent = Color3.fromRGB(10, 10, 10),
+	LightContrast = Color3.fromRGB(20, 20, 20),
+	DarkContrast = Color3.fromRGB(14, 14, 14),  
+	TextColor = Color3.fromRGB(255, 190, 0)
 }
 
 do
@@ -2168,5 +2169,5 @@ do
 	end
 end
 
-print("dino was here :\)")
+print("UI CREDIT : VENYX | Theme Edit By @\\ C // | Discrod | No Num | Exploit Hub Name : Impact Hub \n Roblox Username Of Dev Impact Hub : @PersonaLifeIII \n Old Roblox Account Of Dev Impact Hub : @PersonaLifeII")
 return library
