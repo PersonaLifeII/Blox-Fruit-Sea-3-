@@ -56,7 +56,7 @@ end)
     end
 end)
 
-local S1_2 = page:addSection("I Don't Know")
+local S1_2 = page:addSection("Character")
 
 S1_2:addSlider("Walk Speed", 50,16,500, function(Value)
     WS = Value
@@ -108,7 +108,12 @@ S1_2:addButton("", function(value)
     print(value)
 end)
 
-S1_2:addToggle("Fly [ G ]", nil, function(State)
+FlyBind = "g"
+S1_2:addToggle("Fly Key", "g", function(value)
+    FlyBind = value
+end)
+
+S1_2:addToggle("Fly", nil, function(State)
 sex2 = State
 local Max = 0
 local Players = game.Players
@@ -116,7 +121,7 @@ local LP = Players.LocalPlayer
 local Mouse = LP:GetMouse()
 Mouse.KeyDown:connect(
     function(k)
-        if k:lower() == "g" then
+        if k:lower() == FlyBind then
             Max = Max + 1
             getgenv().Fly = false
             if sex2 then
