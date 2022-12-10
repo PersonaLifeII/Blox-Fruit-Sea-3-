@@ -1,12 +1,15 @@
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Blox-Fruit-Sea-3-/main/UI%20Venyx"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
 local venyx = library.new("Impact Hub | Kill Player Mode", 5013109572)
 
 local page = venyx:addPage("Main Tab", 5012544693)
-local S1_1 = page:addSection("Kill Player")
+local S1_I = page:addSection("I Don't Know")
 
-S1_1:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function()
+S1_I:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function()
     venyx:toggle()
     end)
+
+local S1_1 = page:addSection("Main Section")
+
 local playerlist = {}
 
 for i,v in pairs(game.Players:GetPlayers())do
@@ -45,24 +48,33 @@ end)
  end)
  S1_1:addToggle("Kill Player", nil, function(Value)
  _G.KillPl = Value
-         end)
+        end)
+
  S1_1:addButton("Teleport Player", function(Value)
+    if game.Players:FindFirstChild(Select) then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
-         end)
- S1_1:addSlider("Walk Speed", 50,16,500, function(Value)
+    end
+end)
+
+local S1_2 = page:addSection("I Don't Know")
+
+S1_2:addSlider("Walk Speed", 50,16,500, function(Value)
     WS = Value
          end)
- S1_1:addSlider("Jump Power", 50,16,500, function(Value)
+         S1_2:addSlider("Jump Power", 50,16,500, function(Value)
     JP = Value
          end)
-  S1_1:addToggle("Set Walk Speed", nil, function(Value)
+S1_2:addButton("", function(value)
+    print(value)
+end)
+S1_2:addToggle("Set Walk Speed", nil, function(Value)
      _G.SetWS = Value
          end)
-   S1_1:addToggle("Set Jump Power", nil, function(Value)
+         S1_2:addToggle("Set Jump Power", nil, function(Value)
      _G.SetJP = Value
         end)
 
-S1_1:addToggle("Safe Mode", nil, function(Value)
+        S1_2:addToggle("Safe Mode", nil, function(Value)
      _G.SetYokSootTot = Value
 end)
         
@@ -72,9 +84,9 @@ spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
          if _G.SetYokSootTot then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(792, 909, 5895)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,500,500)
             wait(0.1)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2489, 1786, 200)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0,500,500)
         end
  end)
 end)
@@ -84,13 +96,19 @@ spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
      pcall(function()
          if _G.KillPl then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
-click()
+            if game.Players:FindFirstChild(Select) then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,Distance)
+            end
         end
  end)
 end)
 end)
-S1_1:addToggle("Fly [ G ]", nil, function(State)
+
+S1_2:addButton("", function(value)
+    print(value)
+end)
+
+S1_2:addToggle("Fly [ G ]", nil, function(State)
 sex2 = State
 local Max = 0
 local Players = game.Players
@@ -216,15 +234,96 @@ Mouse.KeyDown:connect(
 )
 
 end)
-S1_1:addToggle("Noclip",nil,function(a)
+S1_2:addToggle("Noclip",nil,function(a)
     _G.Noclip = a
   end)
-S1_1:addToggle("Auto Click", nil, function(a)
+  S1_2:addToggle("Auto Click", nil, function(a)
     _G.AutoC = a
 end)
-S1_1:addButton("Rejoin", function()
+S1_2:addButton("", function(a)
+    print(a)
+end)
+
+S1_2:addButton("Server Hop", function()
+    UI:Notify("Impact Hub", "Finding Server And Hoping..")
+    Hop()
+end)
+
+function Hop()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+    function Teleport() 
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+    Teleport()
+end                   
+
+function isnil(thing)
+    return (thing == nil)
+end
+local function round(n)
+    return math.floor(tonumber(n) + 0.5)
+end
+
+
+
+S1_2:addButton("Rejoin", function()
 game:GetService'TeleportService':TeleportToPlaceInstance(game.PlaceId,game.JobId,game:GetService'Players'.LocalPlayer)
 end)
+
 local S3_2 = page:addSection("Esp")
 
 S3_2:addToggle("ESP Player", nil,function(Value)
@@ -323,12 +422,3 @@ function click()
             end)
         end)
     end)
-
-    local themes = {
-        Background = Color3.fromRGB(0, 0, 0), 
-        Glow = Color3.fromRGB(0, 0, 0), 
-        Accent = Color3.fromRGB(255, 255, 255), 
-        LightContrast = Color3.fromRGB(0, 0, 0), 
-        DarkContrast = Color3.fromRGB(0, 0, 0),  
-        TextColor = Color3.fromRGB(0, 158, 255)
-    }
