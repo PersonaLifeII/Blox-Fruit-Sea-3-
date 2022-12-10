@@ -1,5 +1,5 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
-local venyx = library.new("Impact Hub | FE Script", 5013109572)
+local venyx = library.new("Impact Hub | FE Script", 7040391851)
 
 local page = venyx:addPage("Main Tab", 5012544693)
 local S1_I = page:addSection("I Don't Know")
@@ -51,15 +51,16 @@ end)
  _G.KillPl = Value
 end)
 
+S1_1:addSlider("Distance", 10,10,50, function(Value)
+    Distance = Value
+   end)
+
  S1_1:addButton("Teleport Player", function(Value)
     if game.Players:FindFirstChild(Select) then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
     end
 end)
 
- S1_1:addSlider("Distance", 10,10,50, function(Value)
- Distance = Value
-end)
 
 local S1_2 = page:addSection("Character")
 
@@ -246,7 +247,7 @@ S1_2:addToggle("Noclip",nil,function(a)
     _G.AutoC = a
 end)
 
-local S1_2Z = page:addSection("Character")
+local S1_2Z = page:addSection("Server")
 
 
 S1_2Z:addButton("Server Hop", function()
@@ -427,3 +428,6 @@ function click()
             end)
         end)
     end)
+
+    local page1 = venyx:addPage("None Tab", 5012544693)
+
