@@ -1,7 +1,7 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
 local venyx = library.new("Impact Hub | FE Script", 7040391851)
 
-local page = venyx:addPage("Main Tab", 5012544693)
+local page = venyx:addPage("Main Tab", 7040391851)
 local S1_I = page:addSection("I Don't Know")
 
 S1_I:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function()
