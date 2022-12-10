@@ -46,14 +46,19 @@ end)
     until SeeYouStatus == false 
     game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
  end)
+
  S1_1:addToggle("Kill Player", nil, function(Value)
  _G.KillPl = Value
-        end)
+end)
 
  S1_1:addButton("Teleport Player", function(Value)
     if game.Players:FindFirstChild(Select) then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
     end
+end)
+
+ S1_1:addSlider("Distance", 10,10,50, function(Value)
+ Distance = Value
 end)
 
 local S1_2 = page:addSection("Character")
@@ -64,9 +69,7 @@ S1_2:addSlider("Walk Speed", 50,16,500, function(Value)
          S1_2:addSlider("Jump Power", 50,16,500, function(Value)
     JP = Value
          end)
-S1_2:addButton("", function(value)
-    print(value)
-end)
+
 S1_2:addToggle("Set Walk Speed", nil, function(Value)
      _G.SetWS = Value
          end)
@@ -104,12 +107,9 @@ spawn(function()
 end)
 end)
 
-S1_2:addButton("", function(value)
-    print(value)
-end)
 
 FlyBind = "g"
-S1_2:addToggle("Fly Key", "g", function(value)
+S1_2:addTextbox("Fly Key", "g", function(value)
     FlyBind = value
 end)
 
@@ -245,11 +245,11 @@ S1_2:addToggle("Noclip",nil,function(a)
   S1_2:addToggle("Auto Click", nil, function(a)
     _G.AutoC = a
 end)
-S1_2:addButton("", function(a)
-    print(a)
-end)
 
-S1_2:addButton("Server Hop", function()
+local S1_2Z = page:addSection("Character")
+
+
+S1_2Z:addButton("Server Hop", function()
     UI:Notify("Impact Hub", "Finding Server And Hoping..")
     Hop()
 end)
@@ -325,7 +325,7 @@ end
 
 
 
-S1_2:addButton("Rejoin", function()
+S1_2Z:addButton("Rejoin", function()
 game:GetService'TeleportService':TeleportToPlaceInstance(game.PlaceId,game.JobId,game:GetService'Players'.LocalPlayer)
 end)
 
