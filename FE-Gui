@@ -51,7 +51,7 @@ end)
  _G.KillPl = Value
 end)
 
-S1_1:addSlider("Distance", 10,10,50, function(Value)
+S1_1:addSlider("Distance", 5,3,50, function(Value)
     Distance = Value
    end)
 
