@@ -100,8 +100,6 @@ task.spawn(function()
     pcall(function()
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
-    game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed += 20
-
     EquipWeapon1(MainWeaponName)
     Haki()
 
@@ -2686,11 +2684,7 @@ end)
 
 
 
-Basic:addButton("[Must Clicking] Walk Speed Info", function(value)
-    UI:Notify("Impact Hub", "Listen To Me. After You Have Turn On Walk Speed function then Reset Character for 1 Times")
-end)
-
-Basic:addButton("Quick Reset Character", function(value)
+Basic:addButton("Walk Speed Bypass", function(value)
     game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(15)
 end)
 
@@ -4505,8 +4499,6 @@ function FindGS()
                                         end)
                                 end
                             end)
-
-game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed += 20
 
 
 UI:Notify("Impact Hub", "Welcom To Impact Hub, The Roblox Script")
