@@ -415,7 +415,7 @@ function click()
         game:GetService("RunService").RenderStepped:Connect(function()
          pcall(function()
              if _G.SetJP then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = JP
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = JP
             end
      end)
     end)
