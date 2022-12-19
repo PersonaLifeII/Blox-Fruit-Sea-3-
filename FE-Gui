@@ -430,3 +430,6 @@ function click()
     end)
 
     local page1 = UI:addPage("None Tab", 5012544693)
+
+    UI:SelectPage(UI.pages[1], true)
+
