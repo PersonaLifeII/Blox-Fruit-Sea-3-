@@ -1,5 +1,5 @@
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
-local UI  = Venyx.new("Impact Hub | Premium | Revamp Script | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
+local UI  = Venyx.new("Impact Hub | FE GUI | "..os.date("%d".." ".."%B".." ".."%Y"), 5013109572) -- date
 
 local page = UI:addPage("Main Tab", 7040391851)
 local S1_I = page:addSection("I Don't Know")
@@ -64,10 +64,10 @@ end)
 
 local S1_2 = page:addSection("Character")
 
-S1_2:addSlider("Walk Speed", 50,16,500, function(Value)
+S1_2:addSlider("Walk Speed", 50,16,3000, function(Value)
     WS = Value
          end)
-         S1_2:addSlider("Jump Power", 50,16,500, function(Value)
+         S1_2:addSlider("Jump Power", 50,16,3000, function(Value)
     JP = Value
          end)
 
@@ -139,7 +139,7 @@ Mouse.KeyDown:connect(
                     L = 0,
                     R = 0
                 }
-                local SPEED = 40
+                local SPEED = 60
                 local function FLY()
                     getgenv().Fly = true
                     local BodyGyro = Instance.new("BodyGyro", T)
@@ -430,4 +430,3 @@ function click()
     end)
 
     local page1 = UI:addPage("None Tab", 5012544693)
-
