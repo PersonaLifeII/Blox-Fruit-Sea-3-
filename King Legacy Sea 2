@@ -644,16 +644,12 @@ task.spawn(function()
             local Ws = game:GetService("Workspace").Island
             local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
-            for i, v in pairs(Ws:GetChildren()) do
-            if string.find(v.Name, "Sea King") then
             if game:GetService("Workspace").SeaMonster:FindFirstChild("HydraSeaKing") then
-            if (game:GetService("Workspace").SeaMonster:FindFirstChild("HydraSeaKing").HumanoidRootPart.Position - plr.Position).Magnitude > 10000 then 
+            if (game:GetService("Workspace").SeaMonster:FindFirstChild("HydraSeaKing").HumanoidRootPart.Position - plr.Position).Magnitude > 15000 then 
             print("The Hydra Are Got Bug")
             UI:Notify(HubName, "[Hydra Buged] Hoping....")
             wait(2)
             Hop()
-            end
-        end
     end
 end
 end)
@@ -667,15 +663,11 @@ task.spawn(function()
         pcall(function()
             local Ws = game:GetService("Workspace").Island
 
-            for i, v in pairs(Ws:GetChildren()) do
-            if string.find(v.Name, "Sea King") then
-            print("gay")
-            else
+            if not Ws:FindFirstChild("Sea King Water") and not Ws:FindFirstChild("Sea King Thunder") and not Ws:FindFirstChild("Sea King Lava") then
                 print("Not Hydra Island")
                 UI:Notify(HubName, "[Not Found Hydra Island] Hoping.......")
                 wait(3)
                 Hop()
-                    end
                 end
             end)
         end
@@ -696,11 +688,9 @@ task.spawn(function()
             local Ws = game:GetService("Workspace").Island
             if Ws:FindFirstChild("Sea King Water") or Ws:FindFirstChild("Sea King Thunder") or Ws:FindFirstChild("Sea King Lava") then
 
-            for i, v in pairs(game.Workspace.Island:GetChildren()) do
-            if v.Name == "Sea King Water" or "Sea King Thunder" or "Sea King Lava" and v:FindFirstChild("Main") then
+            for i, v in pairs(game.Workspace.Island:GetDescendants()) do
             if string.find(v.Name, "Chest") then
             plr.CFrame = v.RootPart.CFrame * CFrame.new(0,2,0)
-            end
         end
     end
 end
