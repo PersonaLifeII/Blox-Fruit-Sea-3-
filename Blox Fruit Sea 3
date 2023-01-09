@@ -226,14 +226,11 @@ end
                 if (CFrameQ.Position - plr.Position).Magnitude > 350 then
                     if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
 
-                    CheckLevel()
-                    
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == SpawnValue then
-                        -- Nothing Here Bro --
-            else
-                    CheckLevel()
+            CheckLevel()
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= SpawnValue then
+
+                CheckLevel()
                     if not game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
-                        CheckLevel()
                         pld:ChangeState(15)
                         plr.CFrame = CFrameQ
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", SpawnValue)
@@ -248,9 +245,8 @@ end
             CheckLevel()
             if FarmSpeed == "Auto Farm Speed : 10 %" then
             if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == SpawnValue then
-                -- Nothing Here Bro --
-            else
-                CheckLevel()
+
+            CheckLevel()
             if not game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                     TP(CFrameQ)
                 end
@@ -321,7 +317,7 @@ for i,v in pairs(getreg()) do
 
 									w.activeController.increment = 3
 								else
-									w.activeController.increment = 4
+									w.activeController.increment = 2
 								end             
 
                                 CameraShaker:Stop()
@@ -489,11 +485,7 @@ spawn(function()
                             if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
                             
                                 CheckLevel()
-                    
-                                if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == SpawnValue then
-                                            -- Nothing Here Bro --
-                                        else
-                                            CheckLevel()
+                                if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= SpawnValue then
                                         if not game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                             CheckLevel()
                                             pld:ChangeState(15)
@@ -820,17 +812,17 @@ task.spawn(function()
 
     if not Repli:FindFirstChild("Deandre [Lv. 1750]") and not Enemies:FindFirstChild("Deandre [Lv. 1750]") and Repli.Remotes.CommF_:InvokeServer("EliteHunter") == Sentence then
         wait()
-        UI:Notify(HubName, "Not Found Elite Boss ! or Cooldowning...")
+        UI:Notify(HubName, "Not Found Elite Boss !")
         Hop()
 
     elseif not Repli:FindFirstChild("Urban [Lv. 1750]") and not Enemies:FindFirstChild("Urban [Lv. 1750]") and Repli.Remotes.CommF_:InvokeServer("EliteHunter") == Sentence then
         wait()
-        UI:Notify(HubName, "Not Found Elite Boss ! or Cooldowning...")
+        UI:Notify(HubName, "Not Found Elite Boss !")
         Hop()
 
     elseif not Repli:FindFirstChild("Diablo [Lv. 1750]") and not Enemies:FindFirstChild("Diablo [Lv. 1750]") and Repli.Remotes.CommF_:InvokeServer("EliteHunter") == Sentence then
         wait()
-        UI:Notify(HubName, "Not Found Elite Boss ! or Cooldowning...")
+        UI:Notify(HubName, "Not Found Elite Boss !")
         Hop()
     end
     end)
@@ -851,28 +843,6 @@ CastleQuest:addToggle("Auto Farm Player Hunter", nil, function(value)
     end
 end)
 
-CastleQuest:addToggle("Auto Farm Player Hunter Hop", nil, function(value)
-    _G.Farm_Players_Hop = value
-    if value == false then
-        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-        UnClip()
-    end
-end)
-
-task.spawn(function()
-    while task.wait() do
-    if _G.Farm_Players_Hop then
-    pcall(function()
-if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter") == "I don't have anything for you right now. Come back later." then
-    wait()
-    UI:Notify(HubName, "Not Found Players ! or Cooldowning...")
-    Hop()
-        end
-    end)
-end
-end
-end)
-
 task.spawn(function()
     while task.wait() do
     if _G.Farm_Elite then
@@ -885,7 +855,7 @@ task.spawn(function()
 
     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter") == "I don't have anything for you right now. Come back later." then
         wait(2)
-        UI:Notify(HubName, "Not Found Elite Boss ! or Cooldowning...")
+        UI:Notify(HubName, "Not Found Elite Boss !")
         end
     end
 
@@ -1064,9 +1034,13 @@ task.spawn(function()
      if _G.Farm_Boss then
         pcall(function()
                 CheckBoss()
-                if MsBoss == "Soul Reaper [Lv. 2100] [Raid Boss]" or "Longma [Lv. 2000] [Boss]" or "Don Swan [Lv. 1000] [Boss]" or "Cursed Captain [Lv. 1325] [Raid Boss]" or "Order [Lv. 1250] [Raid Boss]" or "rip_indra True Form [Lv. 5000] [Raid Boss]" then
-                -- Nothing Here Bro --
-                else
+                if MsBoss == "Soul Reaper [Lv. 2100] [Raid Boss]"
+                or MsBoss == "Longma [Lv. 2000] [Boss]"
+                or MsBoss == "Don Swan [Lv. 1000] [Boss]"
+                or MsBoss == "Cursed Captain [Lv. 1325] [Raid Boss]"
+                or MsBoss == "Order [Lv. 1250] [Raid Boss]"
+                or MsBoss == "rip_indra True Form [Lv. 5000] [Raid Boss]"
+            then
 
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then 
                 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameBoss) then
@@ -2197,77 +2171,12 @@ task.spawn(function()
         UI:Notify("Impact Hub", "Your Current Bounty Is : "..(game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value))
     end)
     
-
-    spawn(function()
-       game:GetService("RunService").RenderStepped:Connect(function()
-        pcall(function()
-            if _G.AutoPray then
-    local args = {
-        [1] = "gravestoneEvent",
-        [2] = 2
-    }
-    
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-    end)
-    end)
-    end)
-    spawn(function()
-       game:GetService("RunService").RenderStepped:Connect(function()
-        pcall(function()
-            if _G.AutoTryLuck then
-    local args = {
-        [1] = "gravestoneEvent",
-        [2] = 1
-    }
-    
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-    end)
-    end)
-    end)
-    spawn(function()
-       game:GetService("RunService").RenderStepped:Connect(function()
-        pcall(function()
-            if _G.AutoSurprise then
-    local args = {
-        [1] = "Bones",
-        [2] = "Buy",
-        [3] = 1,
-        [4] = 1
-    }
-    
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-    end)
-    end)
-    end)
-    spawn(function()
-        game:GetService("RunService").RenderStepped:Connect(function()
-         pcall(function()
-             if _G.Auto2xExp then
-    local args = {
-        [1] = "Candies",
-        [2] = "Buy",
-        [3] = 1,
-        [4] = 1
-    }
-    
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
-    end)
-    end)
-end)
     spawn(function()
         game:GetService("RunService").RenderStepped:Connect(function()
          pcall(function()
              if _G.Haki then
-                if game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                else
-                local args = {
-                    [1] = "Buso"
-                }
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
             end
         end
         end)
@@ -2278,13 +2187,12 @@ end)
          pcall(function()
      if _G.KillPlayer then
      TP(game.Players[Player].Character.HumanoidRootPart.CFrame * CFrame.new(0,5,8))
-     click()
      end
      end)
      end)
      end)
 
-     local raidesp = UI:addPage("Raid\nEsp", 7044226690)
+     local raidesp = UI:addPage("Raid\nEsp", 7251993295)
      local raidsection = raidesp:addSection("Raid")
      
      raidsection:addToggle("Kill Aura", nil, function(value)
@@ -2585,7 +2493,7 @@ end
 
 
 
-local dfpage = UI:addPage("Devil Fruit\nLocal Player", 7044284832)
+local dfpage = UI:addPage("Devil Fruit\nLocalPlayer", 6034684949)
 local dfsection = dfpage:addSection("Devil Fruit")
 dfsection:addDropdown("Select Devil Fruit",
 {
@@ -3191,7 +3099,7 @@ end
 end)
 
 
-local Auto_Mat = UI:addPage("Automatics\nMaterial", 7294901968)
+local Auto_Mat = UI:addPage("Automatics\nMaterial", 6023426909)
 
 local Automatics = Auto_Mat:addSection("More Automatics")
 
@@ -3222,10 +3130,7 @@ task.spawn(function()
             if (CFrame.new(-2069, 68, -12946).Position - plr.Position).Magnitude > 350 then
             if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
     
-            CheckLevel()        
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == "Loaf" then
-                        -- Nothing Here Bro --
-            else
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "Loaf" then
                     pld:ChangeState(15)
                     plr.CFrame = CFrame.new(-2434, 132, -12110)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", "Loaf")
@@ -3270,9 +3175,7 @@ task.spawn(function()
             if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
     
             CheckLevel()        
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == "Ship" then
-                        -- Nothing Here Bro --
-            else
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "Ship" then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.2125244140625, 126.97600555419922, 32852.83203125))
                     end
                 end
@@ -3343,7 +3246,7 @@ end
 end)
 
 Materials:addToggle("Auto Farm Conjured Cocoa", nil, function(value)
-_G.asd = value
+_G.Material_Cocoa = value
 if value == false then
     TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     UnClip()
@@ -3392,6 +3295,8 @@ task.spawn(function()
     while task.wait() do
     if _G.Material_Ectoplasm then
     pcall(function()
+        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+        local pld = game.Players.LocalPlayer.Character.Humanoid
 
         if _G.GetQuest then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
@@ -3417,7 +3322,7 @@ task.spawn(function()
     
     if string.find(v.Name, "Ship") and v:FindFirstChild("Humanoid") then
     if v.Humanoid.Health > 0 then
-    wait(.9)
+    wait(1.8)
     TP(v.HumanoidRootPart.CFrame * Farm_Mode)
     end
     
@@ -3441,6 +3346,8 @@ task.spawn(function()
         while task.wait() do
         if _G.Material_Bone then
         pcall(function()
+            local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+            local pld = game.Players.LocalPlayer.Character.Humanoid
 
             if _G.GetQuest then
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
@@ -3457,32 +3364,28 @@ task.spawn(function()
 
             if FarmSpeed == "Auto Farm Speed : 10 %" then
                 TP(CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562))
-            elseif FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
+            end
 
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == "HauntedCastle" then
-                    -- Nothing Here Bro --
-            else
-                CheckLevel()
-                if not game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul [Lv. 2025]") then
+            if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "HauntedCastle" then
+
                     pld:ChangeState(15)
                     plr.CFrame = CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", "HauntedCastle")
                     wait()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", "HauntedCastle")
-
-                            end
-                        end
-                    end
                 end
             end
         end
-        end
+    end
+end
+end
         
         local Enemies = game:GetService("Workspace").Enemies
         
         for i, v in pairs(Enemies:GetChildren()) do
         
-        if v.Name == "Reborn Skeleton [Lv. 1975]" or "Living Zombie [Lv. 2000]" or "Demonic Soul [Lv. 2025]" or "Posessed Mummy [Lv. 2050]" and v:FindFirstChild("Humanoid") then
+        if v.Name == "Reborn Skeleton [Lv. 1975]" or v.Name == "Living Zombie [Lv. 2000]" or v.Name == "Demonic Soul [Lv. 2025]" or v.Name == "Posessed Mummy [Lv. 2050]" and v:FindFirstChild("Humanoid") then
         if v.Humanoid.Health > 0 then
 
         wait(2)
@@ -3505,16 +3408,80 @@ task.spawn(function()
         end
         end)
 
+task.spawn(function()
+    while task.wait() do
+    if _G.Material_Cocoa then
+    pcall(function()
+        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+        local pld = game.Players.LocalPlayer.Character.Humanoid
 
+        if _G.GetQuest then
+            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "ChocQuest"..math.random(1,2), math.random(1,2))
+            end
+        end
+
+        local Enemies = game:GetService("Workspace").Enemies
+    
+        if not Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") then
+        if not Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") then
+        if not Enemies:FindFirstChild("Sweet Thief [Lv. 2350]") then
+        if not Enemies:FindFirstChild("Candy Rebel [Lv. 2375]") then
+
+        if FarmSpeed == "Auto Farm Speed : 10 %" then
+            TP(CFrame.new(-22.53498649597168, 64.85152435302734, -12684.798828125))
+
+        elseif FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
+
+        if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "Chocolate" then
+            pld:ChangeState(15)
+            plr.CFrame = CFrame.new(-22.53498649597168, 64.85152435302734, -12684.798828125)
+
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", "Chocolate")
+
+            wait()
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", "Chocolate")
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    local Enemies = game:GetService("Workspace").Enemies
+    
+    for i, v in pairs(Enemies:GetChildren()) do
+    
+    if v.Name == "Cocoa Warrior [Lv. 2300]" or v.Name == "Chocolate Bar Battler [Lv. 2325]" or v.Name == "Sweet Thief [Lv. 2350]" or v.Name == "Candy Rebel [Lv. 2375]" and v:FindFirstChild("Humanoid") then
+    if v.Humanoid.Health > 0 then
+
+    wait(1.5)
+    TP(v.HumanoidRootPart.CFrame * Farm_Mode)
+    end
+    
+    if _G.BringMonster then
+        Mon = v.Name
+        MagnetSelect(Mon)
+    end
+    
+    BusoHaki()
+    EquipWeapon1(MainWeaponName)
+    Click()
+    
+                end
+                end
+            end)
+        end
+    end
+end)
 task.spawn(function()
 while task.wait() do
 if _G.Automatics_SoulGuitar then
 pcall(function()
 
     for i, v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
-    if v.Name == "Soul Guitar" then
-    -- Nothing Here Bro --
-    else
+    if v.Name ~= "Soul Guitar" then
+
     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Check") >= 500 then    
     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Ectoplasm","Check") >= 250 then
     if game:GetService("Players").LocalPlayer.Data.Fragments.Value >= 5000 then
@@ -3534,9 +3501,8 @@ end
                 if (CFrameQ.Position - plr.Position).Magnitude > 350 then
                 if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
                     
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == "Ship" then
-                        -- Nothing Here Bro --
-            else
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "Ship" then
+
                     CFrameQ = CFrame.new(-9516.9931640625, 178.00651550293, 6078.4653320313)
                     Enemies = game:GetService("Workspace").Enemies
 
@@ -3556,9 +3522,8 @@ end
 
             CFrameQ = CFrame.new(-9516.9931640625, 178.00651550293, 6078.4653320313)
             if FarmSpeed == "Auto Farm Speed : 10 %" then
-            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == "Ship" then
-                -- Nothing Here Bro --
-            else
+            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= "Ship" then
+
             CFrameQ = CFrame.new(-9516.9931640625, 178.00651550293, 6078.4653320313)
 
             if not game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
@@ -3906,7 +3871,7 @@ end
 
     task.spawn(function()
         while true do game:GetService("RunService").RenderStepped:Wait()
-            if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Float or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.MonsFarmRadius or _G.Farm_SpeedMoney or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
+            if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Float or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.Material_Cocoa or _G.MonsFarmRadius or _G.Farm_SpeedMoney or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
                 pcall(function()
                         if not game:GetService("Workspace"):FindFirstChild("Path") then
                             local State = Instance.new("Part")
@@ -3928,7 +3893,7 @@ end
 
     task.spawn(function()
         while true do game:GetService("RunService").RenderStepped:Wait()
-        if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.MonsFarmRadius or _G.Farm_SpeedFragment or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
+        if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.Material_Cocoa or _G.MonsFarmRadius or _G.Farm_SpeedFragment or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
          pcall(function()
                     if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                         local State = Instance.new("BodyVelocity")
@@ -3970,7 +3935,7 @@ end
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Noclip or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.MonsFarmRadius or _G.Farm_SpeedMoney or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
+                if _G.Farm_Lv or _G.KillPlayer or _G.AutoDeathStep or _G.AutoElectricClaw or _G.AutoSuperhuman or _G.AutoSharkmankarate or _G.AutoDragonTalon or _G.AutoElitehunter or _G.Farm_Boss or _G.Farm_BossAll or _G.AutoObservation or _G.AutoHallowScythe or _G.AutoFarmBone or _G.AutoFarmBounty or _G.AutoDoughDungeon or _G.AutoNextIsland or _G.ChestFarm1 or _G.ChestFarm2 or _G.ChestFarm3 or _G.ChestFarm or _G.MonsFarm or _G.Noclip or _G.Tween_Island or _G.Farm_Factory or _G.Farm_MasteryDf or _G.Farm_MasteryGun or _G.Material_Ectoplasm or _G.Material_Bone or _G.Material_Cocoa or _G.MonsFarmRadius or _G.Farm_SpeedMoney or _G.Farm_SpeedMoney or _G.Farm_SpeedMastery or _G.Farm_Elite or _G.Farm_Players == true then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
