@@ -1,4 +1,4 @@
--- BF 2
+
 -- This Is Blox Fruit Script Revamp!
 --- if You See This You Are GAY
 
@@ -272,8 +272,7 @@ end
                                 if _G.BringMonster then
 
                                     CheckLevel()
-                                    Mon = Ms
-                                    MagnetSelect(Mon)
+                                    MagnetSelect(Ms)
                                 end
 
                                 EquipWeapon1(MainWeaponName)
@@ -512,9 +511,9 @@ spawn(function()
                                         TP(v.HumanoidRootPart.CFrame * Farm_Mode)
         
                                         if _G.BringMonster then
+
                                             CheckLevel()
-                                            Mon = SelectMonster
-                                            MagnetSelect(Mon)
+                                            MagnetSelect(SelectMonster)
                                         end
         
                                         EquipWeapon1(MainWeaponName)
@@ -570,8 +569,7 @@ spawn(function()
                 TP(v.HumanoidRootPart.CFrame * Farm_Mode)
 
                 if _G.BringMonster then
-                Mon = v.Name
-                MagnetSelect(Mon)
+                MagnetSelect(v.Name)
                 end
 
                 BusoHaki()
@@ -858,15 +856,6 @@ task.spawn(function()
         UI:Notify(HubName, "Not Found Elite Boss !")
         end
     end
-
-    local QuestText = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-
-    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then 
-        if not string.find(QuestText, "Deandre") or not string.find(QuestText, "Urban") or not string.find(QuestText, "Diablo") then
-        
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-    end
-end
 
     local QuestText = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
     local Repli = game:GetService("ReplicatedStorage")
@@ -1430,8 +1419,7 @@ while task.wait() do
                                     end
                                     if _G.BringMonster then
                                         CheckLevel()
-                                        Mon = Ms
-                                        MagnetSelect(Mon)
+                                        MagnetSelect(Ms)
                                     end
     
                                     EquipWeapon1(MainWeaponName)
@@ -1490,8 +1478,7 @@ while task.wait() do
                                     end
                                     if _G.BringMonster then
                                         CheckLevel()
-                                        Mon = Ms
-                                        MagnetSelect(Mon)
+                                        MagnetSelect(Ms)
                                     end
     
                                     EquipWeapon1(MainWeaponName)
@@ -1562,8 +1549,7 @@ while task.wait() do
                                 end
                                 if _G.BringMonster then
                                     CheckLevel()
-                                    Mon = Ms
-                                    MagnetSelect(Mon)
+                                    MagnetSelect(Ms)
                                 end
 
                                 EquipWeapon1(MainWeaponName)
@@ -1848,26 +1834,44 @@ Tp:addToggle("Go To Island", nil, function(value)
 
     elseif _G.Island_Name == "Ice Castle" then
         TP(CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188))
+
     elseif _G.Island_Name == "Forgotten" then
         TP(CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875))
+
     elseif _G.Island_Name == "Some Island" then
         TP(CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781))
+
     elseif _G.Island_Name == "Mini Sky Island" then
         TP(CFrame.new(-288.74060058594, 49326.31640625, -35248.59375))
 
+
     elseif _G.Island_Name == "Great Tree" then
         TP(CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625))
+
     elseif _G.Island_Name == "Castle On The Sea" then
-        TP(CFrame.new(-5074.45556640625, 314.5155334472656, -2991.054443359375))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables")
+
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-5073, 315, -3151))
+
     elseif _G.Island_Name == "MiniSky" then
         TP(CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125))
+
     elseif _G.Island_Name == "Port Town" then
         TP(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
+
     elseif _G.Island_Name == "Hydra Island" then
-        TP(CFrame.new(5228.8842773438, 604.23400878906, 345.0400390625))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables")
+
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5753, 610, -269))
+
     elseif _G.Island_Name == "Floating Turtle" then
-        TP(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables")
+
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-12471.169921875, 374.94024658203, -7551.677734375))
+
     elseif _G.Island_Name == "Mansion" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetUnlockables")
+
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-12471.169921875, 374.94024658203, -7551.677734375))
 
     elseif _G.Island_Name == "Haunted Castle" then
@@ -3103,14 +3107,6 @@ local Auto_Mat = UI:addPage("Automatics\nMaterial", 6023426909)
 
 local Automatics = Auto_Mat:addSection("More Automatics")
 
-Automatics:addToggle("Auto Speed Farm Mastery\n[Something Can Use For Normal Attack]", nil, function(value)
-    _G.Farm_SpeedMastery = value
-    if value == false then
-        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-        UnClip()
-    end
-end)
-
 Automatics:addToggle("Auto Speed Farm Money", nil, function(value)
     _G.Farm_SpeedMoney = value
     if value == false then
@@ -3152,8 +3148,7 @@ task.spawn(function()
         TP(v.HumanoidRootPart.CFrame * Farm_Mode)
 
         if _G.BringMonster then
-        Mon = v.Name
-        MagnetSelect(Mon)
+        MagnetSelect(v.Name)
         end
 
         BusoHaki()
@@ -3193,8 +3188,7 @@ task.spawn(function()
         TP(v.HumanoidRootPart.CFrame * Farm_Mode)
 
         if _G.BringMonster then
-        Mon = v.Name
-        MagnetSelect(Mon)
+        MagnetSelect(v.Name)
         end
 
         BusoHaki()
@@ -3327,8 +3321,7 @@ task.spawn(function()
     end
     
     if _G.BringMonster then
-        Mon = v.Name
-        MagnetSelect(Mon)
+        MagnetSelect(v.Name)
     end
     
     BusoHaki()
@@ -3393,8 +3386,7 @@ end
         end
         
         if _G.BringMonster then
-            Mon = v.Name
-            MagnetSelect(Mon)
+            MagnetSelect(v.Name)
         end
         
         BusoHaki()
@@ -3460,8 +3452,7 @@ task.spawn(function()
     end
     
     if _G.BringMonster then
-        Mon = v.Name
-        MagnetSelect(Mon)
+        MagnetSelect(v.Name)
     end
     
     BusoHaki()
@@ -3549,9 +3540,7 @@ end
         if _G.BringMonster then
 
             CheckLevel()
-
-            Mon = v.Name
-            MagnetSelect(Mon)
+            MagnetSelect(v.Name)
         end
 
         EquipWeapon1(MainWeaponName)
