@@ -1,6 +1,22 @@
-
+-- BF
 -- This Is Blox Fruit Script Revamp!
 --- if You See This You Are GAY
+
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
+        if _G.Team == "Marines" then
+            for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+                v.Function()
+            end
+        else
+            for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+                v.Function()
+                end
+            end
+        end
+    end
+end
+
 
 local placeId = game.PlaceId
     if placeId == 2753915549 then
@@ -5086,7 +5102,6 @@ end
                                 end)
                             end
                         end)
-
 
 UI:Notify("Impact Hub", "Welcom To Impact Hub.")
 BusoHaki()
