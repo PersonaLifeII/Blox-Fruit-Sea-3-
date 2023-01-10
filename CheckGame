@@ -15,10 +15,10 @@ or _G.Key == Keylist[4] then
 
 local PlaceId = game.PlaceId
 if PlaceId == 4442272183 or PlaceId == 7449423635 or PlaceId == 2753915549 then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit%20Sea%203", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/Blox%20Fruit", true))()
 
 elseif PlaceId == 4520749081 or PlaceId == 6381829480 or PlaceId == 5931540094 then
-loadstring(game:HttpGet"https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/King%20Legacy%20Sea%202")()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/King%20Legacy", true))()
 end
 
 else
