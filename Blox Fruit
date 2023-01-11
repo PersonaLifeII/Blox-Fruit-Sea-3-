@@ -100,13 +100,14 @@ spawn(function()
         end
     end)
     
-    MainWeaponList = {}
+    MainWeaponList = {}    
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
-        if v:IsA("Tool") then
-            table.insert(MainWeaponList ,v.Name)
+    if v:IsA("Tool") then
+    if v.ToolTip ~= "Wear" then
+    table.insert(MainWeaponList, v.ToolTip)
         end
     end
-    
+end
 
     FARMS:addDropdown("Select Weapon : None", MainWeaponList, function(value)
         MainWeaponName = value
@@ -287,10 +288,10 @@ end
                                 if _G.BringMonster then
 
                                     CheckLevel()
-                                    MagnetSelect(Ms)
+                                    MagnetSelect(v.Name)
                                 end
 
-                                EquipWeapon1(MainWeaponName)
+                                EquipWeapon(MainWeaponName)
                                 BusoHaki()
                                 Click()
                                 end
@@ -460,19 +461,23 @@ spawn(function()
     end
     end)
 
-        local mobs = {} 
-            
-            for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                insert = true 
-                for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end 
-                if insert then table.insert(mobs, v.Name) end 
-            end
-            
-            local mobdropdown = FARM:addDropdown("Select Monster : None", mobs, function(value)
-                SelectMonster = value
-            end)
-            
+        MonsTable = {} 
 
+        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+        for k, x in pairs(MonsTable) do
+
+        if x ~= v.Name then
+         table.insert(MonsTable, v.Name)
+            end
+         end 
+        end
+
+            local MonsSelect = FARM:addDropdown("Select Monster : None", MonsTable, function(value)
+                SelectMonster = value
+                if SelectMonster ~= nil then
+                SaveSelectMons = SelectMonster
+                end
+            end)
 
             FARM:addToggle("Auto Farm Monster Select", nil, function(value)
                 _G.MonsFarm = value
@@ -486,9 +491,11 @@ spawn(function()
                 while task.wait() do
              if _G.MonsFarm then
                 pcall(function()
-                        local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-                        local pld = game.Players.LocalPlayer.Character.Humanoid
-        
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    local pld = game.Players.LocalPlayer.Character.Humanoid
+
+                if SaveSelectMons ~= nil then
+
                 if _G.GetQuest then
                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
@@ -500,7 +507,61 @@ spawn(function()
                             
                                 CheckLevel()
                                 if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= SpawnValue then
-                                        if not game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
+                                        if not game:GetService("Workspace").Enemies:FindFirstChild(SaveSelectMons) then
+                                            CheckLevel()
+                                            pld:ChangeState(15)
+                                            plr.CFrame = CFrameQ
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", SpawnValue)
+                                            
+                                            wait()
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetLastSpawnPoint", SpawnValue)
+                                        end
+                                    end
+                                end
+                            end
+                
+                CheckLevel()
+                if not game:GetService("Workspace").Enemies:FindFirstChild(SaveSelectMons) then
+                    plr.CFrame = CFrameMon
+                end
+        
+                    if game:GetService("Workspace").Enemies:FindFirstChild(SaveSelectMons) then
+
+                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == SaveSelectMons and v:FindFirstChild("Humanoid") then
+                                    if v.Humanoid.Health > 0 then
+                                        TP(v.HumanoidRootPart.CFrame * Farm_Mode)
+        
+                                        if _G.BringMonster then
+
+                                            CheckLevel()
+                                            MagnetSelect(v.Name)
+                                        end
+        
+                                        EquipWeapon(MainWeaponName)
+                                        BusoHaki()
+                                        Click()
+                                        end
+                                    end
+                                end
+                            end
+                            end
+                    if SelectMonster ~= nil then
+                    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    local pld = game.Players.LocalPlayer.Character.Humanoid
+
+                if _G.GetQuest then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
+                    end
+                end
+                        CheckLevel()
+                        if (CFrameMon.Position - plr.Position).Magnitude > 350 then
+                            if FarmSpeed == "Auto Farm Speed : 30 %\n[Dead]" then
+                            
+                                CheckLevel()
+                                if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value ~= SpawnValue then
+                                        if not game:GetService("Workspace").Enemies:FindFirstChild(SelectMonster) then
                                             CheckLevel()
                                             pld:ChangeState(15)
                                             plr.CFrame = CFrameQ
@@ -528,32 +589,38 @@ spawn(function()
                                         if _G.BringMonster then
 
                                             CheckLevel()
-                                            MagnetSelect(SelectMonster)
+                                            MagnetSelect(v.Name)
                                         end
         
-                                        EquipWeapon1(MainWeaponName)
+                                        EquipWeapon(MainWeaponName)
                                         BusoHaki()
                                         Click()
                                         end
                                     end
                                 end
                             end
-                        end)
+                        end
+                end)
             end
         end
         end)
-        
 
-            game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
-                for _,v2 in pairs(mobs) do table.remove(mobs, _) end
-                
-                for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    insert = true 
-                    for _,v2 in pairs(mobs) do if v2 == v.Name then insert = false end end
-                    if insert then table.insert(mobs, v.Name) end 
-                end
-                mobdropdown:Refresh(mobs)
-            end)
+        game:GetService("Workspace").Enemies.ChildAdded:Connect(function() 
+            for _,v2 in pairs(MonsTable) do
+             table.remove(MonsTable, _)
+         end
+            
+            for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                insert = true 
+                for _,v2 in pairs(MonsTable) do
+                 if v2 == v.Name then
+                 insert = false end
+                 end
+                if insert then
+             table.insert(MonsTable, v.Name) end 
+            end
+            MonsSelect:Refresh(MonsTable)
+        end)
 
             FARM:addToggle("Auto Farm All Monster In Radius", nil, function(value)
                 _G.MonsFarmRadius = value
@@ -588,7 +655,7 @@ spawn(function()
                 end
 
                 BusoHaki()
-                EquipWeapon1(MainWeaponName)
+                EquipWeapon(MainWeaponName)
                 Click()
                 end
             end
@@ -894,7 +961,7 @@ task.spawn(function()
     if v.Humanoid.Health > 0 then
     TP(v.HumanoidRootPart.CFrame * Farm_Mode)
     BusoHaki()
-    EquipWeapon1(MainWeaponName)
+    EquipWeapon(MainWeaponName)
     Click()
                         end
                     end
@@ -933,7 +1000,7 @@ task.spawn(function()
     if game:GetService("Players")[v.Name].Character.Humanoid.Health > 0 then
     TP(game:GetService("Players")[v.Name].Character.HumanoidRootPart.CFrame * Farm_Mode)
     BusoHaki()
-    EquipWeapon1(MainWeaponName)
+    EquipWeapon(MainWeaponName)
 
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
@@ -1020,7 +1087,7 @@ task.spawn(function()
 							if v.Name == MsBoss and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 
                                 TP(v.HumanoidRootPart.CFrame * Farm_Mode)
-                                EquipWeapon1(MainWeaponName)
+                                EquipWeapon(MainWeaponName)
                                 BusoHaki()
                                 Click()
                             end
@@ -1074,7 +1141,7 @@ task.spawn(function()
                         for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v.Name == MsBoss and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                         TP(v.HumanoidRootPart.CFrame * Farm_Mode)
-                                        EquipWeapon1(MainWeaponName)
+                                        EquipWeapon(MainWeaponName)
                                         BusoHaki()
                                         Click()
                                     end
@@ -1103,7 +1170,7 @@ pcall(function()
         if string.find(v2.Name, "Boss") then
             if v2.Humanoid.Health > 0 then
                 TP(v2.HumanoidRootPart.CFrame * Farm_Mode)
-                EquipWeapon1(MainWeaponName)
+                EquipWeapon(MainWeaponName)
                 BusoHaki()
                 Click() 
             end
@@ -1112,7 +1179,7 @@ pcall(function()
         if string.find(v.Name, "Boss") then
             if v.Humanoid.Health > 0 then
                 TP(v.HumanoidRootPart.CFrame * Farm_Mode)
-                EquipWeapon1(MainWeaponName)
+                EquipWeapon(MainWeaponName)
                 BusoHaki()
                 Click()
             end
@@ -1164,13 +1231,13 @@ pcall(function()
             if game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then 	
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == "Awakened Ice Admiral [Lv. 1400] [Boss]" then    
-                        EquipWeapon1(MainWeaponName)
+                        EquipWeapon(MainWeaponName)
                         BusoHaki()
                         Click()
                     else
                         TP(CFrame.new(6369, 297, -6843))
                         wait(.2)
-                        EquipWeapon1("Library Key")
+                        EquipWeapon("Library Key")
                     end
                     if not game:GetService("ReplicatedStorage"):FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") or not game:GetService("Workspace").Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then
                         if _G.Hop then
@@ -1285,7 +1352,7 @@ task.spawn(function()
                             TP(v.HumanoidRootPart.CFrame * Farm_Mode)
                         end
 
-                        EquipWeapon1(MainWeaponName)
+                        EquipWeapon(MainWeaponName)
                         BusoHaki()
                         Click()
                     end
@@ -1318,7 +1385,7 @@ if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
             if game:GetService("Workspace").Enemies:FindFirstChild("Tide Keeper [Lv. 1475] [Boss]") then 	
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == "Tide Keeper [Lv. 1475] [Boss]" then    
-                            EquipWeapon1(MainWeaponName)
+                            EquipWeapon(MainWeaponName)
                             BusoHaki()
                             Click()
                     end
@@ -1366,7 +1433,7 @@ task.spawn(function()
 						for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
 							if v.Name == "Core" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                     TP(v.HumanoidRootPart.CFrame)
-                                    EquipWeapon1(MainWeaponName)
+                                    EquipWeapon(MainWeaponName)
                                     BusoHaki()
                                     Click()
 							end
@@ -1434,10 +1501,10 @@ while task.wait() do
                                     end
                                     if _G.BringMonster then
                                         CheckLevel()
-                                        MagnetSelect(Ms)
+                                        MagnetSelect(v.Name)
                                     end
     
-                                    EquipWeapon1(MainWeaponName)
+                                    EquipWeapon(MainWeaponName)
                                     BusoHaki()
                                     Click()
 
@@ -1493,10 +1560,10 @@ while task.wait() do
                                     end
                                     if _G.BringMonster then
                                         CheckLevel()
-                                        MagnetSelect(Ms)
+                                        MagnetSelect(v.Name)
                                     end
     
-                                    EquipWeapon1(MainWeaponName)
+                                    EquipWeapon(MainWeaponName)
                                     BusoHaki()
                                     Click()
                                 end
@@ -1546,7 +1613,7 @@ while task.wait() do
                             HealthMin = v.Humanoid.MaxHealth * SelectHealth/100
                             if v.Humanoid.Health <= HealthMin and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 BusoHaki()
-                                EquipWeapon1(GunWeaponName)
+                                EquipWeapon(GunWeaponName)
 
                                 TP(v.HumanoidRootPart.CFrame * CFrame.new(0,DisFarm,0))
 
@@ -1564,10 +1631,10 @@ while task.wait() do
                                 end
                                 if _G.BringMonster then
                                     CheckLevel()
-                                    MagnetSelect(Ms)
+                                    MagnetSelect(v.Name)
                                 end
 
-                                EquipWeapon1(MainWeaponName)
+                                EquipWeapon(MainWeaponName)
                                 BusoHaki()
                                 Click()
 
@@ -2086,7 +2153,7 @@ end
                         if v.Name ~= game.Players.LocalPlayer.Name then
                             if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 17000 then
                                 plyselecthunthelpold = v.Humanoid.Health
-                                    EquipWeapon1(BountyWeaponName)
+                                EquipWeapon(BountyWeaponName)
                                     NameTarget = v.Name
 
                                     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
@@ -2762,25 +2829,25 @@ spawn(function()
             pcall(function()
                 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
                     if string.find(v.Name, "Fruit") then
-                        EquipWeapon1(v.Name)
+                        EquipWeapon(v.Name)
                         wait(.1)
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
                             game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
                         end
                         _G.Fruit_Name = v.Name
-                        EquipWeapon1(v.Name)
+                        EquipWeapon(v.Name)
                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.Fruit_Name).EatRemote:InvokeServer("Drop")
                     end
                 end
 				for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
                     if string.find(v.Name, "Fruit") then
-                        EquipWeapon1(v.Name)
+                        EquipWeapon(v.Name)
                         wait(.1)
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
                             game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
                         end
                         _G.Fruit_Name = v.Name
-                        EquipWeapon1(v.Name)
+                        EquipWeapon(_G.Fruit_Name)
                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.Fruit_Name).EatRemote:InvokeServer("Drop")
                     end
                 end
@@ -3167,7 +3234,7 @@ task.spawn(function()
         end
 
         BusoHaki()
-        EquipWeapon1(MainWeaponName)
+        EquipWeapon(MainWeaponName)
         Click()
                     end
                 end
@@ -3207,7 +3274,7 @@ task.spawn(function()
         end
 
         BusoHaki()
-        EquipWeapon1(MainWeaponName)
+        EquipWeapon(MainWeaponName)
         Click()
                             end
                         end
@@ -3340,7 +3407,7 @@ task.spawn(function()
     end
     
     BusoHaki()
-    EquipWeapon1(MainWeaponName)
+    EquipWeapon(MainWeaponName)
     Click()
     
     end
@@ -3405,7 +3472,7 @@ end
         end
         
         BusoHaki()
-        EquipWeapon1(MainWeaponName)
+        EquipWeapon(MainWeaponName)
         Click()
         
         end
@@ -3471,7 +3538,7 @@ task.spawn(function()
     end
     
     BusoHaki()
-    EquipWeapon1(MainWeaponName)
+    EquipWeapon(MainWeaponName)
     Click()
     
                 end
@@ -3558,7 +3625,7 @@ end
             MagnetSelect(v.Name)
         end
 
-        EquipWeapon1(MainWeaponName)
+        EquipWeapon(MainWeaponName)
         BusoHaki()
         Click()
     end
@@ -4855,13 +4922,14 @@ function CheckBoss()
 end
 
 
-        function EquipWeapon1(MainWeaponName)
-            if game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName) then
-            local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(MainWeaponName)
-            wait(.4)
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-          end
+    function EquipWeapon(Weapon)
+        for i, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == Weapon then
+
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
         end
+    end
+end
 
 
 
@@ -5044,40 +5112,24 @@ function JoinTeam()
     end
 end
 
+DeleteMDF()
 
-        task.spawn(function()
+       task.spawn(function()
             while task.wait() do
                 pcall(function()
-                    wait(.9)
-                    DeleteMDF()
-                    table.clear(MainWeaponList)
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                        if v:IsA("Tool") then
-                       table.insert(MainWeaponList,v.Name)
-                                    end
-                                    end
-                            end)
-                    end
-                end)
-
-                task.spawn(function()
-                    while task.wait() do
-                        pcall(function()
-                            wait(.9)
-                            DeleteMDF()
-                            table.clear(BossTable)
-                            for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
-                                if string.find(v.Name, "Boss") then
-                                    if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
+                    table.clear(BossTable)
+                    for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+                        if string.find(v.Name, "Boss") then
+                            if v.Name == "Ice Admiral [Lv. 700] [Boss]" then
                                     
-                                    else
-                                        table.insert(BossTable, v.Name)
-                                                    end
-                                                end
-                                            end
-                                            end)
+                            else
+                                table.insert(BossTable, v.Name)
+                                end
                             end
-                        end)
+                        end
+                    end)
+                end
+            end)
 
 
                         
@@ -5106,6 +5158,7 @@ UI:Notify("Impact Hub", "Welcom To Impact Hub.")
 BusoHaki()
 TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 UnClip()
+DeleteMDF()
 
 
 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
