@@ -43,29 +43,26 @@ end
 
     function TP(P1)
         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-
-        if not game.Players.LocalPlayer.Character.HumanoidRootPart.Position == P1 then
-        while true do
-        wait(.1)
-
         Distance = (P1.Position - plr.Position).Magnitude
-    
-        if Distance < 350 then
+        Speed = nil
+
+        if Distance > 0 and Distance < 350 then
             Speed = math.huge
-    
-        elseif Distance < 500 then
+        end
+
+        if Distance > 350 and Distance < 500 then
             Speed = 365
-        
+        end
     
-        elseif Distance < 750 then
+        if Distance > 500 and Distance < 750 then
             Speed = 350
-        
+        end
     
-        elseif Distance < 1000 then
+        if Distance > 750 and Distance < 1000 then
             Speed = 325
-        
+        end
     
-        elseif Distance >= 1000 then
+        if Distance >= 1000 then
             Speed = 300
         end
 
@@ -75,9 +72,7 @@ end
             {CFrame = P1}
         ):Play()
     end
-end
-end
-
+    
 local HubName = "Impact Hub V1.8"
 local date = os.date("%d".." ".."%B".." ".."%Y")
 
