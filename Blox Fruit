@@ -2,14 +2,16 @@
 -- This Is Blox Fruit Script Revamp!
 --- if You See This You Are GAY
 
-wait(2)
+if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Main") then
 if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+
     if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
         if _G.Team == "Marines" or _G.Team == "Marine" then
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
         end
             if _G.Team == "Pirates" or _G.Team == "Pirate" then
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+            end
         end
     end
 end
