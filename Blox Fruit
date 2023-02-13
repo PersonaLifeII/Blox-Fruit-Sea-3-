@@ -2,6 +2,23 @@
 -- This Is Blox Fruit Script Revamp!
 --- if You See This You Are GAY
 
+--[[
+    for i,v in pairs(ame:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do
+        if v.Name == "Main" then
+        if v:FindFirstChild("ChooseTeam") then
+        if v:FindFirstChild("ChooseTeam").Visible == true then
+        if _G.Team == "Marines" or _G.Team == "Marine" then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
+        end
+            if _G.Team == "Pirates" or _G.Team == "Pirate" then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+        end
+    end
+end
+end
+
+]]
+
 if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
 
     if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
