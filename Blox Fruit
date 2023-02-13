@@ -2,6 +2,7 @@
 -- This Is Blox Fruit Script Revamp!
 --- if You See This You Are GAY
 
+wait(2)
 if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
         if _G.Team == "Marines" or _G.Team == "Marine" then
@@ -859,7 +860,7 @@ end)
 
 local CastleQuest = page1:addSection("Hunter")
 
-CastleQuest:addToggle("Auto Farm Elite Hunter", nil, function(value)
+CastleQuest:addToggle("Auto Farm Elite Boss", nil, function(value)
     _G.Farm_Elite = value
     if value == false then
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
@@ -867,7 +868,7 @@ CastleQuest:addToggle("Auto Farm Elite Hunter", nil, function(value)
     end
 end)
 
-CastleQuest:addToggle("Auto Farm Elite Hunter Hop", nil, function(value)
+CastleQuest:addToggle("Auto Farm Elite Boss Hop", nil, function(value)
     _G.Farm_Elite_Hop = value
     if value == false then
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
