@@ -1,5 +1,9 @@
-This might not working anymore and also this is Blox Fruit and King Legacy (on Roblox) script exploiting
-There's a newer version but i lost the script so this is the script i got.
-Btw my English is just so bad
 
-LASTEST UPDATE WAS 2 YEAR AGO
+
+LASTEST UPDATE WAS 2 YEAR AGO YOU MIGHT GET BANNED FROM USING THIS
+
+IF YOU WANT TO RUN THE SCRIPT HERE'S THE SCRIPT: 
+_G.Key = "IMP123456" --This is key
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/refs/heads/main/CheckGame"))()
+
+SCRIPT CAN'T BE RUN WITHOUT THE RIGHT KEY
