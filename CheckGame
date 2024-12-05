@@ -1,17 +1,10 @@
 repeat wait(1) until game:IsLoaded()
 
 Keylist = {
-    "Impact-HubClient",
-    "Impact-HubAllowed",
-    "Impact-HubRyoka",
-    "Impact-HubKeyGift"
+    "IMP123456"
 }
 
-_G.Key = "Impact-HubClient"
-if _G.Key == Keylist[1]
-or _G.Key == Keylist[2]
-or _G.Key == Keylist[3]
-or _G.Key == Keylist[4] then
+if _G.Key == Keylist[1] then
 
 local PlaceId = game.PlaceId
 if PlaceId == 4442272183 or PlaceId == 7449423635 or PlaceId == 2753915549 then
