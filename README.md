@@ -17,4 +17,5 @@ THESE SCRIPT WERE NOT FINISHED YET CUZ I QUIT HACKING AND NOW I WAS JUST CHILLIN
 YOU CAN COPIED ALL THESE TO RUN.
 Hub name: Impact Hub / Xerxia Hub
 Discord:d_analyse
+Also if you found error please tell me or just fix it yourself. F9 to see error
 ]]
